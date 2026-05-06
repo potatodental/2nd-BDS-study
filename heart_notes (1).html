@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart — Anatomy & Physiology Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #ffffff;
+    --surface: #f4f6f9;
+    --card: #eef1f6;
+    --border: #d0d7e3;
+    --accent: #c0392b;
+    --accent2: #2471a3;
+    --accent3: #d35400;
+    --accent4: #1a8a7f;
+    --text: #1a1a2e;
+    --muted: #5a6480;
+    --anat: #d35400;
+    --phys: #2471a3;
+    --link: #c0392b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #fde8e8 0%, #ffffff 50%, #e8f0fe 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 60px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '♥';
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 120px;
+    opacity: 0.05;
+    color: var(--accent);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #1a1a2e;
+    letter-spacing: -0.5px;
+  }
+  header h1 span { color: var(--accent); }
+  .subtitle {
+    color: var(--muted);
+    margin-top: 6px;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    padding: 16px 60px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .leg-dot {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+  /* ── MAIN LAYOUT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 60px 80px; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 60px;
+    scroll-margin-top: 60px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: #1a1a2e;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    background: var(--accent);
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 14px;
+    color: #1a1a2e;
+  }
+
+  /* ── ANATOMY / PHYSIO BLOCKS ── */
+  .anat-block, .phys-block, .link-block {
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .anat-block {
+    background: rgba(244,162,97,0.07);
+    border-left: 3px solid var(--anat);
+  }
+  .phys-block {
+    background: rgba(61,155,233,0.07);
+    border-left: 3px solid var(--phys);
+  }
+  .link-block {
+    background: rgba(232,72,85,0.07);
+    border-left: 3px solid var(--accent);
+  }
+  .block-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .anat-block .block-label { color: var(--anat); }
+  .phys-block .block-label { color: var(--phys); }
+  .link-block .block-label { color: var(--accent); }
+
+  /* ── BULLET LISTS ── */
+  ul.notes { list-style: none; }
+  ul.notes li {
+    padding: 3px 0 3px 16px;
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+  ul.notes li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+  ul.notes li strong { color: #1a1a2e; font-weight: 600; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th {
+    background: var(--border);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td.anat { color: var(--anat); }
+  td.phys { color: var(--phys); }
+
+  /* ── FLOW CHART ── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 16px 0;
+  }
+  .flow-step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    position: relative;
+  }
+  .flow-step .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .flow-arrow {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.4;
+    padding: 4px 0;
+  }
+  .flow-step.anat-step { border-left: 3px solid var(--anat); }
+  .flow-step.phys-step { border-left: 3px solid var(--phys); }
+
+  /* ── GRID 2-col ── */
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 700px) {
+    .grid2 { grid-template-columns: 1fr; }
+    main { padding: 24px 20px 60px; }
+    header, nav { padding-left: 20px; padding-right: 20px; }
+    .legend { padding: 12px 20px; }
+  }
+
+  /* ── TAG ── */
+  .tag {
+    display: inline-block;
+    background: rgba(61,155,233,0.15);
+    color: var(--phys);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag.red { background: rgba(232,72,85,0.15); color: var(--accent); }
+  .tag.orange { background: rgba(244,162,97,0.15); color: var(--anat); }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: rgba(46,196,182,0.08);
+    border: 1px solid rgba(46,196,182,0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+    color: var(--accent4);
+  }
+  .highlight strong { color: #fff; }
+
+  /* ── COLLAPSIBLE ── */
+  details {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  summary {
+    padding: 12px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.92rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    color: #1a1a2e;
+    user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '＋'; margin-left: auto; color: var(--muted); font-size: 1rem; }
+  details[open] summary::after { content: '－'; }
+  details .details-body { padding: 16px 18px; background: var(--surface); }
+
+  /* ── ECG MINI ── */
+  .ecg-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  .ecg-wave {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 40px;
+    color: var(--accent2);
+  }
+  .ecg-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .ecg-bar-fill {
+    position: absolute;
+    left: 0; top: 0; height: 100%;
+    border-radius: 3px;
+    background: var(--accent2);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The <span>Heart</span></h1>
+  <p class="subtitle">Integrated Anatomy &amp; Physiology Notes &nbsp;·&nbsp; Cardiovascular System</p>
+</header>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--anat)"></div> Anatomy — structure, location, what you see</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--phys)"></div> Physiology — how it works, function, mechanism</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div> Anatomy → Physiology link — why the structure matters</div>
+</div>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#pericardium">Pericardium</a>
+  <a href="#chambers">Chambers</a>
+  <a href="#valves">Valves</a>
+  <a href="#muscle">Cardiac Muscle</a>
+  <a href="#conduction">Conduction</a>
+  <a href="#ecg">ECG</a>
+  <a href="#cycle">Cardiac Cycle</a>
+  <a href="#output">Cardiac Output</a>
+  <a href="#coronary">Coronary</a>
+  <a href="#nerve">Nerve Supply</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: OVERVIEW
+══════════════════════════════════════════ -->
+<div class="section" id="overview">
+  <h2 class="section-title"><span class="section-num">1</span> Overview</h2>
+
+  <div class="grid2">
+    <div class="anat-block">
+      <span class="block-label">📐 Anatomy</span>
+      <ul class="notes">
+        <li><strong>Location:</strong> Middle mediastinum</li>
+        <li><strong>Shape:</strong> Hollow, conical muscular organ</li>
+        <li><strong>Size:</strong> AP 6 cm · Transverse 8–9 cm · Length 12 cm</li>
+        <li><strong>Weight:</strong> 230–340 g</li>
+        <li><strong>Chambers:</strong> 2 atria + 2 ventricles</li>
+        <li><strong>Apex:</strong> Left ventricle → 5th ICS, midclavicular line, directed downward, forward, left</li>
+        <li><strong>Base:</strong> Posterior — right atrium (1/3) + left atrium (2/3), directed backward and right</li>
+      </ul>
+    </div>
+    <div class="phys-block">
+      <span class="block-label">⚙️ Physiology</span>
+      <ul class="notes">
+        <li><strong>Function:</strong> Acts as two pumps in series — right heart (pulmonary) + left heart (systemic)</li>
+        <li><strong>Cardiac output:</strong> ~5–6 L/min at rest</li>
+        <li><strong>Transport:</strong> O₂, nutrients, hormones, waste removal</li>
+        <li><strong>Also regulates:</strong> Temperature, internal environment</li>
+        <li><strong>Both ventricles must pump equal amounts</strong> over time — maintained by Frank–Starling mechanism</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    The heart's <strong>conical shape</strong> with apex pointing left and down means the apex beat is palpable at the 5th ICS midclavicular line — this is where you auscultate the mitral valve. The <strong>two-pump arrangement in series</strong> means pulmonary and systemic outputs must always match — a structural design that forces balanced circulation.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: PERICARDIUM
+══════════════════════════════════════════ -->
+<div class="section" id="pericardium">
+  <h2 class="section-title"><span class="section-num">2</span> Pericardium</h2>
+
+  <div class="card">
+    <p class="card-title">Layers of Pericardium</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Layer</th><th class="anat">Anatomy</th><th class="phys">Physiology / Function</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fibrous Pericardium</strong></td>
+            <td class="anat">Outer tough fibrous sac · Conical shape · Apex blends with great vessels · Base fused with central tendon of diaphragm</td>
+            <td class="phys">Prevents overdistension of heart · Anchors heart in mediastinum · Limits sudden volume changes</td>
+          </tr>
+          <tr>
+            <td><strong>Serous Pericardium — Parietal</strong></td>
+            <td class="anat">Inner lining of fibrous pericardium · Mesothelium</td>
+            <td class="phys">Smooth surface reduces friction during heartbeat</td>
+          </tr>
+          <tr>
+            <td><strong>Serous Pericardium — Visceral (Epicardium)</strong></td>
+            <td class="anat">Adheres to myocardium · Reflects at roots of great vessels</td>
+            <td class="phys">Outermost layer of heart wall · Part of cardiac wall structure</td>
+          </tr>
+          <tr>
+            <td><strong>Pericardial Space</strong></td>
+            <td class="anat">Between parietal and visceral layers</td>
+            <td class="phys">Contains thin capillary fluid layer → lubricates · Reduces friction during cardiac cycle</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li>The <strong>fibrous pericardium</strong> limits overfilling — in acute heart failure, rapid fluid accumulation in the pericardial space (cardiac tamponade) compresses the heart because the stiff fibrous layer cannot expand</li>
+      <li>Inflammation of pericardium = <strong>pericarditis</strong> → painful friction rub heard on auscultation</li>
+      <li>Fluid aspiration routes: <strong>parasternal or subcostal</strong> — these avoid lung and coronary vessels</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: CHAMBERS
+══════════════════════════════════════════ -->
+<div class="section" id="chambers">
+  <h2 class="section-title"><span class="section-num">3</span> Chambers of the Heart</h2>
+
+  <div class="card">
+    <p class="card-title">Comparison of Four Chambers</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Chamber</th><th class="anat">Anatomy</th><th class="phys">Physiology</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Right Atrium</strong></td>
+            <td class="anat">Quadrilateral · Rough anterior part (pectinate muscles) + smooth posterior (sinus venosus) · Contains fossa ovalis (remnant of foramen ovale) · Receives SVC, IVC, coronary sinus</td>
+            <td class="phys">Receives deoxygenated blood from systemic circulation · Passes blood to right ventricle via tricuspid valve · Contains SA node (in sulcus terminalis region) → pacemaker</td>
+          </tr>
+          <tr>
+            <td><strong>Right Ventricle</strong></td>
+            <td class="anat">Triangular · Thinner wall (4–5 mm) · Contains trabeculae carneae, papillary muscles · Outflow = infundibulum (conus arteriosus)</td>
+            <td class="phys">Pumps deoxygenated blood into pulmonary trunk · Low pressure pump (~25 mm Hg systolic) · Right ventricular failure → systemic venous congestion</td>
+          </tr>
+          <tr>
+            <td><strong>Left Atrium</strong></td>
+            <td class="anat">Quadrangular · Thicker wall than right (~3 mm) · Receives 4 pulmonary veins · Forms base of heart (2/3)</td>
+            <td class="phys">Receives oxygenated blood from lungs · Acts as reservoir during ventricular systole · Low-pressure filling chamber</td>
+          </tr>
+          <tr>
+            <td><strong>Left Ventricle</strong></td>
+            <td class="anat">Conical shape · Wall 3× thicker than RV (8–12 mm) · Contains 2 papillary muscles · Outflow = aortic vestibule · Forms apex of heart</td>
+            <td class="phys">Pumps oxygenated blood into aorta · High pressure pump (~120 mm Hg systolic) · Left ventricular failure → pulmonary congestion</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li><strong>Wall thickness difference</strong> (LV 8–12 mm vs RV 4–5 mm) reflects their pressure work — LV pumps against 120 mm Hg systemic resistance vs RV against 25 mm Hg pulmonary resistance</li>
+      <li><strong>Fossa ovalis</strong> in right atrium = remnant of foramen ovale; if patent (PFO) → right-to-left shunt and cyanosis</li>
+      <li><strong>Trabeculae carneae</strong> increase surface area and prevent suction of endocardium, important for efficient ventricular ejection</li>
+      <li><strong>Interatrial septum</strong> separates atria — defect (ASD) causes left-to-right shunt initially</li>
+      <li><strong>Interventricular septum:</strong> membranous (posterosuperior, small) + muscular (rest) — VSD most common at membranous part</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: VALVES
+══════════════════════════════════════════ -->
+<div class="section" id="valves">
+  <h2 class="section-title"><span class="section-num">4</span> Valves</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="card-title">AV Valves (Atrioventricular)</p>
+      <div class="anat-block">
+        <span class="block-label">📐 Anatomy</span>
+        <ul class="notes">
+          <li><strong>Tricuspid:</strong> Right AV valve · 3 cusps (anterior, posterior, septal) · Circumference ~10–12 cm</li>
+          <li><strong>Mitral (Bicuspid):</strong> Left AV valve · 2 cusps (anterior, posterior) · Circumference ~7–9 cm</li>
+          <li>Cusps attached to papillary muscles via <strong>chordae tendineae</strong></li>
+          <li>Papillary muscles: 3 in RV, 2 in LV</li>
+        </ul>
+      </div>
+      <div class="phys-block">
+        <span class="block-label">⚙️ Physiology</span>
+        <ul class="notes">
+          <li>Open <strong>toward ventricles</strong> — allow atria → ventricle flow</li>
+          <li>Close at start of ventricular systole → prevent backflow</li>
+          <li>Closure produces <strong>S1 (LUB)</strong> heart sound</li>
+          <li>Papillary muscles contract during systole → prevent valve cusps from prolapsing into atria</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <p class="card-title">Semilunar Valves</p>
+      <div class="anat-block">
+        <span class="block-label">📐 Anatomy</span>
+        <ul class="notes">
+          <li><strong>Pulmonary valve:</strong> At junction of RV and pulmonary trunk · 3 cusps (2 anterior, 1 posterior)</li>
+          <li><strong>Aortic valve:</strong> At junction of LV and aorta · 3 cusps · Thicker than pulmonary cusps</li>
+          <li>Aortic sinuses of Valsalva above each cusp → coronary arteries arise here</li>
+        </ul>
+      </div>
+      <div class="phys-block">
+        <span class="block-label">⚙️ Physiology</span>
+        <ul class="notes">
+          <li>Open <strong>away from ventricles</strong> — allow blood out during systole</li>
+          <li>Close when ventricles relax → prevent backflow from arteries</li>
+          <li>Closure produces <strong>S2 (DUB)</strong> heart sound + dicrotic notch in aortic pressure</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Auscultation Areas <span class="tag orange">Anatomy</span> + Heart Sounds <span class="tag">Physiology</span></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Sound</th><th>Cause (Physiology)</th><th>Auscultation Area (Anatomy)</th><th>Timing</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>S1 — LUB</strong></td><td class="phys">Closure of AV valves (mitral + tricuspid) at start of ventricular systole</td><td class="anat">Mitral: 5th ICS midclavicular line · Tricuspid: 5th ICS near sternum</td><td>Start of systole</td></tr>
+          <tr><td><strong>S2 — DUB</strong></td><td class="phys">Closure of semilunar valves (aortic + pulmonary) at start of diastole</td><td class="anat">Aortic: Right 2nd ICS · Pulmonary: Left 2nd ICS (near sternum)</td><td>End of systole</td></tr>
+          <tr><td><strong>S3</strong></td><td class="phys">Rapid ventricular filling — ventricular wall vibrations</td><td class="anat">Apex</td><td>Early diastole (after S2)</td></tr>
+          <tr><td><strong>S4</strong></td><td class="phys">Atrial systole pushing blood into stiff ventricle</td><td class="anat">Apex</td><td>Late diastole (just before S1)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li>The <strong>smaller circumference of mitral valve</strong> (7–9 cm vs tricuspid 10–12 cm) makes it more prone to stenosis — mitral stenosis is the most common valvular disease</li>
+      <li>Aortic sinuses of Valsalva (anatomical dilations above aortic cusps) → <strong>coronary ostia</strong> open here → during diastole when aortic valve closes, blood fills sinuses and enters coronaries — the anatomy ensures coronary perfusion occurs in diastole</li>
+      <li>Chordae tendineae prevent <strong>valve prolapse</strong> — if ruptured (e.g. in MI) → acute mitral regurgitation</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: CARDIAC MUSCLE
+══════════════════════════════════════════ -->
+<div class="section" id="muscle">
+  <h2 class="section-title"><span class="section-num">5</span> Cardiac Muscle (Myocardium)</h2>
+
+  <div class="grid2">
+    <div class="anat-block">
+      <span class="block-label">📐 Anatomy — Structure</span>
+      <ul class="notes">
+        <li>Ribbon-like fibres (not cylindrical like skeletal muscle)</li>
+        <li>Branched and interdigitate with each other</li>
+        <li><strong>Intercalated discs</strong> at junctions → tight junctions (structural) + gap junctions (electrical)</li>
+        <li>Richly supplied by capillaries (1 capillary/fibre)</li>
+        <li>Central nucleus, abundant sarcoplasm</li>
+        <li>Well-developed sarcotubular system — T-tubules at <strong>Z lines</strong> (one triad per sarcomere)</li>
+        <li>Striations present (like skeletal, unlike smooth)</li>
+      </ul>
+    </div>
+    <div class="phys-block">
+      <span class="block-label">⚙️ Physiology — Action Potential</span>
+      <ul class="notes">
+        <li><strong>RMP:</strong> −85 to −95 mV</li>
+        <li><strong>Duration:</strong> ~250 ms (much longer than nerve/skeletal)</li>
+        <li>5 phases with a characteristic <strong>plateau (Phase 2)</strong></li>
+        <li>Phase 0: Rapid depolarization (Na⁺ influx + Ca²⁺)</li>
+        <li>Phase 1: Brief rapid repolarization (K⁺ out)</li>
+        <li>Phase 2: Plateau — slow Ca²⁺ in via L-type channels</li>
+        <li>Phase 3: Repolarization — Ca²⁺ channels close, K⁺ out</li>
+        <li>Phase 4: Resting potential maintained by Na⁺–K⁺ ATPase</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <p class="card-title">Cardiac Muscle Properties</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Property</th><th class="phys">Physiological Meaning</th><th>Significance</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Automaticity</strong></td><td class="phys">Ability to generate its own impulse without external stimulation</td><td>Heart continues beating even when nerves are cut</td></tr>
+          <tr><td><strong>Rhythmicity</strong></td><td class="phys">Generates impulses at regular intervals</td><td>Maintains regular heartbeat (~72/min)</td></tr>
+          <tr><td><strong>Conductivity</strong></td><td class="phys">Propagates impulse through gap junctions — acts as functional syncytium</td><td>Co-ordinated contraction of entire atria then ventricles</td></tr>
+          <tr><td><strong>Excitability</strong></td><td class="phys">Responds to stimulus with action potential · Long refractory period (250–300 ms)</td><td>Prevents tetanus — heart cannot sustain tetanic contraction (essential for pumping)</td></tr>
+          <tr><td><strong>Contractility</strong></td><td class="phys">Force of contraction depends on initial fibre length (Frank–Starling) and Ca²⁺ availability</td><td>Heart adjusts its output to match venous return automatically</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>Key Concept — Long Refractory Period:</strong> The absolute refractory period of cardiac muscle lasts 180–200 ms — almost as long as the entire contraction. This makes tetanic summation impossible. The heart MUST relax, fill, then contract again. Without this, the heart couldn't function as a pump.
+  </div>
+
+  <details>
+    <summary>🔬 Excitation–Contraction Coupling (How electrical signal becomes mechanical force)</summary>
+    <div class="details-body">
+      <div class="flow">
+        <div class="flow-step phys-step"><span class="step-label">Step 1 — Electrical</span>Action potential in sarcolemma → spreads into T-tubules</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step phys-step"><span class="step-label">Step 2 — Trigger Ca²⁺</span>T-tubule depolarization → opens L-type Ca²⁺ channels on T-tubule membrane → Ca²⁺ enters from ECF</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step phys-step"><span class="step-label">Step 3 — Ca²⁺-induced Ca²⁺ release</span>ECF Ca²⁺ triggers sarcoplasmic reticulum to release more Ca²⁺ → large rise in sarcoplasmic Ca²⁺</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step phys-step"><span class="step-label">Step 4 — Cross-bridge cycling</span>Ca²⁺ binds troponin-C → tropomyosin shifts → myosin head binds actin → cross-bridge cycling → muscle contraction</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step phys-step"><span class="step-label">Step 5 — Relaxation</span>Ca²⁺ pumped back into SR + extruded via Na⁺/Ca²⁺ exchanger at sarcolemma → cross-bridge cycling stops</div>
+      </div>
+      <div class="link-block" style="margin-top:12px">
+        <span class="block-label">Key difference from skeletal muscle</span>
+        Cardiac muscle depends on <strong>extracellular Ca²⁺</strong> (from ECF via L-type channels) in addition to SR Ca²⁺. This is why cardiac contractility is sensitive to plasma Ca²⁺ and drugs like digoxin (which raises intracellular Ca²⁺ by blocking Na⁺/K⁺ ATPase).
+      </div>
+    </div>
+  </details>
+
+  <div class="link-block" style="margin-top:16px">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li><strong>Intercalated discs with gap junctions</strong> → low-resistance bridges → action potential spreads rapidly through the entire atrial or ventricular syncytium → co-ordinated "all-or-none" contraction of whole heart</li>
+      <li><strong>T-tubules at Z-lines</strong> in cardiac muscle (vs A-I junction in skeletal) → ensures Ca²⁺ release is synchronized with sarcomere shortening</li>
+      <li><strong>Rich capillary supply</strong> (1 per fibre) → heart has very high O₂ demand (8 mL/100 g/min at rest) → must extract 70–80% of O₂ from blood even at rest → any decrease in coronary flow → immediate ischaemia</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: CONDUCTION SYSTEM
+══════════════════════════════════════════ -->
+<div class="section" id="conduction">
+  <h2 class="section-title"><span class="section-num">6</span> Conducting System</h2>
+
+  <div class="flow">
+    <div class="flow-step anat-step">
+      <span class="step-label">📐 Anatomy — SA Node</span>
+      Located in right atrium, just right of SVC opening · Contains P-cells (pacemaker cells) · Supplied by right vagus + right sympathetics
+    </div>
+    <div class="flow-arrow">↓ impulse spreads through atrial muscle + internodal pathways (Bachmann, Wenckebach, Thorel) simultaneously</div>
+    <div class="flow-step phys-step">
+      <span class="step-label">⚙️ Physiology — Pacemaker Potential</span>
+      RMP only −55 to −60 mV (not stable) · Slow Na⁺ leak → gradual depolarization = pacemaker potential (prepotential) · T-type Ca²⁺ channels open → reaches threshold −40 mV → action potential generated at 70–80/min
+    </div>
+    <div class="flow-arrow">↓ 0.03 s to reach AV node</div>
+    <div class="flow-step anat-step">
+      <span class="step-label">📐 Anatomy — AV Node</span>
+      Right side of posterior atrial septum, near tricuspid valve, above coronary sinus · Supplied by left vagus + left sympathetics
+    </div>
+    <div class="flow-arrow">↓ AV nodal delay = 0.1 s (slow conduction)</div>
+    <div class="flow-step phys-step">
+      <span class="step-label">⚙️ Physiology — AV Delay</span>
+      Delay allows atria to complete contraction and fill ventricles BEFORE ventricles contract · Without delay, ventricles would contract before filling is complete
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step anat-step">
+      <span class="step-label">📐 Anatomy — Bundle of His</span>
+      From AV node → through fibrous skeleton → divides into right + left bundle branches at crest of muscular interventricular septum
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step anat-step">
+      <span class="step-label">📐 Anatomy — Purkinje Fibres</span>
+      Terminal fibres from bundle branches · Spread to all parts of ventricular myocardium · Largest fibres in heart (fast conduction)
+    </div>
+    <div class="flow-arrow">↓ 0.08–0.15 s — ventricular depolarization complete</div>
+    <div class="flow-step phys-step">
+      <span class="step-label">⚙️ Physiology — Ventricular Depolarization Sequence</span>
+      Starts at left side of interventricular septum → across middle septum → down septum to apex → returns along ventricular walls to AV groove (endocardial to epicardial)
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <p class="card-title">Intrinsic Firing Rates (Why SA node dominates)</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pacemaker Site</th><th class="phys">Intrinsic Rate</th><th>Clinical Significance</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SA Node</strong></td><td class="phys">70–80/min (fastest)</td><td>Normal pacemaker — dominates all others</td></tr>
+          <tr><td>AV Node</td><td class="phys">40–60/min</td><td>Takes over if SA node fails → junctional rhythm</td></tr>
+          <tr><td>Atrial muscle</td><td class="phys">40–60/min</td><td>Ectopic atrial pacemaker</td></tr>
+          <tr><td>Ventricular muscle</td><td class="phys">20–40/min</td><td>Ventricular escape rhythm — last resort, slow and dangerous</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li>The <strong>fibrous skeleton</strong> of the heart (fibrous rings around valves) electrically insulates atria from ventricles — the only path for impulse transmission is through the AV node and Bundle of His. This is why the AV delay is so critical — without it, atria and ventricles would activate simultaneously</li>
+      <li>The <strong>anatomy of Purkinje fibres</strong> (largest diameter = fastest conduction) ensures ventricles depolarize from apex upward → blood ejected upward toward outflow tracts efficiently</li>
+      <li>When AV node is blocked → <strong>complete heart block</strong> — ventricles beat independently at 20–40/min (Stokes–Adams attack)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: ECG
+══════════════════════════════════════════ -->
+<div class="section" id="ecg">
+  <h2 class="section-title"><span class="section-num">7</span> Electrocardiogram (ECG)</h2>
+
+  <div class="anat-block">
+    <span class="block-label">📐 Anatomy basis</span>
+    ECG records potential differences from body surface. Body fluids are good conductors (electrolytes). The heart acts as a dipole — depolarized part = negative pole, non-excited = positive pole. Waves recorded depend on orientation of lead relative to heart.
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <p class="card-title">ECG Waves — What Each Represents</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Wave/Interval</th><th class="phys">Physiological Event</th><th>Normal Value</th><th>Clinical Note</th></tr></thead>
+        <tbody>
+          <tr><td><strong>P wave</strong></td><td class="phys">Atrial depolarization (SA node → atrial muscle)</td><td>&lt;0.1 s · 0.1–0.12 mV</td><td>Absent in atrial fibrillation</td></tr>
+          <tr><td><strong>PR interval</strong></td><td class="phys">AV conduction time including nodal delay</td><td>0.12–0.21 s</td><td>Prolonged = AV block</td></tr>
+          <tr><td><strong>QRS complex</strong></td><td class="phys">Ventricular depolarization</td><td>&lt;0.08 s</td><td>Wide = bundle branch block · Deep Q = MI</td></tr>
+          <tr><td><strong>ST segment</strong></td><td class="phys">Ventricular plateau phase (all ventricles depolarized)</td><td>Isoelectric ~0.32 s</td><td>Elevated = acute MI · Depressed = ischaemia</td></tr>
+          <tr><td><strong>T wave</strong></td><td class="phys">Ventricular repolarization</td><td>~0.27 s · 0.3 mV</td><td>Inverted = ischaemia · Tall peaked = hyperkalaemia</td></tr>
+          <tr><td><strong>QT interval</strong></td><td class="phys">Total ventricular systole (depolarization + repolarization)</td><td>~0.4 s</td><td>Prolonged = risk of torsades de pointes</td></tr>
+          <tr><td><strong>U wave</strong></td><td class="phys">Slow repolarization of papillary muscles</td><td>0.08 s · rare</td><td>Prominent = hypokalaemia</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>Note:</strong> Atrial repolarization is not visible on ECG because it coincides with and is buried within the QRS complex.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8: CARDIAC CYCLE
+══════════════════════════════════════════ -->
+<div class="section" id="cycle">
+  <h2 class="section-title"><span class="section-num">8</span> Cardiac Cycle</h2>
+
+  <div class="phys-block">
+    <span class="block-label">⚙️ Overview</span>
+    Duration: 0.8 s at HR 75/min · Systole: 0.3 s · Diastole: 0.5 s · At high HR, diastole shortens much more than systole → reduced coronary perfusion and filling
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <p class="card-title">Phases of Cardiac Cycle</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Phase</th><th>Duration</th><th class="phys">Events</th><th>Pressures / Volumes</th></tr></thead>
+        <tbody>
+          <tr><td colspan="4" style="background:rgba(232,72,85,0.08);color:var(--accent);font-weight:600;font-size:0.8rem;letter-spacing:1px;">ATRIAL SYSTOLE</td></tr>
+          <tr><td>Atrial contraction</td><td>0.1 s</td><td class="phys">Atria contract → pushes last 25% of blood into ventricles · P wave on ECG · a-wave in venous pressure</td><td>EDV = 130 mL · Aortic P = 80 mm Hg</td></tr>
+          <tr><td colspan="4" style="background:rgba(232,72,85,0.08);color:var(--accent);font-weight:600;font-size:0.8rem;letter-spacing:1px;">VENTRICULAR SYSTOLE (0.3 s)</td></tr>
+          <tr><td>Isovolumic contraction</td><td>0.05 s</td><td class="phys">Both AV and semilunar valves closed · Pressure rises rapidly · <strong>S1 (LUB)</strong> → AV valve closure · c-wave in atrial pressure</td><td>Volume unchanged · LV pressure rises to 80 mm Hg</td></tr>
+          <tr><td>Rapid ejection</td><td>0.1 s</td><td class="phys">Semilunar valves open · 2/3 of SV ejected · Aortic pressure rises to 120 mm Hg</td><td>LV pressure peaks · SV ~80 mL total ejected</td></tr>
+          <tr><td>Slow ejection</td><td>0.15 s</td><td class="phys">Remaining 1/3 SV ejected · Pressure starts declining</td><td>Aortic pressure begins to fall</td></tr>
+          <tr><td colspan="4" style="background:rgba(61,155,233,0.08);color:var(--phys);font-weight:600;font-size:0.8rem;letter-spacing:1px;">VENTRICULAR DIASTOLE (0.5 s)</td></tr>
+          <tr><td>Protodiastole</td><td>0.04 s</td><td class="phys">Ventricles start relaxing · Semilunar valves snap shut → <strong>S2 (DUB)</strong> + dicrotic notch in aortic pressure</td><td>ESV = 50 mL</td></tr>
+          <tr><td>Isovolumic relaxation</td><td>0.06 s</td><td class="phys">Both sets of valves closed · LV pressure falls rapidly from 80 → 2–3 mm Hg</td><td>Volume unchanged</td></tr>
+          <tr><td>Rapid passive filling</td><td>0.11 s</td><td class="phys">AV valves open · Blood rushes in from atria · v-wave in atrial pressure · <strong>S3</strong> (physiological in young)</td><td>75% filling occurs here</td></tr>
+          <tr><td>Diastasis (reduced filling)</td><td>0.19 s</td><td class="phys">Slow filling phase · Pressure equilibrates between atria and ventricles</td><td>Remaining ~0% fills passively</td></tr>
+          <tr><td>Atrial systole</td><td>0.1 s</td><td class="phys">(Repeats) → final 25% filling · <strong>S4</strong> if audible</td><td>Cycle restarts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li><strong>Papillary muscles</strong> contract at start of systole simultaneously with ventricular walls → prevents mitral/tricuspid prolapse into atria during the high-pressure systolic phase</li>
+      <li>The <strong>fibrous AV ring</strong> pulls down during systole (vis-a-fronte) → enlarges atrial lumen → sucks blood from great veins (ventricular systolic suction)</li>
+      <li><strong>Ejection fraction</strong> = 65% normally (80 mL out of 130 mL EDV) — reduced in heart failure</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 9: CARDIAC OUTPUT
+══════════════════════════════════════════ -->
+<div class="section" id="output">
+  <h2 class="section-title"><span class="section-num">9</span> Cardiac Output &amp; Regulation</h2>
+
+  <div class="card">
+    <p class="card-title">Cardiac Output Basics</p>
+    <div class="grid2">
+      <div class="phys-block">
+        <span class="block-label">⚙️ Formula</span>
+        <ul class="notes">
+          <li><strong>CO = SV × HR</strong></li>
+          <li>Normal: 70–80 mL × 70 beats = <strong>~5–6 L/min</strong></li>
+          <li>Cardiac index: CO / body surface area = <strong>3.2 L/min/m²</strong></li>
+          <li>Ejection fraction: SV/EDV × 100 = <strong>~65%</strong></li>
+        </ul>
+      </div>
+      <div class="phys-block">
+        <span class="block-label">⚙️ Determinants</span>
+        <ul class="notes">
+          <li><strong>Preload</strong> (EDV) → stretches fibres → Frank–Starling</li>
+          <li><strong>Afterload</strong> (peripheral resistance) → opposes ejection</li>
+          <li><strong>Heart rate</strong> → directly proportional to CO (within limits)</li>
+          <li><strong>Contractility</strong> → intrinsic myocardial force (sympathetics, Ca²⁺, drugs)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Frank–Starling Law</p>
+    <div class="phys-block">
+      <span class="block-label">⚙️ Physiology</span>
+      Within physiological limits, the force of cardiac contraction is proportional to the end-diastolic volume (preload). More stretch → more force. This is called heterometric autoregulation.
+    </div>
+    <div class="link-block">
+      <span class="block-label">🔗 Clinical Relevance</span>
+      <ul class="notes">
+        <li>If LV fails and blood backs up → EDV increases → Frank–Starling boosts contraction → temporarily compensates. But excessive stretch → descending limb → decompensated heart failure</li>
+        <li>This mechanism also ensures <strong>equal output from both ventricles</strong> — if RV pumps slightly more, LV fills more and automatically pumps more</li>
+      </ul>
+    </div>
+  </div>
+
+  <details>
+    <summary>🔄 Extrinsic Regulation — Autonomic Control of Cardiac Output</summary>
+    <div class="details-body">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Division</th><th class="phys">Effect on HR</th><th class="phys">Effect on Contractility</th><th>Mechanism</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sympathetic</strong></td><td class="phys">↑ (positive chronotropic)</td><td class="phys">↑ (positive inotropic)</td><td>β₁ receptors → ↑ cAMP → ↑ Ca²⁺ entry · Norepinephrine/epinephrine</td></tr>
+            <tr><td><strong>Parasympathetic (Vagal)</strong></td><td class="phys">↓ (negative chronotropic)</td><td class="phys">↓ atria only (no effect on ventricles)</td><td>M₂ receptors → ↑ K⁺ conductance → hyperpolarization · Acetylcholine</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="highlight" style="margin-top:12px">
+        <strong>Vagal tone dominates at rest</strong> — resting HR ~72/min. Atropine (blocks vagus) → HR rises to 150–180/min. When both are blocked → intrinsic rate ~100/min.
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 10: CORONARY CIRCULATION
+══════════════════════════════════════════ -->
+<div class="section" id="coronary">
+  <h2 class="section-title"><span class="section-num">10</span> Coronary Circulation</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="card-title">Right Coronary Artery (RCA)</p>
+      <div class="anat-block">
+        <span class="block-label">📐 Anatomy</span>
+        <ul class="notes">
+          <li>Arises from <strong>right aortic sinus</strong> of ascending aorta</li>
+          <li>Between pulmonary trunk and right auricle</li>
+          <li>Branches: right conus, SA artery, right ventricular rami, posterior interventricular branch</li>
+          <li>Supplies: RV, RA, posterior LV, posterior IVS, <strong>SA node (60%), AV node</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <p class="card-title">Left Coronary Artery (LCA)</p>
+      <div class="anat-block">
+        <span class="block-label">📐 Anatomy</span>
+        <ul class="notes">
+          <li>Arises from <strong>left posterior aortic sinus</strong> of ascending aorta</li>
+          <li>Wider and larger than RCA</li>
+          <li>Branches: <strong>LAD (anterior interventricular)</strong> + circumflex</li>
+          <li>Supplies: Anterior LV, LA, anterior IVS, left bundle branch</li>
+          <li>LAD = "widow maker" — supplies most of LV</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:0">
+    <p class="card-title">Venous Drainage</p>
+    <div class="anat-block">
+      <span class="block-label">📐 Anatomy</span>
+      <ul class="notes">
+        <li><strong>Coronary sinus</strong> (2–3 cm, in posterior AV groove) → drains most of heart → opens into right atrium between IVC and tricuspid valve</li>
+        <li>Tributaries: Great cardiac vein, middle cardiac vein, small cardiac vein, posterior vein of LV, oblique vein</li>
+        <li>Also: anterior cardiac veins + Thebesian veins (direct into chambers) = physiological shunt</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Coronary Blood Flow — Physiology</p>
+    <div class="phys-block">
+      <span class="block-label">⚙️ Characteristic Features</span>
+      <ul class="notes">
+        <li>Normal flow at rest: ~250 mL/min (70 mL/100 g/min) = <strong>5% of cardiac output</strong></li>
+        <li>O₂ extraction: 70–80% at rest (vs 25% whole body) → cannot extract more → increased demand MUST be met by increased flow</li>
+        <li>During exercise: 3–6× increase in coronary flow</li>
+        <li><strong>LV flow occurs mainly in diastole</strong> — systolic ventricular contraction compresses intramural vessels → flow nearly zero during isovolumic contraction</li>
+        <li><strong>RV flow occurs in both systole and diastole</strong> — lower ventricular pressure, less compression</li>
+      </ul>
+    </div>
+    <div class="link-block" style="margin-top:12px">
+      <span class="block-label">🔗 Anatomy → Physiology</span>
+      <ul class="notes">
+        <li>Coronary arteries are <strong>functionally end arteries</strong> (though anatomically anastomosing) → blockage causes infarction of that territory</li>
+        <li>Aortic sinuses of Valsalva ensure coronary ostia receive blood during <strong>diastole</strong> (when aortic valve closes and sinuses fill) — this is the anatomical design for coronary perfusion</li>
+        <li>At high heart rates → diastole shortens disproportionately → <strong>coronary perfusion time decreases</strong> → risk of subendocardial ischaemia in diseased hearts</li>
+        <li>Autoregulation maintains coronary flow constant from 70–200 mm Hg arterial pressure — fails below 70 mm Hg</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 11: NERVE SUPPLY
+══════════════════════════════════════════ -->
+<div class="section" id="nerve">
+  <h2 class="section-title"><span class="section-num">11</span> Nerve Supply of the Heart</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <p class="card-title">Sympathetic Supply</p>
+      <div class="anat-block">
+        <span class="block-label">📐 Anatomy</span>
+        <ul class="notes">
+          <li>Preganglionic: T1–T5 segments of spinal cord</li>
+          <li>Postganglionic: From superior, middle, inferior cervical ganglia + T1–T5 thoracic ganglia</li>
+          <li>Right side → mainly SA node</li>
+          <li>Left side → mainly AV node</li>
+          <li>Supplies: Atria, ventricles AND conducting system</li>
+        </ul>
+      </div>
+      <div class="phys-block">
+        <span class="block-label">⚙️ Effect</span>
+        <ul class="notes">
+          <li>↑ Heart rate (positive chronotropic)</li>
+          <li>↑ Conduction velocity (positive dromotropic)</li>
+          <li>↑ Excitability (positive bathmotropic)</li>
+          <li>↑ Force of contraction (positive inotropic)</li>
+          <li>Vasodilation of coronary arteries</li>
+          <li>↑ Cardiac output</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <p class="card-title">Parasympathetic Supply (Vagus)</p>
+      <div class="anat-block">
+        <span class="block-label">📐 Anatomy</span>
+        <ul class="notes">
+          <li>Preganglionic: Nucleus ambiguus + dorsal nucleus of vagus (medulla)</li>
+          <li>Right vagus → mainly SA node</li>
+          <li>Left vagus → mainly AV node</li>
+          <li>Supplies: Atria and conducting system ONLY (not ventricles)</li>
+          <li>Postganglionic in cardiac plexus</li>
+        </ul>
+      </div>
+      <div class="phys-block">
+        <span class="block-label">⚙️ Effect</span>
+        <ul class="notes">
+          <li>↓ Heart rate (negative chronotropic)</li>
+          <li>↓ Conduction velocity (negative dromotropic)</li>
+          <li>↓ Force of contraction of atria only</li>
+          <li>↓ Coronary blood flow</li>
+          <li><strong>No effect on ventricular contractility</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="link-block">
+    <span class="block-label">🔗 Anatomy → Physiology</span>
+    <ul class="notes">
+      <li>Vagal fibres supply <strong>only atria and conducting system</strong> — not ventricles. This means vagal stimulation can slow/stop SA node and block AV conduction (complete heart block) but cannot stop ventricular contraction once impulse escapes below AV node</li>
+      <li><strong>Referred pain of MI:</strong> Cardiac afferent pain fibres travel with sympathetic nerves (T1–T5) → pain referred to left arm, jaw, neck — these dermatomes correspond to T1–T5 — purely anatomical explanation for clinical symptom</li>
+      <li>Normal resting HR 72/min is lower than intrinsic SA node rate (~90–100/min) → <strong>vagal tone</strong> slows it down. Cut vagus → HR rises. Block vagus with atropine → HR rises to 150–180/min</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid var(--border); padding-top:24px; margin-top:40px; color:var(--muted); font-size:0.8rem;">
+  <p>Sources: <em>Textbook of Human Physiology for Dental Students</em> — Indu Khurana (2nd Ed.) &nbsp;|&nbsp; <em>Ch. 8 Cardiovascular System</em> — Anatomy Notes</p>
+  <p style="margin-top:4px;">🟠 Orange = Anatomy &nbsp;|&nbsp; 🔵 Blue = Physiology &nbsp;|&nbsp; 🔴 Red = Anatomy→Physiology Integration</p>
+</div>
+
+</main>
+</body>
+</html>

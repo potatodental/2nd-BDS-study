@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Respiratory System — Anatomy & Physiology Integrated</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#ffffff; --text:#1a1a2e; --accent:#c0392b; --accent2:#2980b9;
+  --accent3:#27ae60; --muted:#6b7280; --border:#e5e7eb; --card:#f8f9fa;
+  --anatomy:#fff0f0; --physio:#f0f7ff; --anatomy-border:#e8b4b8;
+  --physio-border:#93c5fd; --link-border:#d4c5a0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Source Sans 3',sans-serif;background:#fff;color:var(--text);line-height:1.7;font-size:15px;}
+
+header{background:var(--text);color:white;padding:60px 40px 50px;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(192,57,43,0.15);}
+header h1{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;line-height:1.1;position:relative;z-index:1;}
+header h1 span{color:#e74c3c;}
+header p{color:rgba(255,255,255,0.7);font-size:0.95rem;margin-top:12px;position:relative;z-index:1;max-width:650px;}
+
+.legend{display:flex;gap:20px;flex-wrap:wrap;padding:16px 40px;background:var(--card);border-bottom:1px solid var(--border);align-items:center;}
+.legend-label{font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:0.82rem;font-weight:600;}
+.legend-dot{width:11px;height:11px;border-radius:3px;}
+
+nav{position:sticky;top:0;background:white;border-bottom:2px solid var(--border);padding:0 40px;z-index:100;display:flex;gap:2px;overflow-x:auto;}
+nav a{padding:13px 14px;text-decoration:none;color:var(--muted);font-size:0.78rem;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:all 0.2s;letter-spacing:0.3px;}
+nav a:hover{color:var(--text);border-bottom-color:var(--accent);}
+
+main{max-width:1100px;margin:0 auto;padding:40px;}
+
+.section-header{margin:50px 0 24px;padding-bottom:12px;border-bottom:3px solid var(--text);display:flex;align-items:baseline;gap:14px;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--muted);background:var(--card);padding:3px 8px;border-radius:4px;border:1px solid var(--border);}
+
+.link-card{background:linear-gradient(135deg,#fff8e1,#fff3e0);border:1px solid var(--link-border);border-left:5px solid #f39c12;border-radius:8px;padding:16px 20px;margin:18px 0;}
+.link-card-title{font-size:0.7rem;font-weight:700;color:#d68910;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:7px;}
+.link-card-title::before{content:'⚡ ';}
+.link-card p,.link-card ul{font-size:0.87rem;color:#6b4c11;line-height:1.65;}
+.link-card ul{padding-left:18px;}
+
+.anat-card{background:var(--anatomy);border:1px solid var(--anatomy-border);border-left:5px solid var(--accent);border-radius:8px;padding:16px 20px;margin:14px 0;}
+.anat-card h4{font-family:'Playfair Display',serif;font-size:0.97rem;color:var(--accent);margin-bottom:8px;font-weight:700;}
+.anat-card p,.anat-card ul,.anat-card ol{font-size:0.87rem;color:#4a1010;}
+
+.phys-card{background:var(--physio);border:1px solid var(--physio-border);border-left:5px solid var(--accent2);border-radius:8px;padding:16px 20px;margin:14px 0;}
+.phys-card h4{font-family:'Playfair Display',serif;font-size:0.97rem;color:var(--accent2);margin-bottom:8px;font-weight:700;}
+.phys-card p,.phys-card ul,.phys-card ol{font-size:0.87rem;color:#0c2d4a;}
+
+.clinical{background:#f0fdf4;border:1px solid #86efac;border-left:5px solid var(--accent3);border-radius:8px;padding:16px 20px;margin:16px 0;}
+.clinical-title{font-size:0.7rem;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:7px;}
+.clinical-title::before{content:'🏥 ';}
+.clinical p,.clinical ul{font-size:0.87rem;color:#14532d;}
+.clinical ul{padding-left:18px;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+
+.struct-table{width:100%;border-collapse:collapse;font-size:0.84rem;margin:18px 0;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.struct-table thead tr{background:var(--text);color:white;}
+.struct-table th{padding:11px 14px;text-align:left;font-weight:600;font-size:0.78rem;letter-spacing:0.3px;}
+.struct-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+.struct-table tbody tr:nth-child(even){background:var(--card);}
+.struct-table tbody tr:hover{background:#fffbf0;}
+
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:0.68rem;font-weight:700;text-transform:uppercase;}
+.tag-anat{background:#fee2e2;color:#991b1b;}
+.tag-phys{background:#dbeafe;color:#1e40af;}
+.tag-link{background:#fef3c7;color:#92400e;}
+
+ul,ol{padding-left:20px;}
+ul li,ol li{margin-bottom:4px;}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:18px 0;background:var(--card);border-radius:10px;padding:18px;border:1px solid var(--border);}
+.flow-step{background:white;border:2px solid var(--border);border-radius:7px;padding:9px 13px;font-size:0.8rem;font-weight:600;text-align:center;min-width:100px;}
+.flow-step.anat{border-color:var(--anatomy-border);background:var(--anatomy);color:#7b1414;}
+.flow-step.phys{border-color:var(--physio-border);background:var(--physio);color:#0c2d4a;}
+.flow-sub{font-size:0.67rem;font-weight:400;color:var(--muted);display:block;margin-top:2px;}
+.flow-arrow{font-size:1.1rem;color:var(--muted);padding:0 2px;}
+
+.num-box{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:7px 12px;margin:4px 5px 4px 0;font-size:0.82rem;}
+.num-val{font-family:'JetBrains Mono',monospace;font-size:0.95rem;font-weight:500;color:var(--accent2);}
+.num-label{color:var(--muted);font-size:0.76rem;}
+
+.pressure-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--border);font-size:0.86rem;}
+.pressure-row:last-child{border:none;}
+.pressure-name{width:200px;font-weight:600;font-size:0.82rem;}
+.pressure-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
+.pressure-fill{height:100%;border-radius:4px;}
+.pressure-val{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--accent2);min-width:70px;}
+
+details{border:1px solid var(--border);border-radius:8px;margin:10px 0;overflow:hidden;}
+summary{padding:13px 17px;font-weight:600;font-size:0.88rem;cursor:pointer;background:var(--card);list-style:none;display:flex;align-items:center;gap:8px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:'▶';font-size:0.62rem;transition:transform 0.2s;color:var(--muted);}
+details[open] summary::before{transform:rotate(90deg);}
+details > div{padding:16px 17px;}
+
+.hypoxia-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+@media(max-width:700px){.hypoxia-grid{grid-template-columns:1fr;}}
+.hyp-card{border-radius:8px;padding:15px 18px;border:1px solid;}
+.hyp-1{background:#fff0f0;border-color:#e8b4b8;border-left:5px solid #e74c3c;}
+.hyp-2{background:#fff8e1;border-color:#f9d71c44;border-left:5px solid #f39c12;}
+.hyp-3{background:#f3e8ff;border-color:#d8b4fe;border-left:5px solid #8e44ad;}
+.hyp-4{background:#ecfdf5;border-color:#86efac;border-left:5px solid #16a34a;}
+.hyp-card h5{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;margin-bottom:8px;}
+.hyp-1 h5{color:#c0392b;} .hyp-2 h5{color:#d68910;} .hyp-3 h5{color:#7c3aed;} .hyp-4 h5{color:#15803d;}
+.hyp-card p,.hyp-card ul{font-size:0.84rem;}
+
+footer{text-align:center;padding:28px;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);margin-top:60px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Respiratory System<br><span>Anatomy → Physiology</span></h1>
+  <p>Complete integrated reference — every anatomical feature mapped to its physiological consequence. Covers structure, ventilation, diffusion, transport, regulation, hypoxia, applied aspects and clinical correlations.</p>
+</header>
+
+<div class="legend">
+  <span class="legend-label">Color Key:</span>
+  <div class="legend-item"><div class="legend-dot" style="background:#e74c3c;"></div> Anatomy</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2980b9;"></div> Physiology</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f39c12;"></div> Anatomy → Physiology Link</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#27ae60;"></div> Clinical</div>
+</div>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#tract">Air Passages</a>
+  <a href="#bronchial">Bronchial Tree</a>
+  <a href="#lungs">Lungs</a>
+  <a href="#pleura">Pleura</a>
+  <a href="#thorax">Thorax & Diaphragm</a>
+  <a href="#ventilation">Ventilation</a>
+  <a href="#volumes">Lung Volumes</a>
+  <a href="#compliance">Compliance</a>
+  <a href="#diffusion">Diffusion & VA/Q</a>
+  <a href="#transport">Gas Transport</a>
+  <a href="#regulation">Regulation</a>
+  <a href="#hypoxia">Hypoxia</a>
+  <a href="#disturbances">Disturbances</a>
+  <a href="#altitude">Altitude & Pressure</a>
+  <a href="#exercise">Exercise</a>
+  <a href="#clinical">Clinical</a>
+</nav>
+
+<main>
+
+<!-- ===== §01 OVERVIEW ===== -->
+<div class="section-header" id="overview">
+  <h2>System Overview</h2><span class="section-num">§01</span>
+</div>
+<p style="color:var(--muted);margin-bottom:16px;">The respiratory system delivers O₂ to tissues and removes CO₂. Every structural choice — cartilaginous rings, biconcave alveolar geometry, pleural coupling — is a direct answer to a physiological demand.</p>
+
+<div class="flow">
+  <div class="flow-step anat">Nose/Pharynx<span class="flow-sub">Filter, warm, humidify</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step anat">Larynx/Trachea<span class="flow-sub">Open airway, protection</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step anat">Bronchial Tree<span class="flow-sub">23 generations</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step anat">Alveoli<span class="flow-sub">300M; 70 m²</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step phys">Gas Exchange<span class="flow-sub">O₂/CO₂ across 0.6 μm</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step phys">Blood Transport<span class="flow-sub">Hb + plasma + HCO₃⁻</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step phys">Tissues<span class="flow-sub">O₂ delivered; CO₂ removed</span></div>
+</div>
+
+<table class="struct-table">
+  <thead><tr><th>Structure</th><th>Key Anatomical Feature</th><th>Physiological Role</th><th>Type</th></tr></thead>
+  <tbody>
+    <tr><td>Nasal cavity</td><td>Turbinates, rich vascular mucosa, goblet cells</td><td>Warms, humidifies, filters inspired air</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Trachea</td><td>C-shaped rings, incomplete posteriorly</td><td>Maintains open lumen; allows oesophageal expansion</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Terminal bronchioles</td><td>No cartilage; abundant smooth muscle</td><td>Airway resistance control; main site of bronchoconstriction</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Alveoli (×300M)</td><td>0.6 μm wall, 70 m² total surface</td><td>Maximises diffusion area; minimises distance</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Type II pneumocytes</td><td>Granular cells in alveolar wall</td><td>Secrete surfactant → prevents collapse, reduces work of breathing</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Pleural space</td><td>Closed serous cavity; thin fluid film</td><td>Negative pressure couples lung to chest wall</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Diaphragm</td><td>Dome-shaped; phrenic nerve C3–C5</td><td>75% of tidal volume; primary muscle of inspiration</td><td><span class="tag tag-link">A→P</span></td></tr>
+    <tr><td>Pulmonary capillaries</td><td>Low-pressure system; one cap per alveolus</td><td>Gas exchange; low pressure prevents pulmonary oedema</td><td><span class="tag tag-link">A→P</span></td></tr>
+  </tbody>
+</table>
+
+<!-- ===== §02 AIR PASSAGES ===== -->
+<div class="section-header" id="tract">
+  <h2>Upper Respiratory Tract</h2><span class="section-num">§02</span>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Nasal Cavities</h4>
+    <p>Right and left cavities; open via anterior nares → nasopharynx via posterior nares. Turbinates (conchae) create tortuous path. Richly vascular mucosa. Goblet cells secrete mucus. Paranasal sinuses drain here.</p>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Air Conditioning</h4>
+    <ul>
+      <li><strong>Warming:</strong> Air reaches 37°C by the time it reaches alveoli</li>
+      <li><strong>Humidification:</strong> 100% saturation achieved (adds 47 mmHg water vapour pressure)</li>
+      <li><strong>Filtration:</strong> Particles trapped in mucus at bends; mucociliary escalator sweeps upward</li>
+      <li>IgA in mucus → local immune protection</li>
+    </ul>
+  </div>
+</div>
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link</div>
+  <p>Turbinate geometry forces air through tight bends → particles impinge on mucus at each curve → cilia beat upward at ~1000 strokes/min → particles reach pharynx → swallowed. Rich nasal vasculature acts as a counter-current heat exchanger. Humidification prevents drying of delicate alveolar membranes and maintains the fluid layer needed for surfactant to function. Without this conditioning, alveoli would be exposed to cold, dry air — catastrophic for surfactant and diffusion.</p>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Larynx</h4>
+    <p>Glottis = triangular space between vocal cords. Epiglottis guards entry. Laryngeal abductor muscles dilate glottis during inspiration.</p>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Glottis Physiology</h4>
+    <p>Abductors actively widen glottis on inspiration. During swallowing: <strong>deglutition apnoea</strong> (0.5 s) — larynx elevates, epiglottis closes → prevents aspiration. Irritant receptor stimulation → cough reflex (expels material). Spasm of glottis → stridor.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Trachea</h4>
+    <p>C-shaped cartilaginous rings — <strong>incomplete posteriorly</strong>. Posterior membranous wall has trachealis smooth muscle. Divides at carina (T4–T5) into right and left principal bronchi. Lined by ciliated columnar epithelium + goblet cells.</p>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Why Incomplete Rings?</h4>
+    <p>Oesophagus lies immediately posterior → incomplete rings allow oesophageal expansion during swallowing without airway compromise. Complete rings would obstruct swallowing. The cartilage prevents tracheal collapse during forced inspiration (when intratracheal pressure is highly negative).</p>
+  </div>
+</div>
+
+<!-- ===== §03 BRONCHIAL TREE ===== -->
+<div class="section-header" id="bronchial">
+  <h2>Bronchial Tree</h2><span class="section-num">§03</span>
+</div>
+
+<div class="anat-card">
+  <h4>🔴 23 Generations of Division</h4>
+  <ul>
+    <li><strong>Gen 0:</strong> Trachea — cross-section 2.5 cm²</li>
+    <li><strong>Gen 1:</strong> Principal bronchi (right: wider, shorter, more vertical; left: narrower, longer)</li>
+    <li><strong>Gen 2:</strong> Lobar bronchi (right: 3; left: 2)</li>
+    <li><strong>Gen 3:</strong> Segmental bronchi — 10 per lung = 10 bronchopulmonary segments each</li>
+    <li><strong>Gen 4–16:</strong> Progressively smaller bronchi → terminal bronchioles — <strong>Conducting Zone</strong> (~150 mL dead space)</li>
+    <li><strong>Gen 17–22:</strong> Respiratory bronchioles — some gas exchange begins</li>
+    <li><strong>Gen 23:</strong> Alveolar ducts + alveoli — total cross-section 11,800 cm²</li>
+  </ul>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: The 4700× Area Increase</div>
+  <p>Cross-section increases 4700× from trachea to alveoli. By V = Q/A, air velocity drops from ~100 cm/s in trachea to ~1 mm/s in alveoli. This near-zero velocity is essential — diffusion (not bulk flow) dominates at alveolar level. If air moved fast through alveoli, contact time would be far too brief for O₂/CO₂ equilibration. The anatomy deliberately slows air to allow diffusion to take over.</p>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Histological Changes Down the Tree</h4>
+    <ul>
+      <li>Cartilage: trachea (C-rings) → bronchi (plates) → disappears at bronchioles</li>
+      <li>Smooth muscle: increases as cartilage disappears</li>
+      <li>Goblet cells + serous glands: bronchi → absent in bronchioles</li>
+      <li>Epithelium: ciliated columnar → cuboidal → squamous at alveoli</li>
+      <li>Cilia: present to terminal bronchioles; absent in alveoli</li>
+    </ul>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Why These Changes Matter</h4>
+    <ul>
+      <li><strong>Loss of cartilage:</strong> Smooth muscle now controls lumen diameter = airway resistance</li>
+      <li><strong>Sympathetic β₂:</strong> Smooth muscle relaxes → bronchodilation</li>
+      <li><strong>Parasympathetic muscarinic:</strong> Smooth muscle contracts → bronchoconstriction</li>
+      <li><strong>No cilia in alveoli:</strong> Alveolar macrophages (dust cells) take over defence</li>
+      <li><strong>Squamous epithelium:</strong> Minimal diffusion barrier at gas exchange sites</li>
+    </ul>
+  </div>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Right Bronchus & Foreign Bodies</div>
+  <p>Right primary bronchus is wider, shorter and more vertical — essentially a direct continuation of the trachea. Aspirated foreign bodies therefore enter the right lung preferentially. Most common sites: <strong>apical segment of right lower lobe</strong> (upright patient) and <strong>posterior segment of right upper lobe</strong> (supine). This is pure anatomy predicting clinical outcome.</p>
+</div>
+
+<div class="anat-card">
+  <h4>🔴 Bronchopulmonary Segments</h4>
+  <p>Each lung: 10 segments. Each segment = one tertiary (segmental) bronchus + independent pulmonary artery branch + portion of pulmonary vein shared with adjacent segments. Separated by intersegmental connective tissue septa. Self-contained anatomical and functional unit.</p>
+</div>
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Surgical Independence</div>
+  <p>Independent bronchus + artery (but shared veins) means a diseased segment can be surgically removed without affecting adjacent segments. Disease (pneumonia, abscess, TB) is often confined to one segment for the same reason — independent air and blood supply limits spread. Physiologically, each segment ventilates and perfuses independently, making them the unit of VA/Q analysis.</p>
+</div>
+
+<!-- ===== §04 LUNGS ===== -->
+<div class="section-header" id="lungs">
+  <h2>Lungs — Structure & Function</h2><span class="section-num">§04</span>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Gross Structure</h4>
+    <ul>
+      <li><strong>Shape:</strong> Conical — apex, base, costal surface, medial surface</li>
+      <li><strong>Apex:</strong> 2.5 cm above clavicle (naked/cervical pleura — vulnerable)</li>
+      <li><strong>Base:</strong> Concave; rests on diaphragm (right: liver; left: stomach, spleen)</li>
+      <li><strong>Medial surface:</strong> Hilum (bronchi, vessels, nerves, lymphatics)</li>
+      <li><strong>Left lung:</strong> Cardiac notch accommodates heart</li>
+      <li><strong>Lobes:</strong> Right — 3 (upper, middle, lower); Left — 2 (upper, lower)</li>
+      <li><strong>Colour:</strong> Newborn: rosy pink; Adult: dark grey (carbon deposition)</li>
+      <li><strong>Texture:</strong> Elastic, spongy (300 million alveoli)</li>
+    </ul>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Functional Implications</h4>
+    <ul>
+      <li><strong>Elasticity:</strong> Enables passive expiration — elastic recoil is the driving force</li>
+      <li><strong>Spongy texture:</strong> Enormous air-tissue interface for gas exchange</li>
+      <li><strong>Apex anatomy:</strong> More negative pleural pressure at apex (−7 mmHg) vs base (−2 mmHg) due to gravity → apex more inflated at rest → more susceptible to pneumothorax and TB</li>
+      <li><strong>Base on diaphragm:</strong> Diaphragmatic descent is primary volume-increasing mechanism</li>
+      <li><strong>Cardiac notch:</strong> Reduces left lung volume slightly → left has less reserve</li>
+    </ul>
+  </div>
+</div>
+
+<div class="anat-card">
+  <h4>🔴 Alveolus — Microscopic Structure</h4>
+  <ul>
+    <li><strong>Type I pneumocytes:</strong> Flat cells; cover 95% of surface; thin for diffusion</li>
+    <li><strong>Type II pneumocytes:</strong> Granular cells; secrete surfactant (DPPC); can regenerate Type I after injury</li>
+    <li><strong>Alveolar macrophages (PAM/dust cells):</strong> Actively phagocytic; defence when cilia absent</li>
+    <li><strong>Pores of Kohn:</strong> Small pores between adjacent alveoli → collateral ventilation</li>
+    <li><strong>Mast cells:</strong> Contain histamine, heparin — participate in allergic reactions</li>
+    <li><strong>APUD cells:</strong> Store and secrete VIP, substance P, somatostatin</li>
+    <li><strong>Total membrane thickness:</strong> 0.6 μm (8 layers compressed)</li>
+  </ul>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Alveolar Design Optimised for Diffusion</div>
+  <p>By Fick's law: Diffusion ∝ (Area × ΔP × D) / thickness. The anatomy simultaneously maximises and minimises the right terms: <strong>Area = 70 m²</strong> (300M alveoli, each wrapped in capillaries). <strong>Thickness = 0.6 μm</strong> (8 layers but largely fused/compressed). <strong>D for CO₂ = 20× O₂</strong> (higher solubility). Result: diffusing capacity for O₂ at rest = 20–25 mL/min/mmHg; during exercise increases to 65 mL/min/mmHg as more capillaries recruit. Pores of Kohn enable collateral ventilation — if a bronchiole is blocked, adjacent alveoli can still receive air through pores, preventing collapse.</p>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Pulmonary Blood Supply</h4>
+    <p><strong>Bronchial arteries</strong> (from descending aorta): Supply bronchi and connective tissue up to respiratory bronchioles. Anastomose with pulmonary arteries.</p>
+    <p><strong>Pulmonary arteries</strong> (deoxygenated from RV): Supply alveolar capillaries for gas exchange.</p>
+    <p><strong>Pulmonary veins (×4):</strong> Oxygenated blood → left atrium. Bronchial veins drain into pulmonary veins.</p>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Dual Supply Significance</h4>
+    <p>Bronchial veins drain into pulmonary veins → <strong>physiological shunt</strong> (1–2% of CO) — explains why arterial pO₂ (95 mmHg) is slightly less than alveolar pO₂ (104 mmHg).</p>
+    <p>Pulmonary capillary pressure ≈ 10 mmHg; oncotic pressure = 25 mmHg → net suction keeps alveoli dry. When LV failure raises pulmonary venous pressure above 25 mmHg → oedema floods alveoli → diffusion barrier ↑ → hypoxia.</p>
+    <p>Pulmonary circulation = <strong>low pressure, low resistance, high capacitance</strong> — contains 600 mL blood (can vary 200–900 mL) acting as reservoir for left ventricle.</p>
+  </div>
+</div>
+
+<!-- ===== §05 PLEURA ===== -->
+<div class="section-header" id="pleura">
+  <h2>Pleura & Pleural Space</h2><span class="section-num">§05</span>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Pleural Layers</h4>
+    <ul>
+      <li><strong>Visceral pleura:</strong> Tightly adhered to lung; covers all surfaces except hilum and pulmonary ligament</li>
+      <li><strong>Parietal pleura:</strong> Lines thoracic cavity — costal, mediastinal, diaphragmatic, cervical types</li>
+      <li><strong>Pleural cavity:</strong> Potential space with thin lubricating serous fluid</li>
+      <li><strong>Cervical pleura:</strong> Extends 2.5 cm above clavicle — unprotected by ribs (naked pleura)</li>
+      <li><strong>Recesses:</strong> Costodiaphragmatic (most dependent) and costomediastinal</li>
+    </ul>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Intrapleural Pressure</h4>
+    <div class="pressure-row"><span class="pressure-name">End expiration (FRC)</span><div class="pressure-bar"><div class="pressure-fill" style="width:30%;background:#e74c3c;"></div></div><span class="pressure-val">−2.5 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">During quiet inspiration</span><div class="pressure-bar"><div class="pressure-fill" style="width:50%;background:#c0392b;"></div></div><span class="pressure-val">−6 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Deep inspiration</span><div class="pressure-bar"><div class="pressure-fill" style="width:80%;background:#922b21;"></div></div><span class="pressure-val">−30 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Lung apex (upright)</span><div class="pressure-bar"><div class="pressure-fill" style="width:60%;background:#7b241c;"></div></div><span class="pressure-val">−7 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Lung base (upright)</span><div class="pressure-bar"><div class="pressure-fill" style="width:20%;background:#aab7b8;"></div></div><span class="pressure-val">−2 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Valsalva manoeuvre</span><div class="pressure-bar"><div class="pressure-fill" style="width:100%;background:#2980b9;"></div></div><span class="pressure-val">+60–70 mmHg</span></div>
+  </div>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Negative Pressure & Lung Coupling</div>
+  <p>The pleural cavity is anatomically a <strong>closed, fluid-filled potential space</strong>. The lung's tendency to collapse (elastic recoil) and the chest wall's tendency to spring outward are equal and opposite — balanced at −2.5 mmHg at FRC. The fluid film transmits force between them like a suction cup — no direct attachment needed. When chest wall expands, lung must follow. <br>Apex has more negative pressure (−7 mmHg) because gravity pulls the lung downward, stretching the apex more — so apex alveoli are larger at rest but have less reserve for further inflation. Base alveoli are smaller at rest but expand more with each breath — better ventilation AND better perfusion (gravity).</p>
+</div>
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Costodiaphragmatic Recess</div>
+  <p>Most dependent part of pleural cavity → gravity causes fluid (transudate/exudate/blood) to collect here first. X-ray: obliteration of costodiaphragmatic angle = first sign of effusion. Physiologically, 200–300 mL of fluid compresses basal lung → ↓ ventilation to base → V/Q mismatch → hypoxia. Thoracocentesis needle: 6th ICS, posterior to mid-axillary line — above lower rib edge (neurovascular bundle runs below each rib).</p>
+</div>
+
+<!-- ===== §06 THORAX & DIAPHRAGM ===== -->
+<div class="section-header" id="thorax">
+  <h2>Thoracic Cage & Diaphragm</h2><span class="section-num">§06</span>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Thoracic Cage</h4>
+    <ul>
+      <li>Osseo-cartilaginous: vertebrae, 12 pairs ribs, costal cartilages, sternum</li>
+      <li>Ribs articulate posteriorly at costo-vertebral joints (pivot)</li>
+      <li>Costal cartilages give elasticity for recoil</li>
+      <li>Neurovascular bundle runs in costal groove — below each rib (vein → artery → nerve, superior to inferior)</li>
+      <li>Two intercostal muscle layers: external + internal</li>
+    </ul>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Three Movements of Respiration</h4>
+    <ul>
+      <li><strong>Pump handle:</strong> Ribs rotate at costo-vertebral joint → sternum moves up and forward → ↑ anteroposterior diameter</li>
+      <li><strong>Bucket handle:</strong> Middle ribs rotate around axis from front to back → ↑ transverse diameter</li>
+      <li><strong>Piston (diaphragm):</strong> Dome descends → ↑ vertical diameter — accounts for 75% of tidal volume change</li>
+      <li>All reversed during expiration</li>
+    </ul>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="anat-card">
+    <h4>🔴 Diaphragm</h4>
+    <ul>
+      <li>Dome-shaped musculoaponeurotic partition between thorax and abdomen</li>
+      <li><strong>Origin:</strong> Xiphoid, ribs 7–12, vertebral column (crura)</li>
+      <li><strong>Insertion:</strong> Fibres converge → central tendon (fused with pericardium)</li>
+      <li><strong>Motor:</strong> Phrenic nerve (C3, C4, C5) — bilateral</li>
+      <li><strong>Sensory:</strong> Phrenic (central) + lower 6 intercostals (peripheral)</li>
+      <li>Right dome higher than left (liver below)</li>
+    </ul>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Diaphragm in Action</h4>
+    <ul>
+      <li>Quiet inspiration: descends 1.5 cm → ~350 mL volume increase</li>
+      <li>Forced inspiration: descends 7–10 cm</li>
+      <li>Accounts for <strong>70–75% of tidal volume change</strong></li>
+      <li>Contraction also elevates lower ribs (bucket + pump handle effects)</li>
+      <li>Paradoxical upward movement on ipsilateral side in phrenic palsy</li>
+      <li>Referred pain to shoulder (C4 dermatome) when diaphragm irritated (subphrenic abscess, blood)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: C3, C4, C5 Keeps the Diaphragm Alive</div>
+  <p>Phrenic nerve injury at C3–C5 → ipsilateral hemi-diaphragm paralysis → 30–35% loss of inspiratory capacity. Spinal cord injury above C3 → total diaphragmatic paralysis → immediately fatal without ventilatory support — explaining why C3 and above lesions are respiratory emergencies. Dual sensory supply (phrenic + intercostal) means central diaphragmatic irritation causes shoulder tip pain (C4 dermatome) while peripheral diaphragmatic irritation causes chest/abdominal wall pain (intercostal dermatomes) — a critical clinical distinction.</p>
+</div>
+
+<table class="struct-table">
+  <thead><tr><th>Muscle</th><th>Type</th><th>Action</th><th>Nerve Supply</th></tr></thead>
+  <tbody>
+    <tr><td>Diaphragm</td><td>Primary inspiration</td><td>Descends; increases vertical diameter; 75% of tidal breathing</td><td>Phrenic (C3,C4,C5)</td></tr>
+    <tr><td>External intercostals</td><td>Primary inspiration</td><td>Elevate ribs; bucket + pump handle; 25% of tidal breathing</td><td>Intercostal nerves</td></tr>
+    <tr><td>Scalenes</td><td>Accessory inspiration</td><td>Elevate 1st and 2nd ribs</td><td>C4–C8</td></tr>
+    <tr><td>Sternocleidomastoid</td><td>Accessory inspiration</td><td>Elevates sternum</td><td>CN XI + C2,C3</td></tr>
+    <tr><td>Serratus anterior</td><td>Accessory inspiration</td><td>Lifts ribs</td><td>Long thoracic (C5–C7)</td></tr>
+    <tr><td>Abdominal muscles (rectus, obliques, transversus)</td><td>Forced expiration</td><td>Increase intra-abdominal pressure; push diaphragm up; depress lower ribs</td><td>Intercostal + iliohypogastric</td></tr>
+    <tr><td>Internal intercostals</td><td>Forced expiration</td><td>Pull ribs downward; decrease AP + transverse diameters</td><td>Intercostal nerves</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== §07 VENTILATION ===== -->
+<div class="section-header" id="ventilation">
+  <h2>Pulmonary Ventilation</h2><span class="section-num">§07</span>
+</div>
+
+<div class="two-col">
+  <div class="phys-card">
+    <h4>🔵 Pressure Changes</h4>
+    <div class="pressure-row"><span class="pressure-name">Intrapulmonary — quiet insp.</span><div class="pressure-bar"><div class="pressure-fill" style="width:20%;background:#e74c3c;"></div></div><span class="pressure-val">−1 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Intrapulmonary — quiet exp.</span><div class="pressure-bar"><div class="pressure-fill" style="width:20%;background:#2980b9;"></div></div><span class="pressure-val">+1 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Muller's manoeuvre</span><div class="pressure-bar"><div class="pressure-fill" style="width:75%;background:#922b21;"></div></div><span class="pressure-val">−80 mmHg</span></div>
+    <div class="pressure-row"><span class="pressure-name">Valsalva manoeuvre</span><div class="pressure-bar"><div class="pressure-fill" style="width:90%;background:#1a5276;"></div></div><span class="pressure-val">+100 mmHg</span></div>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Dead Space & Alveolar Ventilation</h4>
+    <p>Of 500 mL tidal volume, <strong>150 mL fills anatomical dead space</strong> (conducting zone). Only 350 mL reaches alveoli.</p>
+    <p><strong>Alveolar ventilation</strong> = RR × (TV − Dead space) = 12 × 350 = <strong>4,200 mL/min</strong></p>
+    <p><strong>Rapid shallow breathing</strong>: TV 200 mL × 30/min = 6 L/min (same minute volume) but alveolar ventilation = 30 × 50 = only <strong>1,500 mL/min</strong> → hypoxia + hypercapnia despite same minute volume. Depth beats rate.</p>
+    <p><strong>Types of dead space:</strong> Anatomical (150 mL) + Alveolar (ventilated but not perfused) = Physiological dead space</p>
+  </div>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Why Inspiration is Active, Expiration Passive</div>
+  <p>Inspiration requires muscular work to overcome: <strong>Elastic resistance (65%)</strong> — stretch elastic fibres + overcome surface tension; <strong>Airway resistance (28%)</strong> — friction of gas flow; <strong>Viscous resistance (7%)</strong> — non-elastic tissue deformation. Energy stored as elastic potential during inspiration is released during expiration — passive recoil. Forced expiration: abdominal muscles contract → diaphragm pushed up; internal intercostals pull ribs down. Normal work of breathing = 0.3–0.8 kg·m/min = 2–3% of resting O₂ consumption. In obstructive disease this may rise to 30%.</p>
+</div>
+
+<div class="anat-card">
+  <h4>🔴 Surfactant — Structure & Source</h4>
+  <p>Secreted by <strong>Type II pneumocytes</strong>. Composition: phospholipids (mainly DPPC — dipalmitoylphosphatidylcholine) + proteins + ions. Concentration per unit area varies with alveolar radius — more concentrated in smaller alveoli (same number of molecules on smaller surface area).</p>
+  <p>Normal surface tension with surfactant: 5–30 dynes/cm. Without surfactant: 50 dynes/cm.</p>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Surfactant Prevents Collapse (LaPlace's Law)</div>
+  <p>LaPlace's law: P = 2T/r. Smaller alveoli develop higher collapsing pressure (r is smaller). Without surfactant: small alveoli would empty into large ones (atelectasis). <strong>Surfactant breaks this law</strong> — in smaller alveoli, molecules pack more tightly → surface tension drops more → pressure equalises between small and large alveoli → stability maintained. Also: reduced surface tension reduces work of breathing by ~65% (most of the elastic resistance is surface tension). Without surfactant (premature birth) → respiratory distress syndrome → every breath requires enormous effort to re-inflate collapsed alveoli.</p>
+</div>
+
+<!-- ===== §08 LUNG VOLUMES ===== -->
+<div class="section-header" id="volumes">
+  <h2>Lung Volumes & Capacities</h2><span class="section-num">§08</span>
+</div>
+
+<table class="struct-table">
+  <thead><tr><th>Volume/Capacity</th><th>Value (Adult ♂)</th><th>Anatomical Basis</th><th>Physiological Significance</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Tidal Volume (TV)</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">500 mL</td><td>Diaphragm descends 1.5 cm; external intercostals elevate ribs</td><td>Normal breath; 350 mL reaches alveoli</td></tr>
+    <tr><td><strong>IRV</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">3000 mL</td><td>Full contraction all inspiratory muscles; diaphragm 7–10 cm descent</td><td>Reserve for exercise and deep breathing</td></tr>
+    <tr><td><strong>ERV</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">1100 mL</td><td>Abdominal muscles + internal intercostals contract</td><td>Forced expiration reserve</td></tr>
+    <tr><td><strong>Residual Volume (RV)</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">1200 mL</td><td>Chest wall cannot collapse further; air trapped in alveoli + airways</td><td>Cannot be expelled; measured by helium dilution/N₂ washout; prevents lung collapse</td></tr>
+    <tr><td><strong>FRC = ERV + RV</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">2300 mL</td><td>Equilibrium point: lung recoil = chest wall recoil; intrapleural −2.5 mmHg</td><td>Buffer prevents wide swings in alveolar gas; allows breath-holding; dilutes toxic inhaled gases; ↑ in emphysema, ↑ in old age; ↓ in fibrosis, ↓ lying down</td></tr>
+    <tr><td><strong>IC = TV + IRV</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">3500 mL</td><td>Maximum volume inspired from end-expiration</td><td>Reflects inspiratory muscle strength</td></tr>
+    <tr><td><strong>VC = TV + IRV + ERV</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">4600 mL</td><td>Chest size, lung elasticity, muscle strength, posture</td><td>Reduced in restrictive disease; normal or ↑ in obstructive; index of respiratory muscle power</td></tr>
+    <tr><td><strong>TLC = VC + RV</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">5800 mL</td><td>All inspiratory muscles maximally contracted</td><td>↑ emphysema; ↓ fibrosis; ↓ pleural effusion</td></tr>
+    <tr><td><strong>FEV₁</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">~80% of FVC</td><td>Airway lumen size (cartilage, smooth muscle tone)</td><td>Obstructive: FEV₁% ↓ &lt;70%; Restrictive: FEV₁% normal or ↑; most used screening test</td></tr>
+    <tr><td><strong>MVV (MBC)</strong></td><td style="font-family:'JetBrains Mono';color:#2980b9;">80–170 L/min</td><td>Strength + endurance of all respiratory muscles; airway patency</td><td>Profoundly reduced in emphysema + obstruction; reflects overall respiratory reserve</td></tr>
+  </tbody>
+</table>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: FRC is a Pure Anatomical Equilibrium</div>
+  <p>FRC is set by anatomy alone — the balance point where lung elastic recoil exactly equals chest wall elastic recoil, at intrapleural pressure of −2.5 mmHg. Change the anatomy, change the FRC: <strong>Emphysema</strong> → destroys elastic fibres → lung recoil ↓ → equilibrium shifts outward → FRC ↑ → barrel chest. <strong>Pulmonary fibrosis</strong> → elastic recoil ↑ → FRC ↓ → small stiff lungs. <strong>Lying down</strong> → abdominal contents push diaphragm up → FRC ↓ 500–800 mL → supine patients desaturate faster.</p>
+</div>
+
+<!-- ===== §09 COMPLIANCE ===== -->
+<div class="section-header" id="compliance">
+  <h2>Compliance & Resistance</h2><span class="section-num">§09</span>
+</div>
+
+<div class="two-col">
+  <div class="phys-card">
+    <h4>🔵 Compliance</h4>
+    <p>C = ΔV / ΔP — distensibility of lung + chest wall combined.</p>
+    <ul>
+      <li><strong>Normal lung alone:</strong> 0.22 L/cmH₂O</li>
+      <li><strong>Lung + chest wall:</strong> 0.13 L/cmH₂O</li>
+      <li><strong>↓ Compliance</strong> = stiffer lungs = more work to inflate = restrictive pattern (fibrosis, oedema, IRDS)</li>
+      <li><strong>↑ Compliance</strong> = floppy lungs = less elastic recoil = obstructive pattern (emphysema, ageing)</li>
+    </ul>
+    <p>Two-thirds of elastic resistance = surface tension (not tissue). Surfactant reduces surface tension → ↑ compliance → ↓ work of breathing.</p>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 Airway Resistance</h4>
+    <p>Resistance ∝ 1/r⁴ (Poiseuille's law). Halving radius → 16× resistance increase.</p>
+    <ul>
+      <li>Highest resistance: intermediate bronchi (largest cross-section in tree → velocity highest here → most turbulence)</li>
+      <li>Terminal bronchioles: no cartilage → entire diameter = smooth muscle tone</li>
+      <li>↑ during expiration (dynamic airway compression)</li>
+      <li>Sympathetic β₂: ↓ resistance (bronchodilation)</li>
+      <li>Parasympathetic / histamine / leukotrienes: ↑ resistance (bronchoconstriction)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== §10 DIFFUSION & VA/Q ===== -->
+<div class="section-header" id="diffusion">
+  <h2>Diffusion & VA/Q Ratio</h2><span class="section-num">§10</span>
+</div>
+
+<div class="anat-card">
+  <h4>🔴 Respiratory Membrane — 8 Layers</h4>
+  <ol>
+    <li>Surfactant + fluid lining alveolus</li>
+    <li>Type I alveolar epithelial cells (flat, thin)</li>
+    <li>Basement membrane of alveolar epithelium</li>
+    <li>Interstitial space (minimal in most areas)</li>
+    <li>Basement membrane of capillary endothelium</li>
+    <li>Capillary endothelial cells (fenestrated)</li>
+    <li>Plasma</li>
+    <li>Red blood cell membrane + intracellular path to Hb</li>
+  </ol>
+  <p style="margin-top:8px;"><strong>Total thickness: 0.6 μm. Total surface area: 70 m².</strong></p>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Why CO₂ Diffuses Easily Despite Smaller Gradient</div>
+  <p>O₂ gradient across membrane = 64 mmHg; CO₂ gradient = only 5 mmHg — yet CO₂ transfer is equally efficient. The explanation is anatomical-biochemical: CO₂ has a solubility coefficient 20× greater than O₂ in tissue fluid → diffusion coefficient (D in Fick's law) is 20× higher. So despite 12× smaller gradient, CO₂ diffuses at roughly the same rate. This is why in early pulmonary oedema or fibrosis (thickened membrane), O₂ fails first — CO₂ still crosses adequately due to high solubility. A patient with interstitial fibrosis may be hypoxic with normal or even low pCO₂ (hyperventilating to compensate).</p>
+</div>
+
+<table class="struct-table">
+  <thead><tr><th>Gas</th><th>Alveolar Partial Pressure</th><th>Venous Partial Pressure</th><th>Gradient</th><th>Diffusing Capacity (rest)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>O₂</strong></td><td>104 mmHg</td><td>40 mmHg</td><td>64 mmHg</td><td>20–25 mL/min/mmHg (→65 during exercise)</td></tr>
+    <tr><td><strong>CO₂</strong></td><td>40 mmHg</td><td>45 mmHg</td><td>5 mmHg</td><td>400–500 mL/min/mmHg (20× that of O₂)</td></tr>
+  </tbody>
+</table>
+
+<div class="phys-card" style="margin-top:16px;">
+  <h4>🔵 VA/Q Ratio (Ventilation-Perfusion)</h4>
+  <p>VA/Q = alveolar ventilation per minute / blood flow per minute. Normal overall ratio = <strong>0.84–0.9</strong>.</p>
+  <ul>
+    <li><strong>Normal VA/Q (0.8–1.0):</strong> Alveolar pO₂ = 104, pCO₂ = 40 mmHg — optimal exchange</li>
+    <li><strong>↑ VA/Q (→ ∞):</strong> Ventilation without perfusion = alveolar dead space (e.g. pulmonary embolism). Alveolar gas approaches inspired air composition (pO₂ 149, pCO₂ → 0)</li>
+    <li><strong>↓ VA/Q (→ 0):</strong> Perfusion without ventilation = shunt (e.g. airway obstruction, lobar pneumonia). Blood passes through without oxygenation. Alveolar gas approaches venous blood composition (pO₂ 40, pCO₂ 45 mmHg)</li>
+  </ul>
+  <p><strong>Effect of gravity (upright position):</strong> Both ventilation and perfusion are greater at base than apex. But perfusion gradient (3:1 base:apex ratio) is steeper than ventilation gradient → VA/Q highest at apex (~3.3), lowest at base (~0.6). Apex: hyperventilated relative to perfusion; Base: overperfused relative to ventilation.</p>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Why VA/Q Mismatch Causes Hypoxia More Than Hypercapnia</div>
+  <p>In shunted blood (low VA/Q), O₂ content is severely reduced. Unlike O₂, CO₂ has a near-linear dissociation curve — increased ventilation in other lung regions easily washes out extra CO₂. But supplemental ventilation cannot increase O₂ content much beyond normal saturation (Hb already 97% saturated on the flat part of the curve). Result: VA/Q mismatch → hypoxia with normal or low pCO₂. This pattern is the hallmark of pulmonary embolism, pneumonia and pulmonary oedema.</p>
+</div>
+
+<!-- ===== §11 GAS TRANSPORT ===== -->
+<div class="section-header" id="transport">
+  <h2>Gas Transport in Blood</h2><span class="section-num">§11</span>
+</div>
+
+<details>
+  <summary>🔵 Oxygen Transport</summary>
+  <div>
+    <div class="two-col">
+      <div class="phys-card">
+        <h4>🔵 Dissolved Form (1.5%)</h4>
+        <p>0.3 mL O₂ per 100 mL blood dissolved in plasma at pO₂ 100 mmHg. Obeys Henry's law. Only becomes important at very high pO₂ (hyperbaric O₂ therapy) or when Hb unavailable (CO poisoning).</p>
+      </div>
+      <div class="phys-card">
+        <h4>🔵 Bound to Haemoglobin (98.5%)</h4>
+        <p>1 g Hb binds 1.34 mL O₂. Hb 15 g/dL → capacity = 20.1 mL/100 mL. Arterial blood: ~19.8 mL O₂/100 mL (97.5% saturation). Venous blood: ~15 mL/100 mL (75% sat). 5 mL O₂ released per 100 mL blood per circulation cycle.</p>
+      </div>
+    </div>
+    <div class="phys-card" style="margin-top:8px;">
+      <h4>🔵 O₂–Hb Dissociation Curve</h4>
+      <p>Sigmoid shape due to cooperative binding (T→R conformational shift). Two physiological zones:</p>
+      <ul>
+        <li><strong>Plateau (pO₂ 60–100 mmHg):</strong> Loading zone — even if alveolar pO₂ drops to 60 mmHg, Hb is still 90% saturated. Safety margin at altitude or in lung disease.</li>
+        <li><strong>Steep portion (pO₂ below 60 mmHg):</strong> Unloading zone — large O₂ release per small pO₂ drop. Keeps tissue pO₂ relatively stable (Hb buffers tissue O₂).</li>
+      </ul>
+      <p><strong>Right shift</strong> (↓ affinity, more O₂ released): ↑ pCO₂ (Bohr effect), ↓ pH, ↑ temperature, ↑ 2,3-DPG. Beneficial in exercising tissues. p50 increases.</p>
+      <p><strong>Left shift</strong> (↑ affinity, less O₂ released): ↓ pCO₂, ↑ pH, ↓ temperature, ↓ 2,3-DPG, fetal Hb (HbF). p50 decreases.</p>
+      <p><strong>HbF:</strong> Left-shifted relative to HbA (γ chains have less 2,3-DPG affinity) → HbF saturates 70% at pO₂ = 20 mmHg where HbA is only 35% saturated → facilitates O₂ transfer from mother to fetus at placenta.</p>
+      <p><strong>CO poisoning:</strong> CO has 200× affinity for Hb → carboxyhaemoglobin → ↓ O₂ content + left-shifts remaining O₂ curve → dual harm.</p>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>🔵 Carbon Dioxide Transport</summary>
+  <div>
+    <table class="struct-table">
+      <thead><tr><th>Form</th><th>% of Total</th><th>Mechanism</th><th>Key Factor</th></tr></thead>
+      <tbody>
+        <tr><td>Dissolved in plasma</td><td>7%</td><td>Simple solution; proportional to pCO₂</td><td>High CO₂ solubility (20× O₂)</td></tr>
+        <tr><td>Bicarbonate (HCO₃⁻)</td><td>70%</td><td>CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻ (in RBC). HCO₃⁻ exits to plasma; Cl⁻ enters (chloride shift / Hamburger phenomenon)</td><td>Carbonic anhydrase in RBC; Band 3 protein</td></tr>
+        <tr><td>Carbaminohaemoglobin</td><td>23%</td><td>CO₂ + Hb–NH₂ → Hb–NHCOOH. Deoxygenated Hb binds more CO₂ (Haldane effect)</td><td>Globin amino groups; Haldane effect</td></tr>
+      </tbody>
+    </table>
+    <div class="link-card">
+      <div class="link-card-title">Anatomy → Physiology Link: Haldane Effect</div>
+      <p>At tissues: O₂ released from Hb → deoxy-Hb has higher affinity for CO₂ → more CO₂ loaded as carbamino-Hb AND deoxy-Hb is a weaker acid → buffers H⁺ from HCO₃⁻ formation → CO₂ dissociation curve shifts left → more CO₂ carried at same pCO₂. At lungs: opposite occurs — oxygenation reduces CO₂ carrying capacity → CO₂ unloaded. The Haldane effect approximately doubles the amount of CO₂ transported in each direction. The chloride shift increases osmolality inside venous RBCs → water enters → venous RBCs are slightly larger and more fragile than arterial RBCs; PCV of venous blood ~3% higher than arterial.</p>
+    </div>
+  </div>
+</details>
+
+<!-- ===== §12 REGULATION ===== -->
+<div class="section-header" id="regulation">
+  <h2>Regulation of Respiration</h2><span class="section-num">§12</span>
+</div>
+
+<div class="anat-card">
+  <h4>🔴 Respiratory Control Centres (Brainstem)</h4>
+  <ul>
+    <li><strong>Medulla — DRG (Dorsal Respiratory Group):</strong> Located in NTS; mainly I-neurons generating basic rhythm; IOS neurons terminate inspiration; ramp signal to phrenic + intercostal motor neurons</li>
+    <li><strong>Medulla — VRG (Ventral Respiratory Group):</strong> Nucleus ambiguus + retroambigualis; I + E neurons; normally silent at rest; activated during forced breathing (exercise)</li>
+    <li><strong>Pons — Pneumotaxic Centre (PNC):</strong> Upper pons; inhibits apneustic centre → shortens inspiration → increases rate; stimulated by cortex and vagal afferents</li>
+    <li><strong>Pons — Apneustic Centre:</strong> Lower pons; promotes prolonged inspiratory effort (apneusis if unchecked); normally inhibited by PNC + vagal stretch receptor afferents</li>
+    <li><strong>Cortex:</strong> Voluntary control — talking, singing, breath-holding (50–60 s max), voluntary hyperventilation</li>
+  </ul>
+</div>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Hering–Breuer Reflex</div>
+  <p>Anatomical circuit: lung inflation → stretch receptors in smooth muscle of bronchi/bronchioles → vagus nerve → NTS (DRG) → IOS neurons activated → inspiration terminated. In humans this reflex is weak at normal tidal volumes (activates only when TV &gt;1–1.5 L). Becomes important during exercise. If vagus nerves are cut → deeper, slower breathing (apneusis-like) — proving the reflex normally limits inspiration depth and sets rhythm.</p>
+</div>
+
+<table class="struct-table">
+  <thead><tr><th>Receptor</th><th>Location (Anatomy)</th><th>Stimulus</th><th>Physiological Effect</th><th>% of Drive</th></tr></thead>
+  <tbody>
+    <tr><td>Central chemoreceptors</td><td>Ventral medullary surface; bathed in CSF</td><td>↑ H⁺ in CSF (from CO₂ crossing BBB — H⁺ and HCO₃⁻ cannot cross)</td><td>↑ Rate + depth of breathing; main CO₂ sensor</td><td>80–85%</td></tr>
+    <tr><td>Carotid bodies</td><td>Bifurcation of common carotid artery; Type I glomus cells (highest blood flow/g in body)</td><td>↓ pO₂ (&lt;60 mmHg), ↑ pCO₂, ↑ H⁺, ↑ K⁺</td><td>↑ Ventilation; also ↑ BP + tachycardia; responds to dissolved O₂ not total content</td><td>15–20%</td></tr>
+    <tr><td>Aortic bodies</td><td>Adjacent to aortic arch; vagal innervation</td><td>Similar to carotid bodies</td><td>Similar; less studied; contribute to cardiovascular reflexes</td><td>Small</td></tr>
+    <tr><td>Pulmonary stretch receptors</td><td>Smooth muscle of bronchi/bronchioles</td><td>Lung inflation (TV &gt;1.5 L)</td><td>Hering–Breuer reflex — terminate inspiration</td><td>Backup</td></tr>
+    <tr><td>J-receptors</td><td>Adjacent to pulmonary capillaries in alveolar interstitium</td><td>Pulmonary capillary engorgement, chemical stimuli, interstitial fluid ↑</td><td>Apnoea then rapid breathing; bradycardia; hypotension; muscle weakness</td><td>Exercise/pathology</td></tr>
+    <tr><td>Irritant receptors</td><td>Below mucosa of entire respiratory tract</td><td>Smoke, noxious gases, particulate matter</td><td>Cough (pharynx–bronchi), sneeze (nasal), Hering–Breuer deflation reflex</td><td>Protective</td></tr>
+    <tr><td>Proprioceptors</td><td>Muscles, tendons, joints</td><td>Movement/stretch during exercise</td><td>↑ Ventilation (explains early hyperpnoea of exercise before pCO₂ rises)</td><td>Exercise</td></tr>
+  </tbody>
+</table>
+
+<div class="link-card">
+  <div class="link-card-title">Anatomy → Physiology Link: Blood-Brain Barrier Explains CO₂ Dominance</div>
+  <p>BBB has tight junctions — impermeable to H⁺ and HCO₃⁻ but freely permeable to CO₂. Therefore: <strong>(1)</strong> CO₂ crosses → forms H⁺ in CSF → stimulates central chemoreceptors (80–85% of drive). <strong>(2)</strong> Metabolic acidosis (↑ blood H⁺) stimulates only peripheral chemoreceptors — H⁺ cannot reach central receptors. <strong>(3)</strong> This is why patients with chronic hypercapnia (COPD) — who have adapted central receptors — depend on their peripheral O₂-sensitive drive to breathe. Giving high-flow O₂ removes hypoxic drive → apnoea (hypercapnic narcosis).</p>
+</div>
+
+<!-- ===== §13 HYPOXIA ===== -->
+<div class="section-header" id="hypoxia">
+  <h2>Hypoxia</h2><span class="section-num">§13</span>
+</div>
+
+<p style="color:var(--muted);margin-bottom:16px;">Hypoxia = deficiency of O₂ supply at tissue level. Four distinct types, each with a different anatomical origin and set of physiological consequences. Understanding the mechanism predicts the clinical features and the response to O₂ therapy.</p>
+
+<div class="hypoxia-grid">
+  <div class="hyp-card hyp-1">
+    <h5>1. Hypoxic Hypoxia</h5>
+    <p><strong>Mechanism:</strong> ↓ arterial pO₂ (dissolved O₂ in plasma is low → peripheral chemoreceptors stimulated)</p>
+    <p><strong>Causes:</strong></p>
+    <ul>
+      <li>Low inspired pO₂ (high altitude, enclosed spaces)</li>
+      <li>Hypoventilation (opioids, muscle paralysis, obesity)</li>
+      <li>↓ Diffusion across respiratory membrane (fibrosis, oedema)</li>
+      <li>Physiological shunt (atelectasis, pneumonia, ARDS)</li>
+      <li>Anatomical shunt (cardiac septal defects, AV fistula)</li>
+    </ul>
+    <p><strong>Features:</strong> Arterial pO₂ ↓, O₂ content ↓, Hb saturation ↓. <strong>Cyanosis present</strong> (central). <strong>Tachypnoea present</strong> (chemoreceptors stimulated by low pO₂). A–V pO₂ difference normal or ↓.</p>
+    <p><strong>O₂ therapy:</strong> Effective in most causes (diffusion, hypoventilation, altitude). Limited in shunts (O₂ cannot reach shunted blood).</p>
+  </div>
+  <div class="hyp-card hyp-2">
+    <h5>2. Anaemic Hypoxia</h5>
+    <p><strong>Mechanism:</strong> Normal pO₂, but reduced O₂ carrying capacity of blood</p>
+    <p><strong>Causes:</strong></p>
+    <ul>
+      <li>↓ RBC count (haemorrhage, haemolysis, aplastic anaemia)</li>
+      <li>↓ Hb content (iron deficiency, B12 deficiency)</li>
+      <li>Altered Hb (methaemoglobinaemia, carboxyhaemoglobinaemia)</li>
+    </ul>
+    <p><strong>Features:</strong> Arterial pO₂ <strong>normal</strong>, O₂ content ↓, Hb ↓. <strong>No cyanosis</strong> (dissolved O₂ in plasma is normal → no chemoreceptor stimulation). <strong>No tachypnoea</strong> at rest. A–V O₂ difference normal.</p>
+    <p><strong>O₂ therapy:</strong> Limited at atmospheric pressure (Hb already maximally saturated); hyperbaric O₂ increases dissolved O₂.</p>
+  </div>
+  <div class="hyp-card hyp-3">
+    <h5>3. Stagnant (Ischaemic) Hypoxia</h5>
+    <p><strong>Mechanism:</strong> Normal pO₂ and O₂ content, but ↓ blood flow to tissue</p>
+    <p><strong>Causes:</strong></p>
+    <ul>
+      <li>Circulatory shock (hypovolaemic, cardiogenic, septic)</li>
+      <li>Cardiac failure</li>
+      <li>Local arterial obstruction (thrombosis, embolism)</li>
+      <li>Venous obstruction</li>
+    </ul>
+    <p><strong>Features:</strong> Arterial pO₂ <strong>normal</strong>, O₂ content normal. <strong>Cyanosis present</strong> (peripheral — tissues extract more O₂ → venous pO₂ very low → peripheral cyanosis in nail beds). A–V O₂ difference ↑↑. <strong>No tachypnoea</strong> (arterial pO₂ normal).</p>
+    <p><strong>O₂ therapy:</strong> Limited — the problem is delivery, not content. Treat underlying cause (restore circulation).</p>
+  </div>
+  <div class="hyp-card hyp-4">
+    <h5>4. Histotoxic Hypoxia</h5>
+    <p><strong>Mechanism:</strong> O₂ delivered normally but tissues cannot utilise it — cellular respiration blocked</p>
+    <p><strong>Causes:</strong></p>
+    <ul>
+      <li>Cyanide poisoning (blocks cytochrome oxidase)</li>
+      <li>Hydrogen sulphide</li>
+      <li>Some heavy metal toxins</li>
+    </ul>
+    <p><strong>Features:</strong> Arterial pO₂ <strong>normal</strong>, O₂ content normal, Hb normal. <strong>No cyanosis</strong> (blood stays oxygenated — venous blood is unusually bright red). A–V O₂ difference ↓ or zero (tissues not consuming O₂). <strong>No tachypnoea</strong>.</p>
+    <p><strong>O₂ therapy:</strong> Useless — cells cannot use O₂ regardless of supply. Treat with antidotes (hydroxocobalamin for cyanide).</p>
+  </div>
+</div>
+
+<table class="struct-table" style="margin-top:16px;">
+  <thead><tr><th>Feature</th><th>Hypoxic</th><th>Anaemic</th><th>Stagnant</th><th>Histotoxic</th></tr></thead>
+  <tbody>
+    <tr><td>Arterial pO₂</td><td>↓</td><td>Normal</td><td>Normal</td><td>Normal</td></tr>
+    <tr><td>Arterial O₂ content</td><td>↓</td><td>↓↓</td><td>Normal</td><td>Normal</td></tr>
+    <tr><td>Hb concentration</td><td>Normal</td><td>↓</td><td>Normal</td><td>Normal</td></tr>
+    <tr><td>Blood flow</td><td>Normal</td><td>Normal (or ↑)</td><td>↓</td><td>Normal</td></tr>
+    <tr><td>A–V O₂ difference</td><td>↓ or normal</td><td>Normal</td><td>↑↑</td><td>↓ or zero</td></tr>
+    <tr><td>Cyanosis</td><td>✅ Central</td><td>❌ Absent</td><td>✅ Peripheral</td><td>❌ Absent</td></tr>
+    <tr><td>Tachypnoea</td><td>✅ Yes</td><td>❌ No (at rest)</td><td>❌ No</td><td>❌ No</td></tr>
+    <tr><td>O₂ therapy effective?</td><td>✅ Usually</td><td>⚠️ Limited</td><td>⚠️ Limited</td><td>❌ No</td></tr>
+  </tbody>
+</table>
+
+<div class="phys-card" style="margin-top:16px;">
+  <h4>🔵 Cyanosis — Why Type Matters</h4>
+  <p><strong>Central cyanosis:</strong> Bluish discolouration of mucous membranes (lips, tongue, earlobes) — occurs when arterial deoxy-Hb &gt;5 g/dL. Indicates low arterial O₂ saturation. Present in hypoxic and stagnant hypoxia.</p>
+  <p><strong>Peripheral cyanosis:</strong> Confined to extremities (nail beds, fingertips). Occurs when peripheral tissues extract excessive O₂ (stagnant hypoxia, cold). Arterial saturation may be normal.</p>
+  <p><strong>Why cyanosis is unreliable:</strong> Anaemic patients (Hb &lt;7 g/dL) can never develop cyanosis even if completely deoxygenated — not enough Hb to reach 5 g/dL threshold. Polycythaemic patients may be cyanotic even with mild desaturation.</p>
+</div>
+
+<div class="phys-card" style="margin-top:12px;">
+  <h4>🔵 Compensatory Responses to Chronic Hypoxia</h4>
+  <p><strong>Immediate (accommodation):</strong></p>
+  <ul>
+    <li>Hyperventilation (peripheral chemoreceptors stimulated by ↓ pO₂)</li>
+    <li>Tachycardia + ↑ cardiac output</li>
+    <li>↑ 2,3-DPG in RBCs → right shift of O₂–Hb curve → more O₂ released to tissues</li>
+  </ul>
+  <p><strong>Long-term (acclimatisation):</strong></p>
+  <ul>
+    <li>Polycythaemia — ↑ erythropoietin from kidney → ↑ RBC mass → ↑ O₂ carrying capacity</li>
+    <li>Sustained hyperventilation (gradual reset of central chemoreceptors)</li>
+    <li>Pulmonary hypertension (hypoxic pulmonary vasoconstriction, generalised)</li>
+    <li>↑ Capillary density in skeletal + cardiac muscle</li>
+    <li>↑ Mitochondrial density + oxidative enzymes</li>
+    <li>↑ Total lung capacity + diffusing capacity (high-altitude natives)</li>
+    <li>Cardiovascular normalises once blood O₂ content restored by polycythaemia</li>
+  </ul>
+</div>
+
+<!-- ===== §14 DISTURBANCES ===== -->
+<div class="section-header" id="disturbances">
+  <h2>Disturbances of Respiration</h2><span class="section-num">§14</span>
+</div>
+
+<table class="struct-table">
+  <thead><tr><th>Term</th><th>Definition</th><th>Physiological Basis</th><th>Causes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Tachypnoea</strong></td><td>↑ respiratory rate</td><td>↑ drive from chemoreceptors or mechanoreceptors</td><td>Fever, pain, hypoxia, anxiety</td></tr>
+    <tr><td><strong>Bradypnoea</strong></td><td>↓ respiratory rate</td><td>↓ respiratory centre activity</td><td>Opioids, hypothyroidism, raised ICP</td></tr>
+    <tr><td><strong>Apnoea</strong></td><td>Complete cessation of breathing</td><td>Loss of drive; reflex inhibition</td><td>Voluntary (max 50–60 s), post-hyperventilation (CO₂ wash), deglutition (0.5 s), sleep apnoea</td></tr>
+    <tr><td><strong>Hypoventilation</strong></td><td>↓ rate and force → ↑ pCO₂ + ↓ pO₂</td><td>Reduced respiratory centre drive or muscle weakness</td><td>Opioids, neuromuscular disease, obesity hypoventilation</td></tr>
+    <tr><td><strong>Hyperventilation</strong></td><td>↑ rate and force → ↓ pCO₂ (hypocapnia)</td><td>Excess respiratory centre drive</td><td>Anxiety, metabolic acidosis, altitude, pain</td></tr>
+    <tr><td><strong>Dyspnoea</strong></td><td>Unpleasant sensation of breathing difficulty — subjective</td><td>When ventilation exceeds 4–5× resting; DI &lt;60% (dyspnoeic index = (MVV−MV)/MVV × 100)</td><td>Physiological: severe exercise. Pathological: asthma, COPD, cardiac failure, pneumothorax</td></tr>
+    <tr><td><strong>Cheyne–Stokes</strong></td><td>Periodic breathing: cyclical waxing and waning tidal volumes alternating with apnoea</td><td>Oscillation between hypocapnic apnoea and hypoxic hyperpnoea; delayed blood-brain circulation time amplifies feedback</td><td>CCF, stroke, raised ICP, normal post-hyperventilation, high altitude</td></tr>
+    <tr><td><strong>Kussmaul</strong></td><td>Deep, sighing, regular breathing</td><td>↑ drive from metabolic acidosis → hyperventilation to blow off CO₂</td><td>Diabetic ketoacidosis, uraemia</td></tr>
+    <tr><td><strong>Apneusis</strong></td><td>Prolonged inspiratory cramp</td><td>Apneustic centre uninhibited (PNC lesion or vagotomy)</td><td>Pontine lesions</td></tr>
+    <tr><td><strong>Asphyxia</strong></td><td>Combination of hypoxia (↓ pO₂) + hypercapnia (↑ pCO₂)</td><td>Both gases affected simultaneously</td><td>Strangulation, drowning, tracheal obstruction, diaphragm paralysis</td></tr>
+    <tr><td><strong>Hypercapnia</strong></td><td>↑ arterial pCO₂ (&gt;45 mmHg) → respiratory acidosis</td><td>Inadequate CO₂ elimination; pCO₂ &gt;50 → CO₂ narcosis (headache, confusion, coma)</td><td>Hypoventilation, COPD, restrictive lung disease</td></tr>
+    <tr><td><strong>Hypocapnia</strong></td><td>↓ arterial pCO₂ → respiratory alkalosis</td><td>CO₂ blown off faster than produced; cerebral vasoconstriction → dizziness, tetany</td><td>Hyperventilation (anxiety, altitude, pain)</td></tr>
+  </tbody>
+</table>
+
+<div class="phys-card">
+  <h4>🔵 Effects of Hyperventilation</h4>
+  <p>After vigorous voluntary hyperventilation: arterial pO₂ rises to ~150 mmHg; pCO₂ falls to ~15 mmHg. Then breathing may show:</p>
+  <ul>
+    <li><strong>Hypoventilation/apnoea</strong> (most common) — lack of CO₂ stimulus</li>
+    <li><strong>Periodic breathing (Cheyne–Stokes)</strong> — hypoxic drive triggers breaths; each breath partially washes out hypoxic stimulus; cycling continues until pCO₂ recovers to threshold</li>
+    <li>Normal breathing resumes when pCO₂ returns to ~40 mmHg</li>
+    <li>Neurological: tetany, dizziness, tingling (↓ pCO₂ → cerebral vasoconstriction + ↑ neuromuscular excitability due to ↓ ionised Ca²⁺)</li>
+  </ul>
+</div>
+
+<!-- ===== §15 ALTITUDE & PRESSURE ===== -->
+<div class="section-header" id="altitude">
+  <h2>High Altitude & High Pressure</h2><span class="section-num">§15</span>
+</div>
+
+<div class="two-col">
+  <div class="phys-card">
+    <h4>🔵 High Altitude Physiology</h4>
+    <p>Atmospheric composition unchanged with altitude (21% O₂). But barometric pressure falls → pO₂ falls proportionally.</p>
+    <ul>
+      <li>Sea level: pO₂ = 159 mmHg; alveolar pO₂ = 104 mmHg</li>
+      <li>10,000 ft: alveolar pO₂ ≈ 60 mmHg → O₂ saturation ≈ 90% (safe plateau zone)</li>
+      <li>Above 18,000 ft: alveolar pO₂ &lt;40 mmHg → steep dissociation curve → rapid desaturation</li>
+    </ul>
+    <p><strong>Acute mountain sickness:</strong> Hypoxia + hyperventilation → respiratory alkalosis → cerebral oedema → headache, nausea, vomiting, ataxia.</p>
+    <p><strong>Acclimatisation:</strong> Same as chronic hypoxia responses above (polycythaemia, ↑ ventilation, ↑ 2,3-DPG, ↑ DL, ↑ capillarity).</p>
+  </div>
+  <div class="phys-card">
+    <h4>🔵 High Atmospheric Pressure (Diving)</h4>
+    <p>Pressure increases 1 atm per 10 m depth. By Boyle's law: volume of gas ∝ 1/pressure.</p>
+    <ul>
+      <li><strong>Oxygen toxicity</strong> (&gt;4 atm O₂): Superoxide radicals → neurological complications (convulsions, coma)</li>
+      <li><strong>Nitrogen narcosis:</strong> N₂ dissolves in neuronal lipids at high pN₂ → euphoria → impaired judgement → unconsciousness ("rapture of the deep")</li>
+      <li><strong>Decompression sickness (Caisson's disease / the bends):</strong> Rapid ascent → dissolved N₂ forms bubbles in blood/tissues → joint pain, chokes (pulmonary), neurological symptoms, diver's palsy</li>
+      <li><strong>Air embolism:</strong> Ascending with breath held → expanding gas tears alveoli → air emboli in circulation</li>
+    </ul>
+    <p><strong>Prevention:</strong> Helium replaces N₂ (less narcotic, diffuses faster, smaller bubbles). Slow stepwise ascent. Recompression tank.</p>
+  </div>
+</div>
+
+<!-- ===== §16 EXERCISE ===== -->
+<div class="section-header" id="exercise">
+  <h2>Respiratory Adjustments in Exercise</h2><span class="section-num">§16</span>
+</div>
+
+<div class="phys-card">
+  <h4>🔵 Respiratory Responses to Exercise</h4>
+  <ul>
+    <li><strong>↑ Pulmonary ventilation:</strong> Increases linearly with O₂ consumption up to anaerobic threshold (≈60% VO₂max); above threshold, ventilation rises disproportionately due to lactic acidosis stimulus</li>
+    <li><strong>Mechanisms of exercise hyperpnoea:</strong> Proprioceptors (early — before pCO₂ rises), cortical anticipation, rising pCO₂/H⁺/K⁺ (sustained), temperature ↑</li>
+    <li><strong>Arterial blood gases maintained:</strong> pO₂ and pCO₂ remain near normal despite greatly increased ventilation — the system adjusts ventilation precisely to metabolic demand</li>
+    <li><strong>O₂ deficit:</strong> At exercise onset, O₂ supply lags demand → anaerobic energy (phosphocreatine, anaerobic glycolysis) bridges the gap</li>
+    <li><strong>O₂ debt:</strong> Extra O₂ consumed during recovery = replenish phosphocreatine + clear lactate + restore myoglobin O₂ + resupply dissolved O₂ in tissues</li>
+    <li><strong>↑ Diffusing capacity:</strong> Closed pulmonary capillaries recruit → DLO₂ increases from 25 to 65 mL/min/mmHg</li>
+    <li><strong>Right shift of O₂–Hb curve:</strong> ↑ temperature + ↑ CO₂ + ↑ H⁺ + ↑ 2,3-DPG in exercising muscle → more O₂ offloaded per unit pO₂ drop</li>
+    <li><strong>VO₂max:</strong> Average = 3 L/min; trained athlete = 5+ L/min; limited by cardiac output, not pulmonary capacity in most individuals</li>
+  </ul>
+</div>
+
+<!-- ===== §17 CLINICAL ===== -->
+<div class="section-header" id="clinical">
+  <h2>Clinical Correlations</h2><span class="section-num">§17</span>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Pneumothorax</div>
+  <p><strong>Anatomy:</strong> Cervical pleura extends 2.5 cm above clavicle (naked/unprotected). Injured by: brachial plexus block, subclavian line insertion, trauma, spontaneous (tall thin males — apical blebs). Right bronchus more vertical → right-sided procedures higher risk.</p>
+  <p><strong>Physiology:</strong> Air enters pleural space → intrapleural pressure rises from −2.5 mmHg toward atmospheric → lung elastic recoil unopposed → lung collapses → ipsilateral ventilation lost → VA/Q = 0 (shunt) → hypoxia. <strong>Tension pneumothorax:</strong> one-way valve effect → pressure builds positive → mediastinal shift → compresses opposite lung and great veins → obstructive shock → emergency needle decompression at 2nd ICS, midclavicular line.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Hyaline Membrane Disease / Infant Respiratory Distress Syndrome</div>
+  <p><strong>Anatomy:</strong> Type II pneumocytes mature late; surfactant production (DPPC) inadequate before 34–35 weeks gestation. Born prematurely → functionally absent surfactant.</p>
+  <p><strong>Physiology:</strong> Surface tension 50 dynes/cm (uncontrolled by surfactant) → alveoli collapse each expiration → each breath needs enormous effort to re-open → ↑↑ work of breathing → respiratory failure. Protein leaks from capillaries → hyaline membrane on alveolar surface → ↑ diffusion barrier. Prevention: glucocorticoids to mother 24 h pre-delivery (accelerates surfactant synthesis). Treatment: exogenous surfactant instillation + CPAP/ventilator.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Bronchial Asthma</div>
+  <p><strong>Anatomy:</strong> Terminal bronchioles have no cartilage — lumen diameter entirely controlled by smooth muscle. Inflammatory mediators (histamine, leukotrienes, prostaglandins) + parasympathetic stimulation → smooth muscle contracts → lumen narrows.</p>
+  <p><strong>Physiology:</strong> Resistance ∝ 1/r⁴ — halving radius = 16× resistance. During expiration: dynamic compression worsens obstruction (air trapping) → ↑ FRC + RV → barrel chest chronically. FEV₁% dramatically ↓ (obstructive pattern). Hypoxic stimulus → hyperventilation → initially ↓ pCO₂; if severe/prolonged → respiratory muscle fatigue → CO₂ retention → rising pCO₂ = danger sign. β₂ agonists: relax smooth muscle; corticosteroids: ↓ inflammation.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Emphysema</div>
+  <p><strong>Anatomy:</strong> Tobacco smoke → macrophage + neutrophil infiltration → protease release (elastase) → destroys elastic fibres + alveolar septa → fewer, enlarged alveoli → ↓ surface area → ↓ capillary bed → loss of radial traction on airways.</p>
+  <p><strong>Physiology:</strong> ↓ Elastic recoil → ↑ compliance → FRC ↑ + RV ↑ + TLC ↑ (barrel chest). ↓ Surface area → ↓ diffusing capacity → hypoxia. Loss of radial airway traction → dynamic collapse during expiration → air trapping. FEV₁% ↓ (obstructive). Two phenotypes: Type A "pink puffer" (maintains pCO₂ by hyperventilating, compensated) vs Type B "blue bloater" (↑ VA/Q mismatch, CO₂ retention, cyanosis, cor pulmonale).</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Carbon Monoxide Poisoning</div>
+  <p><strong>Mechanism:</strong> CO binds same haem site as O₂ with 200–250× affinity. Sources: vehicle exhaust, coal mines, generators, fires.</p>
+  <p><strong>Physiology:</strong> Two simultaneous harms: <strong>(1) Anaemic hypoxia</strong> — Hb bound to CO cannot carry O₂ → ↓ O₂ content; <strong>(2) Left shift of O₂–Hb curve</strong> — remaining Hb grips O₂ tighter → less O₂ released to tissues at given pO₂. Note: arterial pO₂ is NORMAL (dissolved O₂ in plasma unchanged) → peripheral chemoreceptors not stimulated → no tachypnoea → no cyanosis (carboxyHb is cherry red) → these absent warning signs make CO lethal. Treatment: <strong>100% O₂</strong> at atmospheric pressure (competes with CO; dissolved O₂ sustains life) or <strong>hyperbaric O₂</strong> (further ↑ dissolved O₂; accelerates CO displacement).</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Pleural Effusion</div>
+  <p><strong>Anatomy:</strong> Costodiaphragmatic recess (most dependent) → fluid collects here first → X-ray: blunting of costophrenic angle. Thoracocentesis: 6th ICS, posterior to mid-axillary line, above lower rib edge (neurovascular bundle runs below rib in costal groove).</p>
+  <p><strong>Physiology:</strong> Fluid compresses adjacent lung → ↓ alveolar ventilation → V/Q mismatch → hypoxia. <strong>Transudate</strong> (protein &lt;3g/dL, LDH low): ↑ hydrostatic pressure (CCF), ↓ oncotic pressure (nephrotic syndrome, cirrhosis). <strong>Exudate</strong> (protein &gt;3g/dL, LDH high): inflammation, malignancy, infection.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Artificial Respiration & CPR</div>
+  <p><strong>Indication:</strong> Sudden respiratory arrest (drowning, electrocution, anaesthetic accident, CO poisoning, strangulation, polio). Must start within <strong>3–5 minutes</strong> — irreversible cerebral cortical damage after 5 min anoxia.</p>
+  <p><strong>Mouth-to-mouth method (preferred manual):</strong> Head tilt–chin lift → open airway → seal mouth → close nostrils → exhale into patient → watch chest rise → release → passive recoil expiration. Exhaled air contains ~16% O₂ (sufficient). CO₂ in exhaled air also stimulates patient's respiratory centre.</p>
+  <p><strong>CPR (ABC):</strong> Airway (head tilt) → Breathing (mouth-to-mouth) → Cardiac massage (depress sternum 4–5 cm at 80–90/min). Ratio: 1 ventilation : 5 compressions (2-person) or 2:30 (1-person). Cardiac massage creates pulsatile flow through coronary and cerebral vessels.</p>
+</div>
+
+<div style="margin:30px 0;background:var(--card);border-radius:10px;padding:22px;border:1px solid var(--border);">
+  <p style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:14px;">Key Normal Values — Quick Reference</p>
+  <div style="display:flex;flex-wrap:wrap;gap:7px;">
+    <div class="num-box"><span class="num-val">12–15</span><span class="num-label">breaths/min</span></div>
+    <div class="num-box"><span class="num-val">500 mL</span><span class="num-label">Tidal Volume</span></div>
+    <div class="num-box"><span class="num-val">150 mL</span><span class="num-label">Anatomical Dead Space</span></div>
+    <div class="num-box"><span class="num-val">4.2 L/min</span><span class="num-label">Alveolar Ventilation</span></div>
+    <div class="num-box"><span class="num-val">104 mmHg</span><span class="num-label">Alveolar pO₂</span></div>
+    <div class="num-box"><span class="num-val">40 mmHg</span><span class="num-label">Alveolar pCO₂</span></div>
+    <div class="num-box"><span class="num-val">95 mmHg</span><span class="num-label">Arterial pO₂</span></div>
+    <div class="num-box"><span class="num-val">40 mmHg</span><span class="num-label">Arterial pCO₂</span></div>
+    <div class="num-box"><span class="num-val">40 mmHg</span><span class="num-label">Venous pO₂</span></div>
+    <div class="num-box"><span class="num-val">45 mmHg</span><span class="num-label">Venous pCO₂</span></div>
+    <div class="num-box"><span class="num-val">7.4</span><span class="num-label">Arterial pH</span></div>
+    <div class="num-box"><span class="num-val">0.6 μm</span><span class="num-label">Membrane Thickness</span></div>
+    <div class="num-box"><span class="num-val">70 m²</span><span class="num-label">Alveolar Surface Area</span></div>
+    <div class="num-box"><span class="num-val">300 million</span><span class="num-label">Alveoli</span></div>
+    <div class="num-box"><span class="num-val">−2.5 mmHg</span><span class="num-label">Intrapleural (FRC)</span></div>
+    <div class="num-box"><span class="num-val">1.34 mL/g</span><span class="num-label">O₂ capacity per g Hb</span></div>
+    <div class="num-box"><span class="num-val">25–27 mmHg</span><span class="num-label">p50 (normal)</span></div>
+    <div class="num-box"><span class="num-val">80%</span><span class="num-label">FEV₁% (normal)</span></div>
+    <div class="num-box"><span class="num-val">4600 mL</span><span class="num-label">Vital Capacity (♂)</span></div>
+    <div class="num-box"><span class="num-val">2300 mL</span><span class="num-label">FRC (♂)</span></div>
+    <div class="num-box"><span class="num-val">0.84</span><span class="num-label">VA/Q ratio (normal)</span></div>
+    <div class="num-box"><span class="num-val">0.8</span><span class="num-label">Respiratory Quotient</span></div>
+    <div class="num-box"><span class="num-val">47 mmHg</span><span class="num-label">Water vapour (37°C)</span></div>
+    <div class="num-box"><span class="num-val">C3, C4, C5</span><span class="num-label">Phrenic nerve roots</span></div>
+    <div class="num-box"><span class="num-val">15 mmHg</span><span class="num-label">Mean PA pressure</span></div>
+    <div class="num-box"><span class="num-val">250 mL/min</span><span class="num-label">O₂ consumption (rest)</span></div>
+    <div class="num-box"><span class="num-val">200 mL/min</span><span class="num-label">CO₂ production (rest)</span></div>
+    <div class="num-box"><span class="num-val">3 L/min</span><span class="num-label">VO₂max (average)</span></div>
+  </div>
+</div>
+
+
+<!-- ===== §18 ADDITIONAL CLINICAL (from CH-11 Anatomy) ===== -->
+<div class="section-header" id="additional-clinical">
+  <h2>Additional Clinical Topics</h2><span class="section-num">§18</span>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Intercostal Neuralgia (Herpes Zoster)</div>
+  <p><strong>Anatomy:</strong> Varicella-zoster virus lies dormant in the dorsal root ganglion of spinal nerves. Reactivation → travels along intercostal nerve → affects one or more dermatomes. Does NOT cross midline (unilateral distribution follows intercostal nerve territory).</p>
+  <p><strong>Features:</strong> Erythematous vesicular rash in dermatomal band around chest wall. Severe burning pain along the nerve distribution preceding or accompanying rash. Pain can be severe enough to restrict chest wall movement → splinting → ↓ tidal volume → risk of atelectasis + pneumonia in elderly. Post-herpetic neuralgia can persist for months after rash resolves.</p>
+  <p><strong>Respiratory consequence:</strong> Severe intercostal pain → patient avoids deep breathing → ↓ FRC + ↓ VC → V/Q mismatch → hypoxia especially in pre-existing lung disease or elderly patients.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Bochdalek's Hernia (Congenital Diaphragmatic Hernia)</div>
+  <p><strong>Anatomy:</strong> Failure of fusion of posterolateral (pleuroperitoneal) canal during fetal development → defect in diaphragm, usually left-sided (85%) through the foramen of Bochdalek (between lateral arcuate ligament and ribs). Abdominal contents (stomach, intestine, spleen) herniate into thoracic cavity.</p>
+  <p><strong>Physiology:</strong> Herniated bowel occupies thoracic space during critical period of lung development → ipsilateral lung hypoplasia (underdeveloped) → pulmonary hypertension (↓ vascular bed + hypoxic vasoconstriction). At birth: respiratory failure + cyanosis. Mediastinal shift to opposite side compresses the contralateral lung too. Pulmonary hypertension may cause persistent fetal circulation (R→L shunt through patent ductus arteriosus and foramen ovale → further hypoxia). High mortality; treatment: surgical repair + ventilatory support + pulmonary vasodilators (nitric oxide).</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Sleep Apnoea Syndrome</div>
+  <p><strong>Physiology:</strong> During sleep, RAS activity ↓ → ↓ respiratory drive → chemoreceptor sensitivity to CO₂ ↓. Normal individuals: brief apnoeas (≤10 s) common. <strong>Obstructive sleep apnoea (OSA):</strong> pharyngeal muscle tone ↓ during sleep → upper airway collapses → apnoea → hypoxia + hypercapnia → arousal → airway reopens → snoring/gasping. Cycle repeats hundreds of times per night. Consequences: daytime somnolence, cognitive impairment, systemic hypertension, pulmonary hypertension, arrhythmias, polycythaemia.</p>
+  <p><strong>Central sleep apnoea:</strong> Drive to breathe ceases without obstruction — brainstem instability in CO₂ sensing. Seen in CCF (Cheyne–Stokes pattern), brainstem stroke, high altitude.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Pulmonary Embolism (VA/Q Mismatch — Dead Space Type)</div>
+  <p><strong>Physiology:</strong> Clot in pulmonary artery → obstructs blood flow to perfused segments → VA/Q → ∞ (ventilation without perfusion = alveolar dead space). Affected alveoli ventilated but no gas exchange. pO₂ falls (other lung compensates but Hb saturation curve limits O₂ loading). pCO₂ may be low (reflex hyperventilation). Classic triad: dyspnoea + tachycardia + pleuritic chest pain. ABG: hypoxia + hypocapnia (type 1 respiratory failure). Physiological dead space increases — measured by Bohr equation.</p>
+</div>
+
+<div class="clinical">
+  <div class="clinical-title">Pulmonary Fibrosis (Restrictive Pattern)</div>
+  <p><strong>Anatomy:</strong> Alveolar septa replaced by fibrous tissue → ↑ membrane thickness → ↑ diffusion barrier. Elastic tissue replaced → ↑ elastic recoil.</p>
+  <p><strong>Physiology:</strong> ↑ Recoil → ↓ FRC + ↓ TLC + ↓ VC (all volumes reduced — restrictive). ↑ Membrane thickness → diffusing capacity ↓ → O₂ fails first (hypoxia without hypercapnia — type 1 RF). FEV₁% normal or ↑ (airways unobstructed, lungs stiff but empty quickly). Exertional dyspnoea is cardinal symptom — O₂ demand of exercise cannot be met. Clubbing common (mechanism uncertain — likely related to chronic hypoxia and platelet/growth factor release).</p>
+</div>
+
+<!-- ===== §19 ABBREVIATIONS ===== -->
+<div class="section-header" id="abbreviations">
+  <h2>Abbreviations — Full Forms</h2><span class="section-num">§19</span>
+</div>
+
+<p style="color:var(--muted);margin-bottom:16px;">All shortened terms used throughout this document, listed alphabetically with full forms.</p>
+
+<table class="struct-table">
+  <thead><tr><th>Abbreviation</th><th>Full Form</th><th>Context</th></tr></thead>
+  <tbody>
+    <tr><td>ABG</td><td>Arterial Blood Gas</td><td>Blood test measuring pO₂, pCO₂, pH, HCO₃⁻</td></tr>
+    <tr><td>ARDS</td><td>Acute Respiratory Distress Syndrome</td><td>Severe diffuse lung injury with refractory hypoxia</td></tr>
+    <tr><td>ATP</td><td>Adenosine Triphosphate</td><td>Primary cellular energy currency</td></tr>
+    <tr><td>AV</td><td>Arteriovenous</td><td>Relating to artery and vein together</td></tr>
+    <tr><td>BBB</td><td>Blood-Brain Barrier</td><td>Tight junctions in brain capillary endothelium; impermeable to H⁺, HCO₃⁻</td></tr>
+    <tr><td>BiPAP</td><td>Bilevel Positive Airway Pressure</td><td>Non-invasive ventilation with two pressure levels</td></tr>
+    <tr><td>CCF</td><td>Congestive Cardiac Failure</td><td>Heart failure with systemic + pulmonary congestion</td></tr>
+    <tr><td>CO</td><td>Carbon Monoxide</td><td>Colourless odourless gas; 200× affinity for Hb vs O₂</td></tr>
+    <tr><td>CO₂</td><td>Carbon Dioxide</td><td>Major metabolic waste gas; 20× more soluble than O₂</td></tr>
+    <tr><td>COPD</td><td>Chronic Obstructive Pulmonary Disease</td><td>Umbrella term for emphysema + chronic bronchitis</td></tr>
+    <tr><td>CPAP</td><td>Continuous Positive Airway Pressure</td><td>Non-invasive ventilatory support; prevents airway collapse</td></tr>
+    <tr><td>CPR</td><td>Cardiopulmonary Resuscitation</td><td>Emergency procedure combining ventilation + chest compressions</td></tr>
+    <tr><td>CSF</td><td>Cerebrospinal Fluid</td><td>Fluid surrounding brain and spinal cord; site of central chemoreceptor stimulus</td></tr>
+    <tr><td>DI</td><td>Dyspnoeic Index</td><td>(MVV − MV) / MVV × 100; dyspnoea when &lt;60%</td></tr>
+    <tr><td>DL</td><td>Diffusing Capacity of Lung</td><td>Volume of gas crossing respiratory membrane per min per mmHg gradient</td></tr>
+    <tr><td>DLco</td><td>Diffusing Capacity for Carbon Monoxide</td><td>Standard clinical test of pulmonary diffusion capacity</td></tr>
+    <tr><td>DLO₂</td><td>Diffusing Capacity for Oxygen</td><td>20–25 mL/min/mmHg at rest; 65 during exercise</td></tr>
+    <tr><td>DPPC</td><td>Dipalmitoylphosphatidylcholine</td><td>Main active phospholipid component of pulmonary surfactant</td></tr>
+    <tr><td>DRG</td><td>Dorsal Respiratory Group</td><td>Medullary neurons in NTS; generate basic respiratory rhythm</td></tr>
+    <tr><td>DTS</td><td>Descending Thin Segment</td><td>Part of loop of Henle (renal) — also used in lung context for descending airways</td></tr>
+    <tr><td>ECF</td><td>Extracellular Fluid</td><td>Fluid outside cells; includes plasma and interstitial fluid</td></tr>
+    <tr><td>ERV</td><td>Expiratory Reserve Volume</td><td>Extra air expelled after normal tidal expiration; ~1100 mL</td></tr>
+    <tr><td>FEV₁</td><td>Forced Expiratory Volume in 1 Second</td><td>Volume expelled in first second of FVC manoeuvre; obstructive if &lt;80% of FVC</td></tr>
+    <tr><td>FRC</td><td>Functional Residual Capacity</td><td>Volume remaining after normal tidal expiration = ERV + RV = 2300 mL</td></tr>
+    <tr><td>FVC</td><td>Forced Vital Capacity</td><td>Maximum volume expelled after full inspiration with maximum force</td></tr>
+    <tr><td>Hb</td><td>Haemoglobin</td><td>Iron-containing protein in RBCs; carries O₂ and CO₂</td></tr>
+    <tr><td>HbA</td><td>Adult Haemoglobin (type A)</td><td>Normal adult haemoglobin; α₂β₂ subunits</td></tr>
+    <tr><td>HbF</td><td>Fetal Haemoglobin</td><td>α₂γ₂ subunits; higher O₂ affinity than HbA; left-shifted dissociation curve</td></tr>
+    <tr><td>HbS</td><td>Sickle Cell Haemoglobin</td><td>Abnormal Hb with valine substitution at β-chain position 6</td></tr>
+    <tr><td>HCO₃⁻</td><td>Bicarbonate Ion</td><td>Carries 70% of CO₂ in blood; main blood buffer</td></tr>
+    <tr><td>IC</td><td>Inspiratory Capacity</td><td>TV + IRV = maximum inspired from FRC = 3500 mL</td></tr>
+    <tr><td>ICS</td><td>Intercostal Space</td><td>Space between two adjacent ribs</td></tr>
+    <tr><td>IgA</td><td>Immunoglobulin A</td><td>Antibody secreted in mucus; local respiratory immune protection</td></tr>
+    <tr><td>IOS</td><td>Inspiratory Off-Switch neurons</td><td>DRG neurons that terminate inspiratory ramp and end inspiration</td></tr>
+    <tr><td>IRDS</td><td>Infant Respiratory Distress Syndrome</td><td>Also called Hyaline Membrane Disease; due to surfactant deficiency in premature neonates</td></tr>
+    <tr><td>IRV</td><td>Inspiratory Reserve Volume</td><td>Extra air above tidal volume; ~3000 mL</td></tr>
+    <tr><td>IVC</td><td>Inferior Vena Cava</td><td>Large vein returning blood from lower body to right atrium</td></tr>
+    <tr><td>J-receptors</td><td>Juxtapulmonary Capillary Receptors</td><td>Receptors adjacent to pulmonary capillaries in alveolar interstitium; discovered by AS Paintal</td></tr>
+    <tr><td>LDH</td><td>Lactate Dehydrogenase</td><td>Enzyme used to classify pleural effusion as transudate vs exudate</td></tr>
+    <tr><td>MBC</td><td>Maximum Breathing Capacity</td><td>Same as MVV — maximum air moved per minute on command</td></tr>
+    <tr><td>MMHg / mmHg</td><td>Millimetres of Mercury</td><td>Unit of pressure used for gas partial pressures and blood pressure</td></tr>
+    <tr><td>MV</td><td>Minute Ventilation</td><td>TV × RR = total air moved per minute = 6–7.5 L/min at rest</td></tr>
+    <tr><td>MVV</td><td>Maximum Voluntary Ventilation</td><td>Maximum air ventilated per minute on command; 80–170 L/min normal</td></tr>
+    <tr><td>NTS</td><td>Nucleus Tractus Solitarius</td><td>Medullary relay nucleus receiving chemoreceptor + baroreceptor afferents; contains DRG</td></tr>
+    <tr><td>O₂</td><td>Oxygen (molecular)</td><td>Diatomic molecule; terminal electron acceptor in cellular respiration</td></tr>
+    <tr><td>OSA</td><td>Obstructive Sleep Apnoea</td><td>Recurrent upper airway collapse during sleep causing apnoeic episodes</td></tr>
+    <tr><td>p50</td><td>Partial Pressure at 50% Haemoglobin Saturation</td><td>Index of Hb–O₂ affinity; normal = 25–27 mmHg; ↑ = right shift; ↓ = left shift</td></tr>
+    <tr><td>PA</td><td>Pulmonary Artery</td><td>Carries deoxygenated blood from RV to lungs</td></tr>
+    <tr><td>PAM</td><td>Pulmonary Alveolar Macrophages</td><td>Phagocytic defence cells in alveoli; also called dust cells</td></tr>
+    <tr><td>pCO₂</td><td>Partial Pressure of Carbon Dioxide</td><td>Arterial: 40 mmHg; Venous: 45 mmHg; Alveolar: 40 mmHg</td></tr>
+    <tr><td>PNC</td><td>Pneumotaxic Centre</td><td>Upper pontine centre; inhibits apneustic centre → ↑ respiratory rate</td></tr>
+    <tr><td>pN₂</td><td>Partial Pressure of Nitrogen</td><td>Inert gas at sea level; causes narcosis at high pressure</td></tr>
+    <tr><td>pO₂</td><td>Partial Pressure of Oxygen</td><td>Alveolar: 104 mmHg; Arterial: 95 mmHg; Venous: 40 mmHg; Tissue: 40 mmHg</td></tr>
+    <tr><td>RAS</td><td>Reticular Activating System</td><td>Brainstem arousal system; stimulates respiratory centres; ↓ activity during sleep</td></tr>
+    <tr><td>RBC</td><td>Red Blood Cell / Erythrocyte</td><td>Contains Hb; carries O₂ and CO₂; site of carbonic anhydrase</td></tr>
+    <tr><td>RF</td><td>Respiratory Failure</td><td>Type 1: hypoxia without hypercapnia (diffusion/VA/Q); Type 2: hypoxia + hypercapnia (pump failure)</td></tr>
+    <tr><td>RQ</td><td>Respiratory Quotient</td><td>CO₂ produced / O₂ consumed per minute; normal = 0.8</td></tr>
+    <tr><td>RR</td><td>Respiratory Rate</td><td>Breaths per minute; normal adult = 12–15</td></tr>
+    <tr><td>RV</td><td>Residual Volume</td><td>Air remaining after maximal expiration; ~1200 mL; cannot be measured by spirometry alone</td></tr>
+    <tr><td>RV (cardiac)</td><td>Right Ventricle</td><td>Pumps deoxygenated blood through pulmonary circulation</td></tr>
+    <tr><td>SIADH</td><td>Syndrome of Inappropriate Antidiuretic Hormone</td><td>Excess ADH → water retention → hyponatraemia</td></tr>
+    <tr><td>TAL</td><td>Thick Ascending Limb (of loop of Henle)</td><td>Renal tubule segment; impermeable to water; actively reabsorbs NaCl</td></tr>
+    <tr><td>TB</td><td>Tuberculosis</td><td>Mycobacterium tuberculosis infection; predilection for lung apices (high pO₂, low blood flow)</td></tr>
+    <tr><td>TLC</td><td>Total Lung Capacity</td><td>VC + RV = total volume at full inspiration = 5800 mL; ↑ emphysema, ↓ fibrosis</td></tr>
+    <tr><td>TV</td><td>Tidal Volume</td><td>Volume of one normal breath; 500 mL at rest</td></tr>
+    <tr><td>V/Q or VA/Q</td><td>Ventilation-Perfusion Ratio</td><td>Alveolar ventilation / blood flow; normal = 0.84; mismatch = major cause of hypoxia</td></tr>
+    <tr><td>VC</td><td>Vital Capacity</td><td>TV + IRV + ERV = maximum breath in and out; 4600 mL adult male</td></tr>
+    <tr><td>VIP</td><td>Vasoactive Intestinal Peptide</td><td>Neuropeptide stored in APUD cells of alveoli; bronchodilator</td></tr>
+    <tr><td>VO₂</td><td>Oxygen Consumption</td><td>O₂ used per minute; rest = 250 mL/min; max exercise = 3–5 L/min</td></tr>
+    <tr><td>VO₂max</td><td>Maximum Oxygen Consumption</td><td>Ceiling of aerobic metabolism during exercise; limited by cardiac output in most</td></tr>
+    <tr><td>VRG</td><td>Ventral Respiratory Group</td><td>Medullary neurons; I + E cells; active during forced breathing</td></tr>
+    <tr><td>2,3-DPG</td><td>2,3-Diphosphoglycerate</td><td>RBC metabolite; binds β-chains of deoxyHb → right shifts O₂–Hb curve → ↑ O₂ release</td></tr>
+    <tr><td>5-HT</td><td>5-Hydroxytryptamine (Serotonin)</td><td>Vasoconstrictor released from platelets; stored in mast cells of alveoli</td></tr>
+    <tr><td>APUD</td><td>Amine Precursor Uptake and Decarboxylation</td><td>Neuroendocrine cells in alveoli secreting VIP, substance P, somatostatin</td></tr>
+    <tr><td>AP</td><td>Anteroposterior</td><td>Front-to-back diameter of thorax; increased by pump-handle movement</td></tr>
+    <tr><td>AV</td><td>Atrioventricular</td><td>Relating to atria and ventricles of the heart</td></tr>
+    <tr><td>CN</td><td>Cranial Nerve</td><td>Peripheral nerves from brainstem; CN IX = glossopharyngeal; CN X = vagus; CN XI = accessory</td></tr>
+    <tr><td>DPPC</td><td>Dipalmitoylphosphatidylcholine</td><td>Primary surface-tension-reducing lipid in pulmonary surfactant secreted by Type II pneumocytes</td></tr>
+    <tr><td>FEV₂</td><td>Forced Expiratory Volume in 2 Seconds</td><td>Normally ~90% of FVC</td></tr>
+    <tr><td>FEV₃</td><td>Forced Expiratory Volume in 3 Seconds</td><td>Normally ~98–100% of FVC</td></tr>
+    <tr><td>ICP</td><td>Intracranial Pressure</td><td>Pressure within skull; ↑ ICP → Cushing reflex → bradycardia + hypertension + irregular breathing</td></tr>
+    <tr><td>PA</td><td>Pulmonary Artery / Postero-Anterior (chest X-ray)</td><td>Context-dependent: pulmonary artery OR standard X-ray projection</td></tr>
+  </tbody>
+</table>
+
+</main>
+
+<footer>
+  Integrated from: Textbook of Human Physiology for Dental Students (Indu Khurana) — Section 5 Respiratory System + Chapter 11 Respiratory System Anatomy Notes &nbsp;|&nbsp; For educational use only
+</footer>
+</body>
+</html>

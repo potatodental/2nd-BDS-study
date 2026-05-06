@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitamins Mind Map — Ch 15 & 16</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --border: #1e2d40;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --accent-blue: #38bdf8;
+    --accent-teal: #2dd4bf;
+    --accent-green: #4ade80;
+    --accent-yellow: #fbbf24;
+    --accent-orange: #fb923c;
+    --accent-red: #f87171;
+    --accent-purple: #a78bfa;
+    --accent-pink: #f472b6;
+
+    --vit-a: #f59e0b;
+    --vit-d: #38bdf8;
+    --vit-e: #4ade80;
+    --vit-k: #f87171;
+    --vit-b1: #a78bfa;
+    --vit-b2: #fb923c;
+    --vit-b3: #f472b6;
+    --vit-b6: #2dd4bf;
+    --vit-b12: #38bdf8;
+    --vit-fol: #4ade80;
+    --vit-c: #fbbf24;
+    --vit-biot: #f87171;
+    --vit-pan: #a78bfa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .tab:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+  .tab.active { background: var(--accent-blue); color: #000; border-color: var(--accent-blue); font-weight: 600; }
+
+  /* VIEWS */
+  .view { display: none; padding: 20px; max-width: 1400px; margin: 0 auto; }
+  .view.active { display: block; }
+
+  /* MIND MAP CANVAS */
+  #mindmap-canvas {
+    width: 100%;
+    overflow: auto;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  #mindmap-svg {
+    display: block;
+    min-width: 1200px;
+    min-height: 800px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+
+  .vitamin-card {
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .vitamin-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-badge {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 600; }
+  .card-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .card-body { padding: 0 20px 16px; }
+  .info-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    align-items: flex-start;
+  }
+  .info-label {
+    color: var(--muted);
+    font-weight: 500;
+    min-width: 90px;
+    flex-shrink: 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-top: 2px;
+  }
+  .info-value { color: var(--text); font-size: 13px; line-height: 1.4; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 2px 2px 2px 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .deficiency-banner {
+    margin: 12px 0 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    border-left: 3px solid;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-section { margin-bottom: 32px; }
+  .compare-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: #1e2d40;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--accent-blue);
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .compare-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #1a2535;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .compare-table tr:nth-child(odd) td { background: #0d1525; }
+  .compare-table tr:nth-child(even) td { background: var(--surface); }
+  .compare-table tr:hover td { background: #1a2840; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: #0d1f35;
+    border: 1px solid #1e4060;
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .highlight strong { color: var(--accent-blue); }
+
+  /* SEARCH */
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .search-bar input {
+    width: 100%;
+    max-width: 500px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-bar input:focus { border-color: var(--accent-blue); }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  /* LEGEND */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center;
+    padding: 16px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted);
+  }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* SVG TOOLTIP */
+  .svg-tooltip {
+    position: fixed;
+    background: #1e2d40;
+    border: 1px solid #2a4060;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    max-width: 280px;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+    line-height: 1.5;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .svg-tooltip h4 { color: var(--accent-blue); margin-bottom: 6px; font-size: 14px; }
+  .svg-tooltip p { color: #94a3b8; font-size: 12px; }
+
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    #mindmap-svg { min-width: 900px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Vitamins Mind Map</h1>
+  <p>Chapters 15 & 16 — Biochemistry for Dental Students</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('mindmap')">🧠 Mind Map</div>
+  <div class="tab" onclick="switchTab('cards')">🃏 Vitamin Cards</div>
+  <div class="tab" onclick="switchTab('compare')">📊 Comparisons</div>
+  <div class="tab" onclick="switchTab('clinical')">⚕️ Clinical Points</div>
+</div>
+
+<!-- ===================== MIND MAP VIEW ===================== -->
+<div id="view-mindmap" class="view active">
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Fat Soluble (Ch 15)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>B Complex (Ch 16)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div>Vitamin C</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>Coenzyme form</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div>Deficiency</div>
+    <span style="font-size:12px;color:var(--muted);margin-left:8px">Click nodes to expand details</span>
+  </div>
+  <div id="mindmap-canvas">
+    <svg id="mindmap-svg" viewBox="0 0 1300 900" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="shadow">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+
+      <!-- Background grid -->
+      <rect width="1300" height="900" fill="#0d1525"/>
+      <g opacity="0.05">
+        <line x1="0" y1="150" x2="1300" y2="150" stroke="#fff" stroke-width="0.5"/>
+        <line x1="0" y1="300" x2="1300" y2="300" stroke="#fff" stroke-width="0.5"/>
+        <line x1="0" y1="450" x2="1300" y2="450" stroke="#fff" stroke-width="0.5"/>
+        <line x1="0" y1="600" x2="1300" y2="600" stroke="#fff" stroke-width="0.5"/>
+        <line x1="0" y1="750" x2="1300" y2="750" stroke="#fff" stroke-width="0.5"/>
+        <line x1="200" y1="0" x2="200" y2="900" stroke="#fff" stroke-width="0.5"/>
+        <line x1="450" y1="0" x2="450" y2="900" stroke="#fff" stroke-width="0.5"/>
+        <line x1="700" y1="0" x2="700" y2="900" stroke="#fff" stroke-width="0.5"/>
+        <line x1="950" y1="0" x2="950" y2="900" stroke="#fff" stroke-width="0.5"/>
+        <line x1="1150" y1="0" x2="1150" y2="900" stroke="#fff" stroke-width="0.5"/>
+      </g>
+
+      <!-- CENTER NODE -->
+      <circle cx="650" cy="450" r="70" fill="#1a2840" stroke="#38bdf8" stroke-width="3" filter="url(#glow)"/>
+      <text x="650" y="441" text-anchor="middle" fill="#38bdf8" font-family="Playfair Display, serif" font-size="15" font-weight="700">VITAMINS</text>
+      <text x="650" y="459" text-anchor="middle" fill="#94a3b8" font-family="DM Sans, sans-serif" font-size="10">Ch 15 &amp; 16</text>
+      <text x="650" y="473" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">Biochemistry</text>
+
+      <!-- ===== CHAPTER 15: FAT SOLUBLE ===== -->
+      <!-- Branch label -->
+      <text x="180" y="60" fill="#f59e0b" font-family="Playfair Display, serif" font-size="14" font-weight="700" opacity="0.8">CHAPTER 15</text>
+      <text x="180" y="76" fill="#92400e" font-family="DM Sans, sans-serif" font-size="10">Fat Soluble Vitamins</text>
+
+      <!-- Connection lines to fat soluble branch -->
+      <line x1="590" y1="405" x2="310" y2="190" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="590" y1="430" x2="220" y2="380" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="590" y1="460" x2="220" y2="540" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="595" y1="490" x2="310" y2="660" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+      <!-- VITAMIN A Node -->
+      <g class="mindmap-node" onclick="showDetail('vitA')" style="cursor:pointer">
+        <rect x="210" y="140" width="200" height="90" rx="12" fill="#1a1200" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="210" y="140" width="200" height="8" rx="4" fill="#f59e0b"/>
+        <text x="312" y="168" text-anchor="middle" fill="#f59e0b" font-family="Playfair Display, serif" font-size="14" font-weight="700">Vitamin A</text>
+        <text x="312" y="184" text-anchor="middle" fill="#78716c" font-family="DM Mono, monospace" font-size="10">11-cis-retinal (active)</text>
+        <text x="312" y="198" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Night Blindness</text>
+        <text x="312" y="212" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Xerophthalmia</text>
+      </g>
+
+      <!-- VITAMIN D Node -->
+      <g class="mindmap-node" onclick="showDetail('vitD')" style="cursor:pointer">
+        <rect x="100" y="310" width="200" height="90" rx="12" fill="#001a2c" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="100" y="310" width="200" height="8" rx="4" fill="#38bdf8"/>
+        <text x="202" y="338" text-anchor="middle" fill="#38bdf8" font-family="Playfair Display, serif" font-size="14" font-weight="700">Vitamin D</text>
+        <text x="202" y="354" text-anchor="middle" fill="#64748b" font-family="DM Mono, monospace" font-size="10">Calcitriol (active)</text>
+        <text x="202" y="368" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Rickets (children)</text>
+        <text x="202" y="382" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Osteomalacia (adults)</text>
+      </g>
+
+      <!-- VITAMIN E Node -->
+      <g class="mindmap-node" onclick="showDetail('vitE')" style="cursor:pointer">
+        <rect x="100" y="470" width="200" height="90" rx="12" fill="#001a0d" stroke="#4ade80" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="100" y="470" width="200" height="8" rx="4" fill="#4ade80"/>
+        <text x="202" y="498" text-anchor="middle" fill="#4ade80" font-family="Playfair Display, serif" font-size="14" font-weight="700">Vitamin E</text>
+        <text x="202" y="514" text-anchor="middle" fill="#64748b" font-family="DM Mono, monospace" font-size="10">Tocopherol</text>
+        <text x="202" y="528" text-anchor="middle" fill="#22c55e" font-family="DM Sans, sans-serif" font-size="10">★ Strongest antioxidant</text>
+        <text x="202" y="542" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="10">+ Selenium synergy</text>
+      </g>
+
+      <!-- VITAMIN K Node -->
+      <g class="mindmap-node" onclick="showDetail('vitK')" style="cursor:pointer">
+        <rect x="210" y="620" width="200" height="90" rx="12" fill="#1a0000" stroke="#f87171" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="210" y="620" width="200" height="8" rx="4" fill="#f87171"/>
+        <text x="312" y="648" text-anchor="middle" fill="#f87171" font-family="Playfair Display, serif" font-size="14" font-weight="700">Vitamin K</text>
+        <text x="312" y="664" text-anchor="middle" fill="#64748b" font-family="DM Mono, monospace" font-size="10">Koagulation vitamin</text>
+        <text x="312" y="678" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Prolonged bleeding</text>
+        <text x="312" y="692" text-anchor="middle" fill="#fb923c" font-family="DM Sans, sans-serif" font-size="10">⚠ Warfarin inhibits</text>
+      </g>
+
+      <!-- ===== CHAPTER 16: WATER SOLUBLE ===== -->
+      <!-- Branch label -->
+      <text x="890" y="60" fill="#a78bfa" font-family="Playfair Display, serif" font-size="14" font-weight="700" opacity="0.8">CHAPTER 16</text>
+      <text x="890" y="76" fill="#4c1d95" font-family="DM Sans, sans-serif" font-size="10">Water Soluble Vitamins</text>
+
+      <!-- Connection lines to water soluble -->
+      <line x1="710" y1="405" x2="900" y2="140" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="720" y1="425" x2="1000" y2="230" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="720" y1="450" x2="1050" y2="370" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="720" y1="475" x2="1050" y2="510" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="720" y1="490" x2="1000" y2="630" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="710" y1="500" x2="900" y2="740" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+      <line x1="700" y1="510" x2="760" y2="780" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+      <!-- B1 THIAMINE -->
+      <g onclick="showDetail('b1')" style="cursor:pointer">
+        <rect x="800" y="100" width="190" height="80" rx="10" fill="#1a0e2e" stroke="#a78bfa" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="800" y="100" width="190" height="6" rx="3" fill="#a78bfa"/>
+        <text x="897" y="124" text-anchor="middle" fill="#a78bfa" font-family="Playfair Display, serif" font-size="13" font-weight="700">B1 — Thiamine</text>
+        <text x="897" y="140" text-anchor="middle" fill="#7c3aed" font-family="DM Mono, monospace" font-size="10">TPP</text>
+        <text x="897" y="154" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Beriberi (Wet/Dry)</text>
+        <text x="897" y="168" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">PDH, α-KG DH, Transketolase</text>
+      </g>
+
+      <!-- B2 RIBOFLAVIN -->
+      <g onclick="showDetail('b2')" style="cursor:pointer">
+        <rect x="900" y="205" width="190" height="80" rx="10" fill="#1a0a00" stroke="#fb923c" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="900" y="205" width="190" height="6" rx="3" fill="#fb923c"/>
+        <text x="997" y="229" text-anchor="middle" fill="#fb923c" font-family="Playfair Display, serif" font-size="13" font-weight="700">B2 — Riboflavin</text>
+        <text x="997" y="245" text-anchor="middle" fill="#ea580c" font-family="DM Mono, monospace" font-size="10">FAD, FMN</text>
+        <text x="997" y="259" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Glossitis, Stomatitis</text>
+        <text x="997" y="273" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">FADH₂ → 1.5 ATP</text>
+      </g>
+
+      <!-- B3 NIACIN -->
+      <g onclick="showDetail('b3')" style="cursor:pointer">
+        <rect x="970" y="335" width="190" height="80" rx="10" fill="#1a0014" stroke="#f472b6" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="970" y="335" width="190" height="6" rx="3" fill="#f472b6"/>
+        <text x="1067" y="359" text-anchor="middle" fill="#f472b6" font-family="Playfair Display, serif" font-size="13" font-weight="700">B3 — Niacin</text>
+        <text x="1067" y="375" text-anchor="middle" fill="#be185d" font-family="DM Mono, monospace" font-size="10">NAD⁺, NADP⁺</text>
+        <text x="1067" y="389" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Pellagra (3Ds)</text>
+        <text x="1067" y="403" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">60mg Trp = 1mg Niacin</text>
+      </g>
+
+      <!-- B6 PYRIDOXINE -->
+      <g onclick="showDetail('b6')" style="cursor:pointer">
+        <rect x="970" y="460" width="190" height="80" rx="10" fill="#001a18" stroke="#2dd4bf" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="970" y="460" width="190" height="6" rx="3" fill="#2dd4bf"/>
+        <text x="1067" y="484" text-anchor="middle" fill="#2dd4bf" font-family="Playfair Display, serif" font-size="13" font-weight="700">B6 — Pyridoxine</text>
+        <text x="1067" y="500" text-anchor="middle" fill="#0d9488" font-family="DM Mono, monospace" font-size="10">PLP</text>
+        <text x="1067" y="514" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Convulsions, Anemia</text>
+        <text x="1067" y="528" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">Transamination, ALA synthase</text>
+      </g>
+
+      <!-- B12 COBALAMIN -->
+      <g onclick="showDetail('b12')" style="cursor:pointer">
+        <rect x="900" y="590" width="190" height="80" rx="10" fill="#001030" stroke="#60a5fa" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="900" y="590" width="190" height="6" rx="3" fill="#60a5fa"/>
+        <text x="997" y="614" text-anchor="middle" fill="#60a5fa" font-family="Playfair Display, serif" font-size="13" font-weight="700">B12 — Cobalamin</text>
+        <text x="997" y="630" text-anchor="middle" fill="#2563eb" font-family="DM Mono, monospace" font-size="10">Adenosyl-B12, Methyl-B12</text>
+        <text x="997" y="644" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Megaloblastic + Neuro</text>
+        <text x="997" y="658" text-anchor="middle" fill="#fb923c" font-family="DM Sans, sans-serif" font-size="9">⚠ Needs Intrinsic Factor</text>
+      </g>
+
+      <!-- FOLIC ACID -->
+      <g onclick="showDetail('fol')" style="cursor:pointer">
+        <rect x="800" y="700" width="190" height="80" rx="10" fill="#001a0d" stroke="#4ade80" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="800" y="700" width="190" height="6" rx="3" fill="#4ade80"/>
+        <text x="897" y="724" text-anchor="middle" fill="#4ade80" font-family="Playfair Display, serif" font-size="13" font-weight="700">Folic Acid</text>
+        <text x="897" y="740" text-anchor="middle" fill="#16a34a" font-family="DM Mono, monospace" font-size="10">THFA</text>
+        <text x="897" y="754" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Macrocytic anemia</text>
+        <text x="897" y="768" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">1-carbon group carrier</text>
+      </g>
+
+      <!-- VITAMIN C -->
+      <g onclick="showDetail('vitC')" style="cursor:pointer">
+        <rect x="590" y="780" width="190" height="80" rx="10" fill="#1a1000" stroke="#fbbf24" stroke-width="2" filter="url(#shadow)"/>
+        <rect x="590" y="780" width="190" height="6" rx="3" fill="#fbbf24"/>
+        <text x="687" y="804" text-anchor="middle" fill="#fbbf24" font-family="Playfair Display, serif" font-size="13" font-weight="700">Vitamin C</text>
+        <text x="687" y="820" text-anchor="middle" fill="#d97706" font-family="DM Mono, monospace" font-size="10">Ascorbic Acid</text>
+        <text x="687" y="834" text-anchor="middle" fill="#ef4444" font-family="DM Sans, sans-serif" font-size="10">✕ Scurvy</text>
+        <text x="687" y="848" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">Humans can't synthesize!</text>
+      </g>
+
+      <!-- BIOTIN (small satellite) -->
+      <g onclick="showDetail('biotin')" style="cursor:pointer">
+        <rect x="530" y="590" width="130" height="60" rx="8" fill="#1a000d" stroke="#f87171" stroke-width="1.5"/>
+        <text x="597" y="613" text-anchor="middle" fill="#f87171" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">Biotin</text>
+        <text x="597" y="628" text-anchor="middle" fill="#64748b" font-family="DM Mono, monospace" font-size="9">Carboxylation</text>
+        <text x="597" y="642" text-anchor="middle" fill="#78350f" font-family="DM Sans, sans-serif" font-size="9">Avidin inhibits</text>
+      </g>
+      <line x1="590" y1="480" x2="597" y2="590" stroke="#f87171" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+
+      <!-- PANTOTHENIC ACID (small satellite) -->
+      <g onclick="showDetail('pan')" style="cursor:pointer">
+        <rect x="395" y="590" width="130" height="60" rx="8" fill="#1a0e2e" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="462" y="613" text-anchor="middle" fill="#a78bfa" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Pantothenic</text>
+        <text x="462" y="628" text-anchor="middle" fill="#64748b" font-family="DM Mono, monospace" font-size="9">CoA component</text>
+        <text x="462" y="642" text-anchor="middle" fill="#6d28d9" font-family="DM Sans, sans-serif" font-size="9">Burning feet</text>
+      </g>
+      <line x1="590" y1="490" x2="462" y2="590" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+
+      <!-- KEY CONCEPT CALLOUTS -->
+      <g>
+        <rect x="430" y="200" width="160" height="50" rx="8" fill="#0a1f0a" stroke="#4ade80" stroke-width="1" opacity="0.7"/>
+        <text x="512" y="221" text-anchor="middle" fill="#4ade80" font-family="DM Sans, sans-serif" font-size="10" font-weight="600">NADPH ≠ ATP</text>
+        <text x="512" y="235" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">Used for biosynthesis only</text>
+        <text x="512" y="247" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">Generated by HMP shunt</text>
+      </g>
+
+      <g>
+        <rect x="430" y="640" width="160" height="50" rx="8" fill="#1a0a00" stroke="#fb923c" stroke-width="1" opacity="0.7"/>
+        <text x="512" y="661" text-anchor="middle" fill="#fb923c" font-family="DM Sans, sans-serif" font-size="10" font-weight="600">Methylfolate Trap</text>
+        <text x="512" y="675" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">B12 deficiency blocks</text>
+        <text x="512" y="689" text-anchor="middle" fill="#64748b" font-family="DM Sans, sans-serif" font-size="9">THFA regeneration</text>
+      </g>
+
+    </svg>
+  </div>
+</div>
+
+<!-- ===================== CARDS VIEW ===================== -->
+<div id="view-cards" class="view">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search vitamins, coenzymes, deficiencies..." oninput="filterCards()">
+  </div>
+  <div class="cards-grid" id="cardsGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</div>
+
+<!-- ===================== COMPARE VIEW ===================== -->
+<div id="view-compare" class="view">
+  <div class="compare-section">
+    <h2>Fat Soluble vs Water Soluble</h2>
+    <table class="compare-table">
+      <tr><th>Feature</th><th>Fat Soluble (A, D, E, K)</th><th>Water Soluble (B, C)</th></tr>
+      <tr><td>Absorption</td><td>With fats, needs bile salts</td><td>Simple absorption</td></tr>
+      <tr><td>Storage</td><td>Stored in liver</td><td>Not stored (B12 exception)</td></tr>
+      <tr><td>Carrier proteins</td><td>Present</td><td>Absent</td></tr>
+      <tr><td>Deficiency onset</td><td>Slow (reserves exist)</td><td>Rapid (no storage)</td></tr>
+      <tr><td>Toxicity</td><td>Hypervitaminosis possible</td><td>Unlikely (excess excreted)</td></tr>
+    </table>
+  </div>
+  <div class="compare-section">
+    <h2>B12 vs Folate Deficiency — Critical Distinction</h2>
+    <div class="highlight"><strong>⚠ Exam Trap:</strong> Both B12 and Folate deficiency cause Megaloblastic anemia. But ONLY B12 deficiency causes neurological damage (Subacute Combined Degeneration). This is because B12 is also needed for myelin synthesis.</div>
+    <table class="compare-table">
+      <tr><th>Feature</th><th>B12 Deficiency</th><th>Folate Deficiency</th></tr>
+      <tr><td>Megaloblastic anemia</td><td>✅ YES</td><td>✅ YES</td></tr>
+      <tr><td>Neurological damage</td><td>✅ YES (SCD)</td><td>❌ NO</td></tr>
+      <tr><td>Methylmalonic aciduria</td><td>✅ YES</td><td>❌ NO</td></tr>
+      <tr><td>Elevated homocysteine</td><td>✅ YES</td><td>✅ YES</td></tr>
+      <tr><td>Methylfolate trap</td><td>✅ YES</td><td>❌ NO</td></tr>
+      <tr><td>Causes</td><td>Pernicious anemia, vegans, IF deficiency</td><td>Pregnancy, methotrexate, poor diet</td></tr>
+    </table>
+  </div>
+  <div class="compare-section">
+    <h2>NAD+ vs NADP+ — Critical Distinction</h2>
+    <div class="highlight"><strong>⚠ Key Rule:</strong> NADH → enters ETC → generates 2.5 ATP. NADPH → used ONLY for reductive biosynthesis (fatty acids, cholesterol, steroids) — does NOT generate ATP. NADPH is generated mainly by the HMP shunt pathway.</div>
+    <table class="compare-table">
+      <tr><th>Feature</th><th>NAD+ / NADH</th><th>NADP+ / NADPH</th></tr>
+      <tr><td>Role</td><td>Catabolism / energy generation</td><td>Anabolic reductive biosynthesis</td></tr>
+      <tr><td>ATP generation</td><td>NADH → 2.5 ATP via ETC</td><td>❌ Does NOT generate ATP</td></tr>
+      <tr><td>Source</td><td>TCA cycle, glycolysis</td><td>HMP shunt pathway (GPD enzyme)</td></tr>
+      <tr><td>Key reactions</td><td>Lactate DH, Pyruvate DH, Isocitrate DH</td><td>HMG-CoA reductase, FA synthesis</td></tr>
+    </table>
+  </div>
+  <div class="compare-section">
+    <h2>Calcitriol vs Calcitonin</h2>
+    <div class="highlight"><strong>⚠ Frequently Confused!</strong> These sound similar but have OPPOSITE effects on blood calcium.</div>
+    <table class="compare-table">
+      <tr><th>Feature</th><th>Calcitriol (Active Vit D)</th><th>Calcitonin (Thyroid Hormone)</th></tr>
+      <tr><td>Source</td><td>Kidney (from Vitamin D)</td><td>Thyroid parafollicular cells</td></tr>
+      <tr><td>Effect on Ca++</td><td>⬆ INCREASES blood calcium</td><td>⬇ DECREASES blood calcium</td></tr>
+      <tr><td>Mechanism</td><td>Increases intestinal absorption, bone resorption</td><td>Inhibits osteoclasts, promotes osteoblasts</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== CLINICAL VIEW ===================== -->
+<div id="view-clinical" class="view">
+  <div class="compare-section">
+    <h2>⚕️ High-Yield Clinical Points</h2>
+    <table class="compare-table">
+      <tr><th>Drug / Condition</th><th>Mechanism</th><th>Result</th></tr>
+      <tr><td>Warfarin / Dicoumarol</td><td>Competitively inhibits Vitamin K gamma-carboxylation</td><td>Anticoagulant effect; prolonged PT</td></tr>
+      <tr><td>Methotrexate</td><td>Inhibits folate reductase → blocks THFA generation</td><td>Anticancer; blocks DNA synthesis</td></tr>
+      <tr><td>Isoniazid (INH)</td><td>Inhibits pyridoxal phosphate formation</td><td>Anti-TB drug causes B6 deficiency (pellagra, neuropathy)</td></tr>
+      <tr><td>Avidin (raw egg)</td><td>Binds biotin tightly (1:4 ratio); irreversible</td><td>Biotin deficiency; cooking egg destroys avidin</td></tr>
+      <tr><td>Aspirin</td><td>Inhibits cyclooxygenase → blocks prostaglandin synthesis</td><td>Anti-inflammatory, antipyretic, antiplatelet</td></tr>
+      <tr><td>Sulfonamides</td><td>PABA analogue → inhibits bacterial folic acid synthesis</td><td>Antibacterial; humans unaffected (don't synthesize folate)</td></tr>
+      <tr><td>Fluoride (dental)</td><td>Inhibits enolase (glycolysis step 8 in bacteria)</td><td>Prevents caries; fluoroapatite more acid-resistant</td></tr>
+      <tr><td>Pernicious anemia</td><td>Autoimmune destruction of gastric parietal cells → no Intrinsic Factor</td><td>B12 malabsorption → megaloblastic anemia + neurological damage</td></tr>
+    </table>
+  </div>
+  <div class="compare-section">
+    <h2>🔢 Numbers to Memorize</h2>
+    <table class="compare-table">
+      <tr><th>Fact</th><th>Value</th></tr>
+      <tr><td>Tryptophan → Niacin conversion</td><td>60 mg Tryptophan = 1 mg Niacin</td></tr>
+      <tr><td>NADH ATP yield in ETC</td><td>2.5 ATP per NADH</td></tr>
+      <tr><td>FADH2 ATP yield in ETC</td><td>1.5 ATP per FADH2</td></tr>
+      <tr><td>Fluoride safe limit in drinking water</td><td>1 ppm (1 mg per liter)</td></tr>
+      <tr><td>Fluoride causing mottling of enamel</td><td>&gt;5 ppm</td></tr>
+      <tr><td>Fluoride causing fluorosis (toxic)</td><td>&gt;20 ppm</td></tr>
+      <tr><td>Avidin : Biotin binding ratio</td><td>1 avidin : 4 biotin</td></tr>
+      <tr><td>Normal plasma bilirubin</td><td>0.2–0.8 mg/dL</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div class="svg-tooltip" id="tooltip"></div>
+
+<!-- DETAIL MODAL -->
+<div id="detailModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;overflow-y:auto;padding:20px" onclick="closeModal(event)">
+  <div id="modalContent" style="max-width:680px;margin:40px auto;background:#111827;border-radius:20px;border:1px solid #1e2d40;overflow:hidden" onclick="event.stopPropagation()">
+    <div id="modalHeader" style="padding:24px 28px 16px;border-bottom:1px solid #1e2d40"></div>
+    <div id="modalBody" style="padding:20px 28px 28px"></div>
+  </div>
+</div>
+
+<script>
+const vitamins = [
+  { id:'vitA', name:'Vitamin A', group:'fat', color:'#f59e0b', bg:'#1a1200',
+    coenzyme:'11-cis-retinal', pathway:'Visual cycle (Wald)',
+    enzymes:'Rhodopsin regeneration, Retinal isomerase',
+    deficiency:'Night blindness, Xerophthalmia, Bitot\'s spots, Keratomalacia, Hyperkeratosis',
+    toxicity:'Anorexia, headache, peeling skin, hepatomegaly',
+    note:'Most common cause of preventable blindness in Indian children <5 yrs. Rods = dim light (rhodopsin). Cones = color vision (conopsin). All use 11-cis-retinal.',
+    requirement:'750-1000 µg/day adults',
+    sources:'Milk, egg, liver, fish liver oil; Beta-carotene in vegetables (carrots)' },
+
+  { id:'vitD', name:'Vitamin D', group:'fat', color:'#38bdf8', bg:'#001a2c',
+    coenzyme:'Calcitriol (1,25-DHCC)',
+    pathway:'Skin (UV) → D3 → Liver (25-OH) → Kidney (1-OH) → Calcitriol',
+    enzymes:'Calcium-binding protein (Calbindin) synthesis, Alkaline phosphatase',
+    deficiency:'Rickets (children), Osteomalacia (adults). Low Ca++, Low PO4, High ALP',
+    toxicity:'Hypercalcemia, calcification of soft tissues, polyuria',
+    note:'Calcitriol INCREASES Ca++. Calcitonin DECREASES Ca++. Vitamin D deficiency does NOT cause tetany.',
+    requirement:'5-10 µg/day (200-400 IU)',
+    sources:'Sunlight (main), fish liver oil, egg yolk, milk' },
+
+  { id:'vitE', name:'Vitamin E', group:'fat', color:'#4ade80', bg:'#001a0d',
+    coenzyme:'Tocopherol (alpha-tocopherol most active)',
+    pathway:'Antioxidant chain — neutralizes lipid peroxyl radicals',
+    enzymes:'Glutathione peroxidase (requires selenium synergistically)',
+    deficiency:'Muscular weakness (rare in humans). In rats: infertility, muscular dystrophy',
+    toxicity:'Rare',
+    note:'STRONGEST natural antioxidant in body (lipid phase). Works synergistically with selenium. Reduces LDL oxidation → antiatherogenic.',
+    requirement:'8-10 mg/day',
+    sources:'Vegetable oils (wheat germ, sunflower, safflower). Fish liver oils are DEVOID of Vit E' },
+
+  { id:'vitK', name:'Vitamin K', group:'fat', color:'#f87171', bg:'#1a0000',
+    coenzyme:'Menaquinone (K2), Phylloquinone (K1)',
+    pathway:'Gamma-carboxylation of glutamic acid residues in clotting factors',
+    enzymes:'Gamma-glutamyl carboxylase → forms GCG (binds Ca++)',
+    deficiency:'Prolonged bleeding, prolonged PT, hemorrhagic disease of newborn',
+    toxicity:'Rare',
+    note:'Letter K from German "Koagulation". Warfarin & dicoumarol COMPETITIVELY INHIBIT Vit K → used as anticoagulants. Factors affected: II, VII, IX, X.',
+    requirement:'50-100 µg/day',
+    sources:'Green leafy vegetables; also synthesized by gut bacteria' },
+
+  { id:'b1', name:'B1 — Thiamine', group:'water', color:'#a78bfa', bg:'#1a0e2e',
+    coenzyme:'TPP (Thiamine Pyrophosphate)',
+    pathway:'Carbohydrate metabolism',
+    enzymes:'Pyruvate DH (Pyr→Acetyl-CoA), α-Ketoglutarate DH (TCA step 4), Transketolase (HMP shunt)',
+    deficiency:'Beriberi: Wet (cardiac, edema), Dry (peripheral neuritis), Wernicke-Korsakoff (encephalopathy)',
+    toxicity:'None reported',
+    note:'Thiamine ≠ Thymine (DNA base)! Requirement: 0.5 mg per 1000 calories (linked to carb intake). Alcoholism causes deficiency via poor absorption.',
+    requirement:'1-1.5 mg/day',
+    sources:'Whole grain cereals, yeast, unpolished rice' },
+
+  { id:'b2', name:'B2 — Riboflavin', group:'water', color:'#fb923c', bg:'#1a0a00',
+    coenzyme:'FAD (Flavin Adenine Dinucleotide), FMN (Flavin Mononucleotide)',
+    pathway:'Oxidoreduction reactions',
+    enzymes:'Succinate DH (TCA step 6), Acyl-CoA DH (beta-ox step 1), Pyruvate DH, α-KG DH',
+    deficiency:'Glossitis (magenta tongue), Angular stomatitis, Cheilosis, Circumcorneal vascularization',
+    toxicity:'None',
+    note:'FADH2 → 1.5 ATP in electron transport chain. Usually accompanies other deficiency states.',
+    requirement:'1.5 mg/day',
+    sources:'Liver, dried yeast, egg, milk, fish' },
+
+  { id:'b3', name:'B3 — Niacin', group:'water', color:'#f472b6', bg:'#1a0014',
+    coenzyme:'NAD+ and NADP+',
+    pathway:'NAD+: catabolism (energy); NADP+: anabolic biosynthesis',
+    enzymes:'NAD: Lactate DH, Glyceraldehyde-3P DH, Pyruvate DH, Isocitrate DH. NADPH: HMG-CoA reductase, FA synthase',
+    deficiency:'Pellagra — 3Ds: Dermatitis, Diarrhea, Dementia',
+    toxicity:'High doses: flushing, hepatotoxicity',
+    note:'NADH → 2.5 ATP via ETC. NADPH → biosynthesis ONLY (NO ATP). 60mg Tryptophan = 1mg Niacin (needs B6/PLP). INH, carcinoid syndrome, maize diet cause deficiency.',
+    requirement:'20 mg/day',
+    sources:'Yeast, liver, peanut, cereals, fish, meat' },
+
+  { id:'b6', name:'B6 — Pyridoxine', group:'water', color:'#2dd4bf', bg:'#001a18',
+    coenzyme:'PLP (Pyridoxal Phosphate)',
+    pathway:'Amino acid metabolism',
+    enzymes:'Transaminases (ALT/AST), All decarboxylases, ALA synthase (heme), Kynureninase (Trp→Niacin), Cystathionine synthase, Glycogen phosphorylase',
+    deficiency:'Convulsions (↓GABA), Peripheral neuritis, Hypochromic microcytic anemia, Pellagra-like skin',
+    toxicity:'Peripheral neuropathy with mega-doses',
+    note:'Requirement linked to PROTEIN intake (not calories). INH (isoniazid) causes B6 deficiency. Products: Histamine, Serotonin, GABA, Dopamine, Norepinephrine all need PLP for decarboxylation.',
+    requirement:'1-2 mg/day (↑ with protein intake)',
+    sources:'Yeast, cereal germ, meat, fish, green vegetables' },
+
+  { id:'b12', name:'B12 — Cobalamin', group:'water', color:'#60a5fa', bg:'#001030',
+    coenzyme:'Adenosylcobalamin (storage), Methylcobalamin (circulating)',
+    pathway:'One-carbon metabolism, odd-chain FA metabolism',
+    enzymes:'1) Methylmalonyl-CoA mutase: Methylmalonyl-CoA → Succinyl-CoA (uses Ado-B12). 2) Homocysteine methyltransferase: Homocysteine → Methionine (uses Methyl-B12)',
+    deficiency:'Megaloblastic anemia + Subacute Combined Degeneration of spinal cord (UNIQUE). Methylmalonic aciduria, Elevated homocysteine',
+    toxicity:'None',
+    note:'ONLY water soluble vitamin stored in body! Needs INTRINSIC FACTOR from gastric parietal cells. Pernicious anemia = autoimmune (antibodies vs IF). Methylfolate trap: B12 deficiency → THFA trapped as methyl-THFA → functional folate deficiency.',
+    requirement:'1-2 µg/day',
+    sources:'Animal products only. Liver richest. Curd (Lactobacillus synthesizes B12)' },
+
+  { id:'fol', name:'Folic Acid', group:'water', color:'#4ade80', bg:'#001a0d',
+    coenzyme:'THFA (Tetrahydrofolic acid)',
+    pathway:'One-carbon group transfer',
+    enzymes:'Thymidylate synthase (dTMP), Glycinamide ribonucleotide transformylase (purines C2, C8), Serine hydroxymethyltransferase',
+    deficiency:'Macrocytic anemia (most characteristic). Impaired DNA synthesis',
+    toxicity:'None reported',
+    note:'One-carbon groups: formyl, formimino, methylene, methyl. Methotrexate inhibits folate reductase → anticancer. Sulfonamides mimic PABA → antibacterial. Deficiency common in pregnancy (400µg/day needed).',
+    requirement:'200 µg/day (400 µg pregnancy)',
+    sources:'Yeast, green leafy vegetables, cereals, pulses' },
+
+  { id:'vitC', name:'Vitamin C', group:'water', color:'#fbbf24', bg:'#1a1000',
+    coenzyme:'Ascorbic acid / Dehydroascorbic acid',
+    pathway:'Hydroxylation reactions, antioxidant',
+    enzymes:'Prolyl hydroxylase + Lysyl hydroxylase (collagen), Iron reduction (Fe3+→Fe2+)',
+    deficiency:'Scurvy: Bleeding gums, perifollicular hemorrhage, poor wound healing, scorbutic bones, microcytic anemia',
+    toxicity:'GI upset at high doses; urinary oxalate stones',
+    note:'Humans CANNOT synthesize Vit C (missing L-gulonolactone oxidase). Also absent in primates, guinea pigs, bats. Aqueous phase antioxidant (Vit E = lipid phase). Major function = collagen hydroxylation.',
+    requirement:'75 mg/day (100 mg pregnancy)',
+    sources:'Amla (richest), citrus fruits, guava, green leafy vegetables' },
+
+  { id:'biotin', name:'Biotin', group:'water', color:'#f87171', bg:'#1a000d',
+    coenzyme:'Biotin-lysine (biocytin)',
+    pathway:'Carboxylation reactions (CO2 fixation)',
+    enzymes:'Acetyl-CoA carboxylase (rate-limiting in FA synthesis!), Pyruvate carboxylase (gluconeogenesis), Propionyl-CoA carboxylase (odd chain FA)',
+    deficiency:'Rare. Alopecia, dermatitis, neurological symptoms',
+    toxicity:'None',
+    note:'AVIDIN in raw egg white binds biotin (1:4 ratio). Cooking destroys avidin. Gut bacteria also synthesize biotin.',
+    requirement:'~30 µg/day',
+    sources:'Ubiquitous. Yeast, liver, peanut, egg yolk. Gut bacteria synthesize it.' },
+
+  { id:'pan', name:'Pantothenic Acid', group:'water', color:'#a78bfa', bg:'#1a0e2e',
+    coenzyme:'Component of Coenzyme A (CoA-SH)',
+    pathway:'Acyl group transfer reactions',
+    enzymes:'All CoA-dependent reactions: Pyruvate DH (acetyl-CoA), TCA cycle (succinyl-CoA), FA activation (acyl-CoA), Ketogenesis (HMG-CoA)',
+    deficiency:'Burning feet syndrome (Gopalan\'s syndrome) — rare',
+    toxicity:'None',
+    note:'Pantothenic = "everywhere" in Greek. Widely distributed in food. Also synthesized by gut bacteria. Deficiency extremely rare.',
+    requirement:'~10 mg/day',
+    sources:'Yeast, liver, eggs, meat, vegetables (ubiquitous)' }
+];
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('view-' + name).classList.add('active');
+  if (name === 'cards') renderCards(vitamins);
+}
+
+function renderCards(data) {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = data.map(v => `
+    <div class="vitamin-card" onclick="showDetail('${v.id}')">
+      <div class="card-header" style="background:${v.bg}20">
+        <div class="card-badge" style="background:${v.color}">${v.name.split(' ')[0].replace('—','').trim().slice(0,2)}</div>
+        <div>
+          <div class="card-title" style="color:${v.color}">${v.name}</div>
+          <div class="card-subtitle">${v.group === 'fat' ? '📦 Fat Soluble' : '💧 Water Soluble'}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">Coenzyme</span>
+          <span class="info-value"><span class="tag" style="background:${v.color}20;color:${v.color}">${v.coenzyme}</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Key Enzymes</span>
+          <span class="info-value" style="font-size:12px;color:#94a3b8">${v.enzymes.split(',')[0]}...</span>
+        </div>
+        <div class="deficiency-banner" style="background:${v.bg};border-color:${v.color}">
+          <strong style="color:${v.color};font-size:11px">✕ DEFICIENCY: </strong>
+          <span style="color:#94a3b8;font-size:11px">${v.deficiency.split('.')[0]}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = vitamins.filter(v =>
+    v.name.toLowerCase().includes(q) ||
+    v.coenzyme.toLowerCase().includes(q) ||
+    v.deficiency.toLowerCase().includes(q) ||
+    v.enzymes.toLowerCase().includes(q) ||
+    v.note.toLowerCase().includes(q)
+  );
+  renderCards(filtered);
+}
+
+function showDetail(id) {
+  const v = vitamins.find(x => x.id === id);
+  if (!v) return;
+  document.getElementById('modalHeader').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:52px;height:52px;border-radius:14px;background:${v.color};display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#000;font-family:Playfair Display,serif">${v.name.replace('—','').split(' ').slice(-1)[0].slice(0,2)}</div>
+      <div>
+        <div style="font-size:22px;font-weight:700;color:${v.color};font-family:Playfair Display,serif">${v.name}</div>
+        <div style="font-size:13px;color:#64748b;margin-top:2px">${v.group === 'fat' ? '📦 Chapter 15 — Fat Soluble Vitamin' : '💧 Chapter 16 — Water Soluble Vitamin'}</div>
+      </div>
+    </div>`;
+  document.getElementById('modalBody').innerHTML = `
+    <div style="display:grid;gap:12px">
+      ${row('🔬 Coenzyme / Active Form', `<span style="background:${v.color}20;color:${v.color};padding:3px 10px;border-radius:6px;font-family:DM Mono,monospace;font-size:13px">${v.coenzyme}</span>`)}
+      ${row('⚗️ Pathway', v.pathway)}
+      ${row('🧬 Key Enzymes', v.enzymes)}
+      ${row2('❌ Deficiency Disease', v.deficiency, '#ef4444')}
+      ${row2('🌟 Unique / High-Yield Note', v.note, '#fbbf24')}
+      ${row('💊 Daily Requirement', v.requirement)}
+      ${row('🥗 Sources', v.sources)}
+      ${v.toxicity !== 'None' && v.toxicity !== 'None reported' ? row2('⚠️ Toxicity', v.toxicity, '#f97316') : ''}
+    </div>`;
+  document.getElementById('detailModal').style.display = 'block';
+}
+
+function row(label, value) {
+  return `<div style="padding:12px;background:#0d1525;border-radius:8px;border-left:3px solid #1e3a5f">
+    <div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px">${label}</div>
+    <div style="font-size:13px;color:#e2e8f0;line-height:1.5">${value}</div>
+  </div>`;
+}
+function row2(label, value, accent) {
+  return `<div style="padding:12px;background:#0d1525;border-radius:8px;border-left:3px solid ${accent}">
+    <div style="font-size:11px;color:${accent};text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:5px">${label}</div>
+    <div style="font-size:13px;color:#e2e8f0;line-height:1.5">${value}</div>
+  </div>`;
+}
+
+function closeModal(e) {
+  document.getElementById('detailModal').style.display = 'none';
+}
+
+// Init cards
+renderCards(vitamins);
+</script>
+</body>
+</html>
