@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentalStudy — 2nd BDS Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════ */
+:root {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --bg:        #faf8f5;
+  --bg2:       #ffffff;
+  --bg3:       #f0ece4;
+  --surface:   #ffffff;
+  --border:    #e2ddd4;
+  --border2:   #c9c2b6;
+  --text:      #18160f;
+  --text2:     #4a4438;
+  --muted:     #8a7f72;
+  --accent:    #b5311a;
+  --accent-hl: rgba(181,49,26,0.08);
+  --accent2:   #1a5c8a;
+  --accent3:   #1a7a5e;
+  --accent4:   #7a4a1a;
+  --gold:      #c9960e;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 6px 24px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.05);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.13), 0 8px 24px rgba(0,0,0,0.07);
+  --nav-h: 60px;
+}
+
+[data-theme="dark"] {
+  --bg:        #0f0d0a;
+  --bg2:       #161410;
+  --bg3:       #1e1b16;
+  --surface:   #1a1814;
+  --border:    #2a2620;
+  --border2:   #3a352c;
+  --text:      #f0ece2;
+  --text2:     #b0a898;
+  --muted:     #6a6055;
+  --accent:    #e06040;
+  --accent-hl: rgba(224,96,64,0.10);
+  --accent2:   #5aaae0;
+  --accent3:   #4acea0;
+  --accent4:   #d8a060;
+  --gold:      #e0c060;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.35);
+  --shadow-md: 0 6px 24px rgba(0,0,0,0.45);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.6);
+}
+
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  transition: background 0.35s, color 0.35s;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   GRAIN OVERLAY
+══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9998;
+}
+[data-theme="dark"] body::before { opacity: 0.04; }
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  gap: 18px;
+  z-index: 500;
+}
+[data-theme="dark"] nav { background: rgba(22,20,16,0.88); }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo-mark {
+  width: 30px; height: 30px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-divider { width: 1px; height: 24px; background: var(--border2); flex-shrink: 0; }
+
+.nav-subtitle {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.nav-spacer { flex: 1; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+
+.nav-btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text2);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 7px;
+  transition: all 0.18s;
+  letter-spacing: 0.2px;
+}
+.nav-btn:hover { border-color: var(--border2); background: var(--surface); color: var(--text); }
+.nav-btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.nav-btn.accent:hover { filter: brightness(1.1); }
+
+.theme-toggle {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  transition: all 0.18s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--border2); }
+
+/* ══════════════════════════════════════════
+   HERO  — editorial magazine layout
+══════════════════════════════════════════ */
+.hero {
+  margin-top: var(--nav-h);
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Left editorial column */
+.hero-left {
+  flex: 1;
+  background: var(--text);
+  color: var(--bg);
+  padding: 52px 52px 44px;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+[data-theme="dark"] .hero-left { background: var(--bg3); color: var(--text); border-right: 1px solid var(--border); }
+
+/* decorative halftone circle */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(181,49,26,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-left::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 20px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(26,92,138,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 20px;
+}
+[data-theme="dark"] .hero-eyebrow { color: var(--muted); }
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  color: #fff;
+  margin-bottom: 6px;
+  position: relative;
+}
+[data-theme="dark"] .hero h1 { color: var(--text); }
+
+.hero h1 strong {
+  font-weight: 700;
+  font-style: italic;
+  color: var(--accent);
+  display: block;
+}
+[data-theme="dark"] .hero h1 strong { color: var(--accent); }
+
+.hero-desc {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  max-width: 420px;
+  line-height: 1.65;
+  margin-top: 20px;
+  position: relative;
+}
+[data-theme="dark"] .hero-desc { color: var(--text2); }
+
+/* Right stats column */
+.hero-right {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--bg2);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 32px;
+  gap: 0;
+}
+
+.stat-row {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-row:first-child { padding-top: 0; }
+.stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════
+   SUBJECT STRIP  — horizontal colored subject tags
+══════════════════════════════════════════ */
+.subject-strip {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 36px;
+}
+.subject-strip::-webkit-scrollbar { display: none; }
+
+.sub-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.1px;
+  position: relative;
+}
+.sub-pill:hover { color: var(--text); }
+.sub-pill.active { color: var(--text); font-weight: 600; }
+
+.sub-pill .pill-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.sub-pill.active .pill-dot { transform: scale(1.3); }
+
+.tab-count {
+  background: var(--bg3);
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+}
+.sub-pill.active .tab-count { background: var(--accent-hl); color: var(--accent); }
+
+/* color per subject */
+.sub-pill[data-tab="all"].active          { border-bottom-color: var(--text); }
+.sub-pill[data-tab="anatomy"].active      { border-bottom-color: #b5311a; }
+.sub-pill[data-tab="physiology"].active   { border-bottom-color: #1a5c8a; }
+.sub-pill[data-tab="biochem"].active      { border-bottom-color: #1a7a5e; }
+.sub-pill[data-tab="oral"].active         { border-bottom-color: #7a4a1a; }
+.sub-pill[data-tab="combo"].active        { border-bottom-color: #5c1a8a; }
+
+/* ══════════════════════════════════════════
+   STICKY TABS WRAPPER
+══════════════════════════════════════════ */
+.sticky-tabs {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 400;
+}
+
+/* ══════════════════════════════════════════
+   SECTION HEADER
+══════════════════════════════════════════ */
+.main-content { max-width: 1240px; margin: 0 auto; padding: 40px 36px 100px; }
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.section-header-left { display: flex; flex-direction: column; gap: 3px; }
+.section-header-left h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+.section-header-left p { font-size: 0.83rem; color: var(--muted); }
+
+/* ══════════════════════════════════════════
+   CARDS GRID
+══════════════════════════════════════════ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 22px;
+}
+
+/* ── card ── */
+.resource-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(.22,.68,0,1.2), box-shadow 0.22s, border-color 0.2s;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.resource-card:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border2);
+}
+
+/* Colored left strip → now a bold left border */
+.card-stripe {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 16px 0 0 16px;
+}
+
+.card-body { padding: 24px 24px 20px 28px; flex: 1; display: flex; flex-direction: column; }
+
+.card-subject-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-top: auto;
+}
+.card-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.68rem;
+  color: var(--muted);
+  background: var(--bg3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.card-open-btn {
+  margin-left: auto;
+  background: var(--text);
+  border: none;
+  color: var(--bg);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  transition: all 0.18s;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+.card-open-btn:hover { background: var(--accent); }
+[data-theme="dark"] .card-open-btn { background: var(--text); color: var(--bg); }
+
+/* card admin delete */
+.card-admin-actions { position: absolute; top: 12px; right: 12px; display: none; gap: 6px; }
+.admin-mode .card-admin-actions { display: flex; }
+.card-delete-btn {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: rgba(181,49,26,0.1); border: 1px solid rgba(181,49,26,0.2);
+  color: var(--accent); cursor: pointer; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.card-delete-btn:hover { background: var(--accent); color: #fff; }
+
+/* ══════════════════════════════════════════
+   SUBJECT COLORS (CSS custom props per card)
+══════════════════════════════════════════ */
+.subject-anatomy     { --sub-color: #b5311a; --sub-hl: rgba(181,49,26,0.09); }
+.subject-physiology  { --sub-color: #1a5c8a; --sub-hl: rgba(26,92,138,0.09); }
+.subject-biochem     { --sub-color: #1a7a5e; --sub-hl: rgba(26,122,94,0.09); }
+.subject-oral        { --sub-color: #7a4a1a; --sub-hl: rgba(122,74,26,0.09); }
+.subject-combo       { --sub-color: #5c1a8a; --sub-hl: rgba(92,26,138,0.09); }
+
+[data-theme="dark"] .subject-anatomy     { --sub-color: #e05a3f; --sub-hl: rgba(224,90,63,0.12); }
+[data-theme="dark"] .subject-physiology  { --sub-color: #4a9fd4; --sub-hl: rgba(74,159,212,0.12); }
+[data-theme="dark"] .subject-biochem     { --sub-color: #3cbf8a; --sub-hl: rgba(60,191,138,0.12); }
+[data-theme="dark"] .subject-oral        { --sub-color: #d4904a; --sub-hl: rgba(212,144,74,0.12); }
+[data-theme="dark"] .subject-combo       { --sub-color: #a47bd4; --sub-hl: rgba(164,123,212,0.12); }
+
+/* ══════════════════════════════════════════
+   EMPTY STATE
+══════════════════════════════════════════ */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 32px;
+  color: var(--muted);
+}
+.empty-icon { font-size: 3.5rem; margin-bottom: 18px; opacity: 0.35; }
+.empty-state h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem; color: var(--text2); margin-bottom: 8px;
+}
+.empty-state p { font-size: 0.9rem; }
+
+/* ══════════════════════════════════════════
+   FULL-SCREEN VIEWER
+══════════════════════════════════════════ */
+.viewer-screen {
+  position: fixed; inset: 0; z-index: 900;
+  background: var(--bg2);
+  display: none; flex-direction: column;
+}
+.viewer-screen.open { display: flex; }
+
+.viewer-topbar {
+  height: 50px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 14px;
+  padding: 0 20px; flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+.viewer-back-btn {
+  height: 32px; padding: 0 13px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--text2); font-size: 0.8rem; font-weight: 600;
+  font-family: var(--font-body); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: all 0.18s; white-space: nowrap; flex-shrink: 0;
+}
+.viewer-back-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+.viewer-topbar-divider { width: 1px; height: 22px; background: var(--border); flex-shrink: 0; }
+.viewer-title {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;
+}
+.viewer-subject-badge {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+}
+.viewer-dl-btn {
+  height: 32px; padding: 0 13px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--text2); font-size: 0.8rem; font-weight: 600;
+  font-family: var(--font-body); cursor: pointer;
+  display: none; align-items: center; gap: 6px;
+  transition: all 0.18s; white-space: nowrap; flex-shrink: 0;
+  text-decoration: none;
+}
+.viewer-dl-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.viewer-dl-btn.show { display: flex; }
+
+.viewer-iframe { flex: 1; width: 100%; border: none; display: block; background: #fff; }
+
+/* Fallback download screen for unsupported types */
+.viewer-fallback {
+  flex: 1; display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px; padding: 40px; text-align: center;
+}
+.viewer-fallback.show { display: flex; }
+.viewer-fallback-icon { font-size: 4rem; opacity: 0.5; }
+.viewer-fallback h3 {
+  font-family: var(--font-display); font-size: 1.4rem;
+  font-weight: 700; color: var(--text);
+}
+.viewer-fallback p { font-size: 0.88rem; color: var(--muted); max-width: 380px; line-height: 1.6; }
+.viewer-fallback-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+.viewer-fallback a {
+  height: 40px; padding: 0 20px; border-radius: 9px;
+  font-family: var(--font-body); font-size: 0.87rem; font-weight: 600;
+  cursor: pointer; transition: all 0.18s;
+  display: inline-flex; align-items: center; gap: 7px;
+  text-decoration: none;
+}
+.viewer-fallback-dl { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.viewer-fallback-dl:hover { filter: brightness(1.1); }
+.viewer-fallback-ext { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+.viewer-fallback-ext:hover { background: var(--surface); color: var(--text); }
+
+/* ══════════════════════════════════════════
+   ADMIN BAR
+══════════════════════════════════════════ */
+.admin-bar {
+  display: none;
+  background: var(--accent); color: #fff;
+  padding: 7px 36px; font-size: 0.77rem; font-weight: 600;
+  letter-spacing: 0.3px; align-items: center; gap: 12px;
+}
+.admin-bar.visible { display: flex; }
+.admin-bar-btn {
+  background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28);
+  color: #fff; border-radius: 5px; padding: 2px 10px;
+  font-size: 0.72rem; font-weight: 600; cursor: pointer;
+  font-family: var(--font-body); transition: all 0.18s;
+}
+.admin-bar-btn:hover { background: rgba(255,255,255,0.28); }
+
+/* ══════════════════════════════════════════
+   MODALS — shared
+══════════════════════════════════════════ */
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.pw-overlay, .admin-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,9,8,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 800; display: none;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.pw-overlay.open, .admin-overlay.open { display: flex; }
+
+.pw-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  padding: 40px 38px 34px;
+  width: 100%; max-width: 360px;
+  text-align: center;
+  animation: modalIn 0.24s ease;
+}
+.pw-icon { font-size: 2.8rem; margin-bottom: 14px; }
+.pw-panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700; margin-bottom: 6px;
+}
+.pw-panel p { font-size: 0.84rem; color: var(--muted); margin-bottom: 22px; }
+.pw-error { color: var(--accent); font-size: 0.8rem; margin-top: 8px; display: none; }
+.pw-error.show { display: block; }
+
+.admin-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  width: 100%; max-width: 560px;
+  overflow: hidden; animation: modalIn 0.24s ease;
+}
+.admin-panel-header {
+  padding: 26px 30px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.admin-panel-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 700;
+}
+.modal-close {
+  width: 30px; height: 30px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--muted); cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.modal-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.admin-panel-body { padding: 24px 30px 28px; }
+
+/* ── Forms ── */
+.form-group { margin-bottom: 18px; }
+.form-label {
+  display: block; font-size: 0.74rem; font-weight: 600;
+  letter-spacing: 0.8px; color: var(--text2);
+  text-transform: uppercase; margin-bottom: 7px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 9px; padding: 10px 14px; font-size: 0.9rem;
+  font-family: var(--font-body); color: var(--text);
+  transition: border-color 0.18s; outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--accent); background: var(--surface);
+}
+.form-textarea { resize: vertical; min-height: 72px; }
+.form-select { cursor: pointer; }
+.form-hint { font-size: 0.73rem; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+
+.btn {
+  height: 40px; padding: 0 20px; border-radius: 9px;
+  font-family: var(--font-body); font-size: 0.87rem; font-weight: 600;
+  cursor: pointer; transition: all 0.18s; border: 1px solid var(--border);
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-ghost { background: var(--bg3); color: var(--text2); }
+.btn-ghost:hover { background: var(--surface); color: var(--text); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { filter: brightness(1.1); }
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 28px; right: 28px;
+  background: var(--text); color: var(--bg);
+  padding: 12px 20px; border-radius: 10px;
+  font-size: 0.84rem; font-weight: 500;
+  box-shadow: var(--shadow-lg); z-index: 9999;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.25s; pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ══════════════════════════════════════════
+   CARD ENTRANCE ANIMATION
+══════════════════════════════════════════ */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.resource-card {
+  animation: cardIn 0.32s ease both;
+}
+.resource-card:nth-child(2) { animation-delay: 0.06s; }
+.resource-card:nth-child(3) { animation-delay: 0.12s; }
+.resource-card:nth-child(4) { animation-delay: 0.18s; }
+.resource-card:nth-child(5) { animation-delay: 0.22s; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .hero-right { display: none; }
+}
+@media (max-width: 700px) {
+  nav { padding: 0 16px; }
+  .hero-left { padding: 36px 24px 32px; }
+  .subject-strip { padding: 0 16px; }
+  .main-content { padding: 28px 16px 80px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .nav-subtitle { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .admin-bar { padding: 7px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  <span>⚙️ Admin Mode Active</span>
+  <button class="admin-bar-btn" onclick="openAddPanel()">+ Add Resource</button>
+  <button class="admin-bar-btn" onclick="exitAdmin()">Exit Admin</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">🦷</div>
+    Dental<span>Study</span>
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-subtitle">2nd BDS Hub</span>
+  <div class="nav-spacer"></div>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="openAdminLogin()" id="adminLoginBtn">⚙️ Admin</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle" title="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      Academic Resource Hub
+    </div>
+    <h1>
+      Your Study
+      <strong>Hub.</strong>
+    </h1>
+    <p class="hero-desc">All your study materials — anatomy, physiology, biochemistry and oral biology — in one place. Open any resource and study directly in your browser.</p>
+  </div>
+  <div class="hero-right">
+    <div class="stat-row">
+      <span class="stat-num" id="statTotal">3</span>
+      <span class="stat-label">Resources</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-num">5</span>
+      <span class="stat-label">Subjects</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Expandable</span>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY TABS -->
+<div class="sticky-tabs">
+  <div class="subject-strip">
+    <button class="sub-pill active" data-tab="all" onclick="switchTab('all', this)">
+      <span class="pill-dot" style="background:#888"></span>
+      All
+      <span class="tab-count" id="count-all">3</span>
+    </button>
+    <button class="sub-pill" data-tab="anatomy" onclick="switchTab('anatomy', this)">
+      <span class="pill-dot" style="background:#b5311a"></span>
+      🦷 Anatomy
+      <span class="tab-count" id="count-anatomy">0</span>
+    </button>
+    <button class="sub-pill" data-tab="physiology" onclick="switchTab('physiology', this)">
+      <span class="pill-dot" style="background:#1a5c8a"></span>
+      🫀 Physiology
+      <span class="tab-count" id="count-physiology">0</span>
+    </button>
+    <button class="sub-pill" data-tab="biochem" onclick="switchTab('biochem', this)">
+      <span class="pill-dot" style="background:#1a7a5e"></span>
+      🧪 Biochemistry
+      <span class="tab-count" id="count-biochem">1</span>
+    </button>
+    <button class="sub-pill" data-tab="oral" onclick="switchTab('oral', this)">
+      <span class="pill-dot" style="background:#7a4a1a"></span>
+      🦠 Oral Biology
+      <span class="tab-count" id="count-oral">0</span>
+    </button>
+    <button class="sub-pill" data-tab="combo" onclick="switchTab('combo', this)">
+      <span class="pill-dot" style="background:#5c1a8a"></span>
+      ✨ Combination
+      <span class="tab-count" id="count-combo">2</span>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2 id="sectionTitle">All Resources</h2>
+      <p id="sectionDesc">Browse and open study materials across all subjects</p>
+    </div>
+    <button class="nav-btn accent admin-only" style="display:none" onclick="openAddPanel()">+ Add Resource</button>
+  </div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</div>
+
+<!-- VIEWER -->
+<div class="viewer-screen" id="viewerScreen">
+  <div class="viewer-topbar">
+    <button class="viewer-back-btn" onclick="closeViewer()">← Back</button>
+    <div class="viewer-topbar-divider"></div>
+    <div class="viewer-title" id="viewerTitle">Resource</div>
+    <div class="viewer-subject-badge" id="viewerBadge"></div>
+    <a class="viewer-dl-btn" id="viewerDlBtn" href="#" download title="Download file">⬇ Download</a>
+  </div>
+  <iframe class="viewer-iframe" id="viewerIframe" src="" title="Study Resource" allow="fullscreen"></iframe>
+  <div class="viewer-fallback" id="viewerFallback">
+    <div class="viewer-fallback-icon" id="fallbackIcon">📄</div>
+    <h3 id="fallbackTitle">File ready</h3>
+    <p id="fallbackDesc">This file type can't be previewed directly in the browser. Download it to open in the appropriate app.</p>
+    <div class="viewer-fallback-actions">
+      <a class="viewer-fallback-dl" id="fallbackDl" href="#" download>⬇ Download File</a>
+      <a class="viewer-fallback-ext" id="fallbackGdocs" href="#" target="_blank" rel="noopener">🔗 Open in Google Docs</a>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-panel">
+    <div class="pw-icon">🔐</div>
+    <h3>Admin Access</h3>
+    <p>Enter the admin password to manage study resources.</p>
+    <input class="form-input" type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter') checkPw()">
+    <div class="pw-error" id="pwError">Incorrect password. Try again.</div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closePwOverlay()">Cancel</button>
+      <button class="btn btn-primary" style="flex:1" onclick="checkPw()">Enter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD RESOURCE PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-panel-header">
+      <h2>Add Resource</h2>
+      <button class="modal-close" onclick="closeAddPanel()">✕</button>
+    </div>
+    <div class="admin-panel-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Subject *</label>
+          <select class="form-select" id="f-subject">
+            <option value="anatomy">🦷 Anatomy</option>
+            <option value="physiology">🫀 Physiology</option>
+            <option value="biochem">🧪 Biochemistry</option>
+            <option value="oral">🦠 Oral Biology</option>
+            <option value="combo">✨ Combination</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <select class="form-select" id="f-type">
+            <option value="Notes">📝 Notes (HTML)</option>
+            <option value="Mind Map">🧠 Mind Map (HTML)</option>
+            <option value="PDF">📕 PDF Document</option>
+            <option value="Word Doc">📘 Word Document (.docx)</option>
+            <option value="PowerPoint">📙 PowerPoint (.pptx)</option>
+            <option value="Diagrams">📊 Diagrams</option>
+            <option value="Flashcards">🃏 Flashcards</option>
+            <option value="Summary">📋 Summary</option>
+            <option value="Reference">📖 Reference</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Title *</label>
+        <input class="form-input" id="f-title" placeholder="e.g. Respiratory System — Anatomy & Physiology">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" id="f-desc" placeholder="Brief description of what this resource covers..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">File Path *</label>
+        <input class="form-input" id="f-path" placeholder="e.g. notes/respiratory.html or https://...">
+        <div class="form-hint">Supported: <strong>.html</strong> (previewed inline), <strong>.pdf</strong> (previewed inline), <strong>.docx / .pptx / .xlsx</strong> (opens via Google Docs viewer or download). Use a relative path like <code>notes/file.docx</code> or a full URL.</div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="closeAddPanel()">Cancel</button>
+        <button class="btn btn-primary" onclick="addResource()">Add Resource</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── DATA ── */
+const BUILT_IN = [
+  {
+    id: 'builtin-vitamins', subject: 'biochem',
+    title: 'Vitamins Mind Map',
+    desc: 'Interactive mind map covering fat-soluble (Ch. 15) and water-soluble vitamins (Ch. 16) — coenzymes, deficiencies, clinical correlations and comparisons.',
+    path: 'Vitamins_MindMap.html', type: 'Mind Map', builtin: true
+  },
+  {
+    id: 'builtin-respiratory', subject: 'combo',
+    title: 'Respiratory System — Anatomy & Physiology',
+    desc: 'Complete integrated reference mapping every anatomical feature of the respiratory system to its physiological consequence. Covers ventilation, diffusion, gas transport, regulation, hypoxia and clinical correlations.',
+    path: 'respiratory_system.html', type: 'Notes', builtin: true
+  },
+  {
+    id: 'builtin-heart', subject: 'combo',
+    title: 'Heart — Anatomy & Physiology Notes',
+    desc: 'Integrated notes on the cardiovascular system — pericardium, chambers, valves, cardiac muscle, conduction, ECG, cardiac cycle, output and coronary circulation.',
+    path: 'heart_notes (1).html', type: 'Notes', builtin: true
+  }
+];
+
+const STORAGE_KEY = 'dentalStudy_resources_v2';
+let adminMode = false;
+let currentTab = 'all';
+const ADMIN_PASSWORD = 'dental2024';
+
+const SUBJECT_CONFIG = {
+  anatomy:    { label: 'Anatomy',      icon: '🦷', cls: 'subject-anatomy' },
+  physiology: { label: 'Physiology',   icon: '🫀', cls: 'subject-physiology' },
+  biochem:    { label: 'Biochemistry', icon: '🧪', cls: 'subject-biochem' },
+  oral:       { label: 'Oral Biology', icon: '🦠', cls: 'subject-oral' },
+  combo:      { label: 'Combination',  icon: '✨', cls: 'subject-combo' }
+};
+
+const SECTION_META = {
+  all:        { title: 'All Resources',        desc: 'Browse and open study materials across all subjects' },
+  anatomy:    { title: 'Anatomy',              desc: 'Structural organization of the human body' },
+  physiology: { title: 'Physiology',           desc: 'Functions and mechanisms of body systems' },
+  biochem:    { title: 'Biochemistry',         desc: 'Molecular biology, metabolism and biochemical pathways' },
+  oral:       { title: 'Oral Biology Science', desc: 'Oral tissues, dental science and related biology' },
+  combo:      { title: 'Combination',          desc: 'Integrated anatomy-physiology and cross-subject resources' }
+};
+
+/* ── STORAGE ── */
+function getUserResources() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+}
+function saveUserResources(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+function allResources() { return [...BUILT_IN, ...getUserResources()]; }
+
+/* ── RENDER ── */
+function renderCards() {
+  const grid = document.getElementById('cardsGrid');
+  const resources = allResources();
+  const filtered = currentTab === 'all' ? resources : resources.filter(r => r.subject === currentTab);
+
+  const counts = { all: resources.length };
+  Object.keys(SUBJECT_CONFIG).forEach(s => { counts[s] = resources.filter(r => r.subject === s).length; });
+  Object.keys(counts).forEach(k => { const el = document.getElementById('count-' + k); if (el) el.textContent = counts[k]; });
+  document.getElementById('statTotal').textContent = resources.length;
+
+  const meta = SECTION_META[currentTab];
+  document.getElementById('sectionTitle').textContent = meta.title;
+  document.getElementById('sectionDesc').textContent = meta.desc;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">📂</div>
+      <h3>No resources yet</h3>
+      <p>${adminMode ? 'Click "Add Resource" above to add the first resource to this subject.' : 'An admin can add resources to this subject.'}</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(r => {
+    const cfg = SUBJECT_CONFIG[r.subject] || SUBJECT_CONFIG.combo;
+    return `
+    <div class="resource-card ${cfg.cls}" onclick="openViewer('${escHtml(r.path)}', '${escHtml(r.title)}', '${r.subject}')" data-id="${r.id}">
+      <div class="card-stripe" style="background:var(--sub-color)"></div>
+      ${!r.builtin ? `<div class="card-admin-actions">
+        <button class="card-delete-btn" onclick="deleteResource(event,'${r.id}')" title="Delete">✕</button>
+      </div>` : ''}
+      <div class="card-body">
+        <div class="card-subject-badge" style="background:var(--sub-hl);color:var(--sub-color)">
+          ${cfg.icon} ${cfg.label}
+        </div>
+        <div class="card-title">${escHtml(r.title)}</div>
+        <div class="card-desc">${escHtml(r.desc || '')}</div>
+        <div class="card-footer">
+          <span class="card-tag">📄 ${escHtml(r.type || 'Notes')}</span>
+          ${r.builtin ? '<span class="card-tag">⭐ Built-in</span>' : '<span class="card-tag">➕ Added</span>'}
+          <button class="card-open-btn" onclick="openViewer('${escHtml(r.path)}', '${escHtml(r.title)}', '${r.subject}'); event.stopPropagation()">
+            Open →
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('.admin-only').forEach(el => { el.style.display = adminMode ? 'inline-flex' : 'none'; });
+  document.body.classList.toggle('admin-mode', adminMode);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('viewerScreen').classList.contains('open')) { closeViewer(); return; }
+    closePwOverlay(); closeAddPanel();
+  }
+});
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;');
+}
+
+/* ── TABS ── */
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.sub-pill').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderCards();
+}
+
+/* ── VIEWER ── */
+const GDOCS_BASE = 'https://docs.google.com/gview?embedded=true&url=';
+
+function getFileType(path) {
+  const p = path.toLowerCase().split('?')[0];
+  if (p.endsWith('.pdf'))                          return 'pdf';
+  if (p.endsWith('.docx') || p.endsWith('.doc'))  return 'word';
+  if (p.endsWith('.pptx') || p.endsWith('.ppt'))  return 'pptx';
+  if (p.endsWith('.xlsx') || p.endsWith('.xls'))  return 'excel';
+  return 'html'; // default — treat as HTML/iframe-able
+}
+
+function resolveAbsoluteUrl(path) {
+  // If already absolute URL, return as-is
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  // Build absolute URL from current page location
+  const base = window.location.href.replace(/\/[^/]*$/, '/');
+  return base + path;
+}
+
+function openViewer(path, title, subject) {
+  const cfg = SUBJECT_CONFIG[subject] || SUBJECT_CONFIG.combo;
+  const type = getFileType(path);
+  const absUrl = resolveAbsoluteUrl(path);
+
+  // Update topbar
+  document.getElementById('viewerTitle').textContent = title;
+  const badge = document.getElementById('viewerBadge');
+  badge.textContent = cfg.icon + ' ' + cfg.label;
+  badge.className = 'viewer-subject-badge ' + cfg.cls;
+  badge.style.background = 'var(--sub-hl)';
+  badge.style.color = 'var(--sub-color)';
+
+  const iframe    = document.getElementById('viewerIframe');
+  const fallback  = document.getElementById('viewerFallback');
+  const dlBtn     = document.getElementById('viewerDlBtn');
+  const fallDl    = document.getElementById('fallbackDl');
+  const fallGd    = document.getElementById('fallbackGdocs');
+  const fallIcon  = document.getElementById('fallbackIcon');
+  const fallTitle = document.getElementById('fallbackTitle');
+  const fallDesc  = document.getElementById('fallbackDesc');
+
+  // Reset
+  iframe.style.display = 'block';
+  fallback.classList.remove('show');
+  dlBtn.classList.remove('show');
+  iframe.src = '';
+
+  if (type === 'html') {
+    // Native iframe — works perfectly
+    iframe.src = path;
+
+  } else if (type === 'pdf') {
+    // PDFs work natively in most browsers via iframe
+    iframe.src = absUrl;
+    dlBtn.href = absUrl;
+    dlBtn.download = title + '.pdf';
+    dlBtn.classList.add('show');
+
+  } else {
+    // DOCX, PPTX, XLSX — use Google Docs viewer
+    const gdocsUrl = GDOCS_BASE + encodeURIComponent(absUrl);
+    iframe.src = gdocsUrl;
+
+    // Also set up fallback in case Google Docs viewer fails / file is local
+    const icons = { word: '📘', pptx: '📙', excel: '📗' };
+    const labels = { word: 'Word Document (.docx)', pptx: 'PowerPoint (.pptx)', excel: 'Excel (.xlsx)' };
+    fallbackIcon.textContent  = icons[type] || '📄';
+    fallbackTitle.textContent = title;
+    fallbackDesc.textContent  = `This ${labels[type] || 'document'} is loading via Google Docs viewer. If it doesn't appear, download it to open in the appropriate app.`;
+    fallDl.href               = absUrl;
+    fallDl.download           = '';
+    fallGd.href               = gdocsUrl;
+
+    // Show download button in topbar too
+    dlBtn.href = absUrl;
+    dlBtn.download = '';
+    dlBtn.classList.add('show');
+
+    // If iframe fails to load (e.g. file is local/offline), show fallback
+    iframe.onerror = () => {
+      iframe.style.display = 'none';
+      fallback.classList.add('show');
+    };
+    // Heuristic: if load takes too long or returns empty, show fallback option
+    setTimeout(() => {
+      try {
+        if (iframe.contentDocument && iframe.contentDocument.body &&
+            iframe.contentDocument.body.innerHTML === '') {
+          iframe.style.display = 'none';
+          fallback.classList.add('show');
+        }
+      } catch(e) { /* cross-origin — that's fine, Google Docs is loading */ }
+    }, 5000);
+  }
+
+  document.getElementById('viewerScreen').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  history.pushState({ viewer: true, path, title, subject }, '', '');
+}
+
+function closeViewer() {
+  document.getElementById('viewerScreen').classList.remove('open');
+  document.getElementById('viewerIframe').src = '';
+  document.getElementById('viewerIframe').style.display = 'block';
+  document.getElementById('viewerFallback').classList.remove('show');
+  document.getElementById('viewerDlBtn').classList.remove('show');
+  document.body.style.overflow = '';
+}
+window.addEventListener('popstate', () => {
+  if (document.getElementById('viewerScreen').classList.contains('open')) closeViewer();
+});
+
+/* ── THEME ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeToggle').textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('dentalStudy_theme', isDark ? 'light' : 'dark');
+}
+function loadTheme() {
+  const saved = localStorage.getItem('dentalStudy_theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+/* ── ADMIN ── */
+function openAdminLogin() {
+  if (adminMode) { exitAdmin(); return; }
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwError').classList.remove('show');
+  document.getElementById('pwOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+}
+function closePwOverlay() { document.getElementById('pwOverlay').classList.remove('open'); }
+function checkPw() {
+  if (document.getElementById('pwInput').value === ADMIN_PASSWORD) {
+    closePwOverlay(); enterAdmin();
+  } else {
+    document.getElementById('pwError').classList.add('show');
+    document.getElementById('pwInput').select();
+  }
+}
+function enterAdmin() {
+  adminMode = true;
+  document.getElementById('adminBar').classList.add('visible');
+  document.getElementById('adminLoginBtn').textContent = '⚙️ Exit Admin';
+  renderCards(); showToast('Admin mode activated');
+}
+function exitAdmin() {
+  adminMode = false;
+  document.getElementById('adminBar').classList.remove('visible');
+  document.getElementById('adminLoginBtn').textContent = '⚙️ Admin';
+  renderCards();
+}
+
+/* ── ADD/DELETE ── */
+function openAddPanel() {
+  document.getElementById('adminOverlay').classList.add('open');
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-path').value = '';
+  if (currentTab !== 'all') document.getElementById('f-subject').value = currentTab;
+}
+function closeAddPanel() { document.getElementById('adminOverlay').classList.remove('open'); }
+function addResource() {
+  const title   = document.getElementById('f-title').value.trim();
+  const path    = document.getElementById('f-path').value.trim();
+  const subject = document.getElementById('f-subject').value;
+  const type    = document.getElementById('f-type').value;
+  const desc    = document.getElementById('f-desc').value.trim();
+  if (!title) { showToast('⚠ Please enter a title'); return; }
+  if (!path)  { showToast('⚠ Please enter a file path or URL'); return; }
+  const newResource = { id: 'user-' + Date.now(), subject, title, desc, path, type, builtin: false, addedAt: Date.now() };
+  const existing = getUserResources();
+  existing.push(newResource);
+  saveUserResources(existing);
+  closeAddPanel(); renderCards();
+  showToast('✓ Resource added successfully');
+}
+function deleteResource(event, id) {
+  event.stopPropagation();
+  if (!confirm('Delete this resource?')) return;
+  saveUserResources(getUserResources().filter(r => r.id !== id));
+  renderCards(); showToast('Resource deleted');
+}
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ── INIT ── */
+loadTheme();
+renderCards();
+</script>
+</body>
+</html>
